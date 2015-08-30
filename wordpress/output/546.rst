@@ -1,0 +1,11 @@
+img_1971.jpg
+############
+:date: 2013-08-15 17:19
+:author: ispmarin
+:category: ciência
+:slug: 546
+:status: draft
+
+|image0|
+
+.. |image0| image:: http://anotherlifeform.files.wordpress.com/2013/08/img_1971.jpg

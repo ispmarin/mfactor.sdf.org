@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Another Life Form - pandas</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Another Life Form </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">Introduction</a></li>
+                    <li><a href="/category/data-science.html">data science</a></li>
+                    <li><a href="/category/data-science-development.html">data science, development</a></li>
+                    <li><a href="/category/debian.html">debian</a></li>
+                    <li><a href="/category/learning.html">Learning</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/analytics-in-a-locked-world.html">Analytics in a locked world</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-04-21T19:25:00-03:00">
+                Published: Ter 21 abril 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/i-m.html">I M</a>
+        </address>
+<p>In <a href="/category/data-science.html">data science</a>.</p>
+<p>tags: <a href="/tag/pandas.html">pandas</a> <a href="/tag/python.html">Python</a> </p>
+</footer><!-- /.post-info --><p>As a data scientist, I have to deal with data from several different
+sources. This begs for a wide range of tools and great flexibility of
+using these tools, otherwise manipulating the data can be almost
+impossible. And then your employer says that you can only use Windows,
+without admin rights, and you can only install software from a very
+restrict pre-approved list. What do you do? Go to a corner and cry?</p>
+<p>Almost. But then, you find a breach, a sliver of hope. You can install
+python on your machine. And in this moment, you smile, asking if you're
+up to the challenge. (Dramatic, no?)</p>
+<p>With one of the best Python installations for Windows is
+<a class="reference external" href="https://winpython.github.io/">WinPython</a>, that comes prepackaged
+with <a class="reference external" href="https://github.com/winpython/winpython/issues/56">Numpy, Scipy and
+Pandas</a> and other
+neat stuff, you can start really working. The second best part is that
+you can install on your user folder, so you don't need admin rights.
+Ufta! And the savior for sane workflows in this setting is
+<a class="reference external" href="https://jupyter.org/">Jupyter</a>, the new IPython shell. It is awesome
+for the data and modelling workflow.</p>
+<p>My workflow now consists of:</p>
+<p>1. Getting all raw data in one place, be excel spreadsheets (don't ask),
+CSV files, word files (I said don't ask!), and some data banks. Most of
+my data are time series.</p>
+<p>2. Importing the data or connecting the services on a jupyter python
+notebook. I have to connect to an oracle BD, so
+<a class="reference external" href="http://cx-oracle.sourceforge.net/">cx_Oracle</a> is the connector.</p>
+<p>3. Parsing the data with
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.excel.ExcelFile.parse.html">ExcelFile</a>
+from <a class="reference external" href="http://pandas.pydata.org/">pandas</a>. It can be tricky. As each
+sheet is different, I use a JSON file with the starting line, starting
+and ending columns, number of lines to be read and headers. That way I
+can process it automatically, and if the file changes is quite easy to
+adjust.</p>
+<p>4. Ok, clear the data! This is usually the most problematic part. One of
+the things that I had to do was to convert zero values to NaNs. The
+reason is that zero is a valid value on my data, but not a real one, so
+it would skew all statistics. Pandas can handle NaNs in the<a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.16.0/gotchas.html">Right
+Way</a>,
+so you would be better off. But beware, there are a few problems with
+<a class="reference external" href="http://stackoverflow.com/questions/29747850/error-using-bootstrap-plot-in-pandas-if-values-have-nan">some
+functions</a>,
+so you have to be careful anyway.</p>
+<p>5. With the data in a proper format, (<a class="reference external" href="www.jstatsoft.org/v59/i10/paper">tidy
+format</a>, NaNs for invalid values,
+all values with proper references), I start doing some exploratory
+analysis on the data. For now, basic stuff like line graphs, boxplots,
+averages by year and month, autocorrelation and some rolling means, and
+scatter plots.</p>
+<p>6. With that things start to get more interesting. I decided to use
+<a class="reference external" href="http://scikit-learn.org/stable/">Scikit-Learn</a> to do the regressions
+instead of statsmodels because of the next step, prediction. You have to
+transform the data again so scikit can understand it, but it's<a class="reference external" href="http://stackoverflow.com/questions/29748717/use-scikit-learn-to-do-linear-regression-on-a-time-series-pandas-data-frame">not
+that
+hard</a>,
+and worth the while. Now I do some stardard Linear Squares to get the
+trend and a RANSAC to get more specific results.</p>
+<p>And all this inside a ipython notebook! Pretty awesome, right? Next
+steps, do a full
+<a class="reference external" href="http://en.wikipedia.org/wiki/Box%E2%80%93Jenkins">Box-Jenkins</a> on
+the results.</p>
+                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="@ispmarin">ispmarin</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
