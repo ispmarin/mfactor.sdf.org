@@ -21,12 +21,10 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
          )
 
 # Social widget
-SOCIAL = (('ispmarin', '@ispmarin'),
+SOCIAL = (('twitter', 'https://twitter.com/ispmarin'),
           )
 
 DEFAULT_PAGINATION = 10
