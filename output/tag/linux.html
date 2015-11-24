@@ -1,92 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Another Life Form - linux</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Ivan Marin" />
+  <meta name="description" content="" />
+<meta property="og:site_name" content="Another Life Form"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Another Life Form"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://mfactor.sdf.org"/>
+  <title>Another Life Form &ndash; Tag: linux</title>
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="http://mfactor.sdf.org">
+        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
+      </a>
+      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
+      <p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://mfactor.sdf.org">Home</a>
+    </nav>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Another Life Form </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">Introduction</a></li>
-                    <li><a href="/category/data-science.html">data science</a></li>
-                    <li><a href="/category/data-science-development.html">data science, development</a></li>
-                    <li><a href="/category/debian.html">debian</a></li>
-                    <li><a href="/category/learning.html">Learning</a></li>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/desktop-files.html#desktop-files">Desktop Files on Debian/Ubuntu and XDG</a></h2>
+    <p>
+      Posted on Seg 23 novembro 2015 in <a href="http://mfactor.sdf.org/category/linux.html">Linux</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/linux.html">linux</a>,      <a href="http://mfactor.sdf.org/tag/desktop.html">desktop</a>    </p>
+  </header>
+  <div>
+      <p>Organizing custom launchers on Debian/Ubuntu XDG compliant</p>
+      <a class="btn" href="http://mfactor.sdf.org/desktop-files.html#desktop-files">Continue reading</a>
+  </div>
+</article>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/desktop-files.html">Desktop Files on Debian/Ubuntu and XDG</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-11-23T00:00:00-02:00">
-                Published: Seg 23 novembro 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-11-23T21:57:00-02:00">
-                Updated: Seg 23 novembro 2015
-        </abbr>
+  <div class="pagination">
+  </div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ivan-marin.html">Ivan Marin</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/desktop.html">desktop</a> </p>
-</footer><!-- /.post-info --><p>I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.</p>
-<p>A <code>desktop file</code> is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The <a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html">standard form</a> of a desktop file is</p>
-<div class="highlight"><pre><span class="k">[Desktop Entry]</span>
-<span class="na">Version</span><span class="o">=</span><span class="s">1.0</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Foo Viewer</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">The best viewer for Foo objects available!</span>
-<span class="na">Exec</span><span class="o">=</span><span class="s">fooview %F</span>
-<span class="na">Icon</span><span class="o">=</span><span class="s">fooview</span>
-<span class="na">Actions</span><span class="o">=</span><span class="s">Gallery;Create;</span>
-<span class="na">Categories</span><span class="o">=</span><span class="s">Network</span>
-</pre></div>
-
-
-<p>This file should be put on a standard path in the system, like <code>~/.local/share/applications</code>. </p>
-<p>And how to check if the file you wrote is valid? Just run <code>desktop-file-validate</code> and it will point any errors that you have. </p>
-<h2>KDE blunder</h2>
-<p>After figuring it out how was the correct format for the file, my menus on KDE (and all actions, like changing the default application)was not changing anything. After searching for a long time, I found a solution: the context menu in Dolphin, to change the default application, was poiting to <code>.local/share/applications/mineapps.list</code> and KDE 5 was reading the file on <code>.config/mimeapps.list</code>. The solution? Exporting the default directory where KDE can find its icons. On my system, I changed .zshenv and added</p>
-<div class="highlight"><pre><span class="x">XDG_DATA_DIRS=</span><span class="p">$</span><span class="nv">XDG_DATA_DIRS</span><span class="x">:/home/ispmarin/.local/share/applications</span>
-</pre></div>
-
-
-<p>done!</p>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-
-                            <li><a href="https://twitter.com/ispmarin">twitter</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-</body>
+    <footer>
+      <p>&copy; Ivan Marin </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Another Life Form ",
+  "url" : "http://mfactor.sdf.org",
+  "image": "",
+  "description": ""
+}
+</script></body>
 </html>

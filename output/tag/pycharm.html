@@ -1,99 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Another Life Form - PyCharm</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Ivan Marin" />
+  <meta name="description" content="" />
+<meta property="og:site_name" content="Another Life Form"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Another Life Form"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://mfactor.sdf.org"/>
+  <title>Another Life Form &ndash; Tag: PyCharm</title>
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="http://mfactor.sdf.org">
+        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
+      </a>
+      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
+      <p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://mfactor.sdf.org">Home</a>
+    </nav>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Another Life Form </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">Introduction</a></li>
-                    <li><a href="/category/data-science.html">data science</a></li>
-                    <li><a href="/category/data-science-development.html">data science, development</a></li>
-                    <li><a href="/category/debian.html">debian</a></li>
-                    <li><a href="/category/learning.html">Learning</a></li>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/development-with-python-on-linux-is-turning-into-windows.html">Development with Python on Linux is turning into Windows</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-03-15T06:05:00-03:00">
-                Published: Dom 15 março 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ispmarin.html">ispmarin</a>
-        </address>
-<p>In <a href="/category/debian.html">debian</a>.</p>
-<p>tags: <a href="/tag/debian.html">debian</a> <a href="/tag/pip.html">pip</a> <a href="/tag/pycharm.html">PyCharm</a> <a href="/tag/python.html">Python</a> </p>
-</footer><!-- /.post-info --><p>Yes, the title is a flamebait, but please bear with me.</p>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/development-with-python-on-linux-is-turning-into-windows.html#development-with-python-on-linux-is-turning-into-windows">Development with Python on Linux is turning into Windows</a></h2>
+    <p>
+      Posted on Dom 15 março 2015 in <a href="http://mfactor.sdf.org/category/debian.html">debian</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/debian.html">debian</a>,      <a href="http://mfactor.sdf.org/tag/pip.html">pip</a>,      <a href="http://mfactor.sdf.org/tag/pycharm.html">PyCharm</a>,      <a href="http://mfactor.sdf.org/tag/python.html">Python</a>    </p>
+  </header>
+  <div>
+      <p>Yes, the title is a flamebait, but please bear with me.</p>
 <p><img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /></p>
 <p>As I said in the last post, I installed Debian on my Chromebook using
 <a class="reference external" href="https://github.com/dnschneid/crouton">crouton</a>. It worked quite
 easily, KDE installed. But then I started building my dev environment,
 using Python. But first, a quick digression.</p>
-<p>I have to use Windows at work now. I know, I know, but there's no way
-around it. Setting up a dev environment on Windows is very very tricky
-and not very funny, especially if you don't have admin rights on your
-own machine. I managed to get the basics working, but it was not easy.
-The loop search internet-&gt;download-&gt;install-&gt;internet was not fun at all
-after all these years with apt-get.</p>
-<p>So, when I started setting up my environment on the Debian on the
-chromebook it struck me. <em>I'm doing exactly as I done in Windows.</em> How
-so? First, I installed Python 2.7.9 via apt-get. Nothing funny so far.
-Then I decided to use a virtualenv. Ops. To install it I can use the
-Debian package or download a newer version directly. Ok, ok... but then
-it comes virtualenvwrapper. Ok, I still can install it using the Debian
-repos, but it's an old version. After I set up my virtualenv, I start
-using pip. Pip is ok, but now I have to download all packages from
-different places. I know that this is one of the features of pip, but
-nonetheless is divorced from the operating system, there is no search to
-speak about inside pip, there is no update all, etc etc. Ok, but there
-is still hope, right? Next thing, PyCharm. Bam, gotta go back to the
-internet, download it, install... Windows again!</p>
-<p>You can argue that I chose to use these packages, that there are several
-in the Debian repos that can satisfy my needs. That this is just a rant
-that &quot;package A or B is not in the repos!&quot;, and I tend to agree with
-you. But I didn't have to do nothing like this when I was developing in
-C, C++ or Fortran, including libraries, so I started thinking that maybe
-the Python tools integration with Debian or any other Linux distro is
-not as good as it could be. What can we do to make it easier? So far I
-don't know. Any suggestions?</p>
-                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+<p>I have to ...</p>
+      <a class="btn" href="http://mfactor.sdf.org/development-with-python-on-linux-is-turning-into-windows.html#development-with-python-on-linux-is-turning-into-windows">Continue reading</a>
+  </div>
+</article>
 
-                            <li><a href="https://twitter.com/ispmarin">twitter</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+  <div class="pagination">
+  </div>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-</body>
+    <footer>
+      <p>&copy; Ivan Marin </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Another Life Form ",
+  "url" : "http://mfactor.sdf.org",
+  "image": "",
+  "description": ""
+}
+</script></body>
 </html>

@@ -1,140 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Another Life Form - symlink</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Ivan Marin" />
+  <meta name="description" content="" />
+<meta property="og:site_name" content="Another Life Form"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Another Life Form"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://mfactor.sdf.org"/>
+  <title>Another Life Form &ndash; Tag: symlink</title>
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="http://mfactor.sdf.org">
+        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
+      </a>
+      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
+      <p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://mfactor.sdf.org">Home</a>
+    </nav>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Another Life Form </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">Introduction</a></li>
-                    <li><a href="/category/data-science.html">data science</a></li>
-                    <li><a href="/category/data-science-development.html">data science, development</a></li>
-                    <li><a href="/category/debian.html">debian</a></li>
-                    <li><a href="/category/learning.html">Learning</a></li>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html">Using Virtual Machines and Ubuntu to Keep a Sane Development Environment</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2012-12-11T15:06:00-02:00">
-                Published: Ter 11 dezembro 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ispmarin.html">ispmarin</a>
-        </address>
-<p>In <a href="/category/debian.html">debian</a>.</p>
-<p>tags: <a href="/tag/fortran.html">fortran</a> <a href="/tag/fortran-in-windows.html">fortran in windows</a> <a href="/tag/symbolic-link.html">symbolic link</a> <a href="/tag/symlink.html">symlink</a> <a href="/tag/ubuntu.html">ubuntu</a> <a href="/tag/virtualbox.html">virtualbox</a> <a href="/tag/windows.html">windows</a> </p>
-</footer><!-- /.post-info --><p>I tried. I swear I tried. But it's plain and simple painful to develop
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html#using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment">Using Virtual Machines and Ubuntu to Keep a Sane Development Environment</a></h2>
+    <p>
+      Posted on Ter 11 dezembro 2012 in <a href="http://mfactor.sdf.org/category/debian.html">debian</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/fortran.html">fortran</a>,      <a href="http://mfactor.sdf.org/tag/fortran-in-windows.html">fortran in windows</a>,      <a href="http://mfactor.sdf.org/tag/symbolic-link.html">symbolic link</a>,      <a href="http://mfactor.sdf.org/tag/symlink.html">symlink</a>,      <a href="http://mfactor.sdf.org/tag/ubuntu.html">ubuntu</a>,      <a href="http://mfactor.sdf.org/tag/virtualbox.html">virtualbox</a>,      <a href="http://mfactor.sdf.org/tag/windows.html">windows</a>    </p>
+  </header>
+  <div>
+      <p>I tried. I swear I tried. But it's plain and simple painful to develop
 in Fortran in Windows. There, I said it. Is it <em>possible</em>? Yes. Is it
 easy? Not a chance in Hell.</p>
 <p>First of all, there aren't a lot of options for Fortran Compilers for
-the Microsoft Windows Platform (and I'm talking about Windows 7, I would
-imagine that Windows 8 would be worse.). The most sane one, Intel
-Fortran, is even now Intel Visual Fortran Compiler for Windows (<a class="reference external" href="http://software.intel.com/en-us/forums/intel-visual-fortran-compiler-for-windows">I kid
-you
-not</a>.).
-And then there's the interfaces. Microsoft provides for free the
-<a class="reference external" href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">Express</a>
-suit, so things are not that bad, right? No. The Express suit can't use
-Intel Visual Fortran Compiler for Windows support, so you're out of luck
-unless you buy the full Visual Studio Suite, and which one I dunno -
-never understood the Ultimate/Professional/Premium/Alien/KitchenCleaning
-version confusion. Eclipse CDT/Photran would be a good one instead,
-right? No. Intel Visual Fortran Compiler for Windows also doesn't
-support Eclipse CDT/Photran. Where to run?</p>
-<p>Maybe MinGW could help us? Yes, maybe. Both Intel Visual Fortran
-Compiler for Windows and MinGW can compile a Fortran source file from
-the command line, but we're in friggin Windows, right? Also, for large
-projects, code completion and syntax errors are a must. I didn't try the
-LLVM/dragonegg and mingw-fortran combination, but as I wouldn't get the
-advantages that I'm looking for, I decided that if I have to use a
-Windows machine, no one would prevent to use a sane, decent Linux
-environment <em>inside</em> that Windows machine. Ubuntu plus VirtualBox it is!</p>
-<p>Downloaded 12.10-amd64, installed in a VDI image, all with standard
-options. Of course Ubuntu would give me some headaches: had to uninstall
-that creepy shopping lens, install Google Chrome. Google Chrome
-installation was interesting: the Software Center gave me an &quot;This
-package is of low quality. Don't install it.&quot; Just hit ignore and
-install it anyway. And Ubuntu froze. Unity recomposed itself, but I
-figured that there is something funky going on between X and VirtualBox,
-so I went back to VirtualBox settings and disabled the 3D video, what
-made things a bit better - but still no changing resolution with
-changing the size of the VM window. Strange. Will probably install KDE
-anyway... so I plugged my external drive to copy all the files to the
-VM. And then, Compiz hanged again. Definitely annoying. So while I
-waited to see what the 12.10 would do (keep freezed, it seems), decided
-to use my 12GB of RAM and my Core i7 and hit an 12.04 installation. It
-started to be a little ironic that I was running away from one platform
-that is impossible to program to another one that refuses to work to
-begin with. I decided to keep going, nonetheless, and see where I would
-get.</p>
-<p>I still kept my hopes that things would be easier after I got an Ubuntu
-running. My plan was to use the VM as a full development environment
-that I could transport easily to different computers. I thought about
-keeping a git repository of the important stuff, but the multiplatform
-problems that I detailed above with Fortran made this a no-go. 12.04 was
-much better than 12.10, and while 12.10 was still frozen, I managed to
-install 12.04, update it, install the required dkms modules for
-VirtualBox. Also downloaded Eclipse CDT, <a class="reference external" href="http://eclipsecolorthemes.org/">Eclipse Colour
-Plugin</a>,
-<a class="reference external" href="http://pydev.org/">Pydev</a> and
-<a class="reference external" href="http://www.eclipse.org/photran/">Photran</a>,
-<a class="reference external" href="http://openjdk.java.net/">OpenJDK</a>, everything running ok! Copied
-from my external drive all the source files, all beautiful. Decided not
-to use 12.10 and stick with 12.04. So now, the next step: moving the VM
-to the external drive.</p>
-<p>After copying the entire VB folder to the external drive, I would have
-to test it and see if there's anything missing. And it works! Now doing
-some backups on external hard drives and transporting happily my virtual
-machines around. It's cumbersome to transport 20GB up and down an
-external drive every time, but it's better than use Windows to program,
-that's for sure!</p>
-<p>One last trick: to share a folder between the Ubuntu guest and Windows
-host and be able to create soft symlinks, I had to issue this command in
-the Windows host:</p>
-<pre class="literal-block">
-VBoxManage setextradata VM_NAME VBoxInternal2/SharedFoldersEnableSymlinksCreate/SHARE_NAME 1
+the ...</p>
+      <a class="btn" href="http://mfactor.sdf.org/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html#using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment">Continue reading</a>
+  </div>
+</article>
 
+  <div class="pagination">
+  </div>
 
-Where VM_NAME is your virtual machine name. Done!
-</pre>
-                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-
-                            <li><a href="https://twitter.com/ispmarin">twitter</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-</body>
+    <footer>
+      <p>&copy; Ivan Marin </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Another Life Form ",
+  "url" : "http://mfactor.sdf.org",
+  "image": "",
+  "description": ""
+}
+</script></body>
 </html>

@@ -1,279 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Another Life Form</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Ivan Marin" />
+  <meta name="description" content="" />
+<meta property="og:site_name" content="Another Life Form"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Another Life Form"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://mfactor.sdf.org"/>
+  <title>Another Life Form</title>
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="http://mfactor.sdf.org">
+        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
+      </a>
+      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
+      <p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://mfactor.sdf.org">Home</a>
+    </nav>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Another Life Form </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about.html">Introduction</a></li>
-                    <li><a href="/category/data-science.html">data science</a></li>
-                    <li><a href="/category/data-science-development.html">data science, development</a></li>
-                    <li><a href="/category/debian.html">debian</a></li>
-                    <li><a href="/category/learning.html">Learning</a></li>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/desktop-files.html">Desktop Files on Debian/Ubuntu and XDG</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-11-23T00:00:00-02:00">
-                Published: Seg 23 novembro 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-11-23T21:57:00-02:00">
-                Updated: Seg 23 novembro 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ivan-marin.html">Ivan Marin</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/desktop.html">desktop</a> </p>
-</footer><!-- /.post-info --><p>I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.</p>
-<p>A <code>desktop file</code> is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The <a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html">standard form</a> of a desktop file is</p>
-<div class="highlight"><pre><span class="k">[Desktop Entry]</span>
-<span class="na">Version</span><span class="o">=</span><span class="s">1.0</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Foo Viewer</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">The best viewer for Foo objects available!</span>
-<span class="na">Exec</span><span class="o">=</span><span class="s">fooview %F</span>
-<span class="na">Icon</span><span class="o">=</span><span class="s">fooview</span>
-<span class="na">Actions</span><span class="o">=</span><span class="s">Gallery;Create;</span>
-<span class="na">Categories</span><span class="o">=</span><span class="s">Network</span>
-</pre></div>
-
-
-<p>This file should be put on a standard path in the system, like <code>~/.local/share/applications</code>. </p>
-<p>And how to check if the file you wrote is valid? Just run <code>desktop-file-validate</code> and it will point any errors that you have. </p>
-<h2>KDE blunder</h2>
-<p>After figuring it out how was the correct format for the file, my menus on KDE (and all actions, like changing the default application)was not changing anything. After searching for a long time, I found a solution: the context menu in Dolphin, to change the default application, was poiting to <code>.local/share/applications/mineapps.list</code> and KDE 5 was reading the file on <code>.config/mimeapps.list</code>. The solution? Exporting the default directory where KDE can find its icons. On my system, I changed .zshenv and added</p>
-<div class="highlight"><pre><span class="x">XDG_DATA_DIRS=</span><span class="p">$</span><span class="nv">XDG_DATA_DIRS</span><span class="x">:/home/ispmarin/.local/share/applications</span>
-</pre></div>
-
-
-<p>done!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/physics-and-history.html" rel="bookmark"
-                           title="Permalink to How to learn Physics (and Mathematics) with History">How to learn Physics (and Mathematics) with History</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-08-19T00:00:00-03:00">
-                Published: Qua 19 agosto 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-08-19T19:30:00-03:00">
-                Updated: Qua 19 agosto 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ivan-marin.html">Ivan Marin</a>
-        </address>
-<p>In <a href="/category/learning.html">Learning</a>.</p>
-<p>tags: <a href="/tag/physics.html">physics</a> <a href="/tag/mathematics.html">mathematics</a> <a href="/tag/history.html">history</a> <a href="/tag/learning.html">learning</a> </p>
-</footer><!-- /.post-info -->                <p>Learning Physics and Mathematics using History</p>
-                <a class="readmore" href="/physics-and-history.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html" rel="bookmark"
-                           title="Permalink to A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK">A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-07-20T09:33:00-03:00">
-                Published: Seg 20 julho 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/i-m.html">I M</a>
-        </address>
-<p>In <a href="/category/data-science.html">data science</a>.</p>
-<p>tags: <a href="/tag/beowulf.html">beowulf</a> <a href="/tag/big-data.html">big data</a> <a href="/tag/cluster-manager.html">cluster manager</a> <a href="/tag/debian.html">debian</a> <a href="/tag/haddop.html">haddop</a> <a href="/tag/openstack.html">openstack</a> <a href="/tag/spark.html">spark</a> </p>
-</footer><!-- /.post-info -->                <p>A long time ago, on a land of big iron and MPI, there were some
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/desktop-files.html#desktop-files">Desktop Files on Debian/Ubuntu and XDG</a></h2>
+    <p>
+      Posted on Seg 23 novembro 2015 in <a href="http://mfactor.sdf.org/category/linux.html">Linux</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/linux.html">linux</a>,      <a href="http://mfactor.sdf.org/tag/desktop.html">desktop</a>    </p>
+  </header>
+  <div>
+      <p>Organizing custom launchers on Debian/Ubuntu XDG compliant</p>
+      <a class="btn" href="http://mfactor.sdf.org/desktop-files.html#desktop-files">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/physics-and-history.html#physics-and-history">How to learn Physics (and Mathematics) with History</a></h2>
+    <p>
+      Posted on Qua 19 agosto 2015 in <a href="http://mfactor.sdf.org/category/learning.html">Learning</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/physics.html">physics</a>,      <a href="http://mfactor.sdf.org/tag/mathematics.html">mathematics</a>,      <a href="http://mfactor.sdf.org/tag/history.html">history</a>,      <a href="http://mfactor.sdf.org/tag/learning.html">learning</a>    </p>
+  </header>
+  <div>
+      <p>Learning Physics and Mathematics using History</p>
+      <a class="btn" href="http://mfactor.sdf.org/physics-and-history.html#physics-and-history">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html#a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack">A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</a></h2>
+    <p>
+      Posted on Seg 20 julho 2015 in <a href="http://mfactor.sdf.org/category/data-science.html">data science</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/beowulf.html">beowulf</a>,      <a href="http://mfactor.sdf.org/tag/big-data.html">big data</a>,      <a href="http://mfactor.sdf.org/tag/cluster-manager.html">cluster manager</a>,      <a href="http://mfactor.sdf.org/tag/debian.html">debian</a>,      <a href="http://mfactor.sdf.org/tag/haddop.html">haddop</a>,      <a href="http://mfactor.sdf.org/tag/openstack.html">openstack</a>,      <a href="http://mfactor.sdf.org/tag/spark.html">spark</a>    </p>
+  </header>
+  <div>
+      <p>A long time ago, on a land of big iron and MPI, there were some
 libraries that were used everywhere. The libraries were fundamental to
 most of the important computation that was done, they were open source
-and all the cool kids on the block knew them. They also rarely ...</p>
-                <a class="readmore" href="/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+and all the cool kids on the block knew them. They also rarely were
+distributed by the Linux distributions, and several versions needed to
+coexist to support all the high performance software that needed to be
+run. They needed to be compiled, and different versions of compilers and
+libraries and binaries kept spiralling out of control. Keeping them
+working was already a huge task, and working well was even harder. And
+yes, I'm talking about BLAS and LAPACK.</p>
+<p><a class="reference external" href="http://www.netlib.org/blas/">BLAS</a> (Basic Linear Algebra Suprograms)
+and <a class="reference external" href="http://www.netlib.org/lapack/">LAPACK</a> (Linear Algebra PACKAge),
+from <a class="reference external" href="http://www.netlib.org/">Netlib</a>, were fundamental on the HPC
+era as the backbone of inumerous projects. The stack on those days had
+one flavour or another of
+<a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI</a> to run
+the parallel jobs in huge clusters, together with
+<a class="reference external" href="http://www.netlib.org/scalapack/">ScaLAPACK</a>. And the job of keeping
+these libraries working with several different compilers (mainly
+<a class="reference external" href="https://gcc.gnu.org/">GCC</a>,
+<a class="reference external" href="https://software.intel.com/en-us/intel-compilers">Intel</a> and
+<a class="reference external" href="http://www.pgroup.com/">Portland Group</a> compilers ) and linking
+binaries objects were the nightmare of any sysadmin. Written mainly in
+Fortran, with wrappers for C and C++, a sysadmin had to keep the entire
+stack compiled with the right version of compilers and linked with the
+right libraries. Projects like <a class="reference external" href="http://www.netlib.org/atlas/">ATLAS</a>
+tried to help a bit on the side of performance optimization, while
+vendors had their own binary distribution, tuned to their processors
+(<a class="reference external" href="https://software.intel.com/en-us/intel-mkl">MKL</a> for Intel and
+<a class="reference external" href="http://developer.amd.com/tools-and-sdks/cpu-development/amd-core-math-library-acml/">ACML</a>
+for AMD).</p>
+<p>A sysadmin on the HPC world had to know all these libraries, how to
+deploy them to the users that wanted to compile their own programs, and
+how to make all of them play nice with each other on the same cluster.
+It was hard to keep track of what was breaking, with lots of non
+standard paths and binary objects, name mangling, and users trying to do
+things that you never imagined possible. The HPC sysadmin also needed to
+know the underlying architecture very well, including the network and
+storage structures, the physical layout of the cables, so he or she
+could have a chance to know what was breaking or lagging.&nbsp; Slowly, these
+tools started to be better organized, with practices like module loading
+and the linux distributions creating packages to the basic libraries,
+even if the performance was not the best possible. And then the Cloud
+happened.</p>
+<p>(I'm not going to dwelve on the HPC vs Cloud debate, not even try to
+touch the Big Data vs BI vs computing debates, and try to focus on the
+tools that make all these acronyms possible, otherwise this would be a
+very long post.)</p>
+<p>I have some time now on my hands and decided to check how the deployment
+and configuration of a Spark cluster is being done on
+<a class="reference external" href="https://spark.apache.org/docs/latest/">Debian</a>. And boy, <a class="reference external" href="http://spark.apache.org/docs/latest/building-spark.html">what a
+surprise</a>.
+I've been seeing several posts from sysadmins complaining about the
+dockerization of applications and the mirage of the devops, but was
+taken aback with the state of how Spark is suposed to be deployed on a
+Debian (<a class="reference external" href="http://bigtop.apache.org/book/apache-bigtop-user-guide/apache-bigtop-user-guide.html">or any other
+linux</a>)
+installation. There are several binaries spread out, with
+interdependencies, depending on the compiler version or library version,
+without standard paths, and users making a even larger mess... where did
+I hear about it before?</p>
+<p>I expected that with the amout of resources that are being poured on the
+cloud projects, some form of organization or standardization would have
+happened. But no luck: all is still downloading binaries and compiling
+tons of disconnected but interdependent libraries, only with more levels
+of abstraction. Yes, the abstraction levels help the user, as he doesn't
+need anymore to know about if the processor has SSE3 or SSE4.2. Yes, now
+devops can be both programmers and sysadmins. Yes, you don't have to buy
+new machines, install them, plug the cables - you can just go to the AWS
+console and click moar instances. But someone, on the end, has to move
+all this to production, keep it working, plan on how this will grow, and
+fix it when it breaks - and it will break, trust me.</p>
+<p>Oh, but there's <a class="reference external" href="https://www.openstack.org/">OpenStack</a>to the
+rescue! Well, not really. I'm also not going to go deep into OpenStack,
+but suffice to say that OpenStack is more an orchestration service than
+what I'm looking into here.</p>
+<p>And oh, there's Docker/Vagrant/CoreOS/etc containers! Well, that's also
+an issue that I think is not the focus of this discussion. During the
+HPC era, usually the application deployment consisted of: configuring
+the computing nodes to communicate, share the data using a dedicated
+network connected to a RAID server and running a binary on a NFS share.
+Things got way more complicated because they are more complicated:
+connection to several databases, web services, what not. But in the end
+the problem is the same: how to deploy an environment that you can
+maintain and fix? These technologies help immensely on empowering the
+developer to create more complex solutions and abstract more, especially
+parallel computations, but they actually make the maitain and fix part
+way more complicated, from the sysadmin perspective. That's why I'm not
+trying to address again these tools: they solve another problem, and
+anyway, you have to configure these containers with the same binaries
+and libraries, that need to be compiled, going back to the initial
+problem!</p>
+<p>So, is there a way to solve this mess? Unfortunately, I don't know. I've
+been sidelining all these issues on the day to day at work, adding
+binaries and virtualenvs when needed, but this will explode soon or
+later. I just think that this problem is not being looked with much
+care, especially on the startup world, or just being pushed to the new
+<a class="reference external" href="https://anotherlifeform.files.wordpress.com/2015/07/7d267-11359006_420191058182770_2015412754_n.jpg">shiny new
+thing</a>that
+will solve everything with more abstraction. What to do? Maybe to think
+about these points when deploying your cluster, playing better with the
+basic distributions and contributing more, and the distros trying not to
+suffer from NIH syndrome would help.</p>
+<p>I'm all ears for suggestions!</p>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/python-reads-on-data-understanding-and-web-development.html" rel="bookmark"
-                           title="Permalink to Python reads on data understanding and web development">Python reads on data understanding and web development</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-07-08T04:45:00-03:00">
-                Published: Qua 08 julho 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/i-m.html">I M</a>
-        </address>
-<p>In <a href="/category/data-science.html">data science</a>.</p>
-<p>tags: <a href="/tag/data-science.html">data science</a> <a href="/tag/python.html">Python</a> <a href="/tag/web-development.html">web development</a> </p>
-</footer><!-- /.post-info -->                <p>I´ve been overwhelmed by the number of good publications, workbooks and
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/python-reads-on-data-understanding-and-web-development.html#python-reads-on-data-understanding-and-web-development">Python reads on data understanding and web development</a></h2>
+    <p>
+      Posted on Qua 08 julho 2015 in <a href="http://mfactor.sdf.org/category/data-science.html">data science</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/data-science.html">data science</a>,      <a href="http://mfactor.sdf.org/tag/python.html">Python</a>,      <a href="http://mfactor.sdf.org/tag/web-development.html">web development</a>    </p>
+  </header>
+  <div>
+      <p>I´ve been overwhelmed by the number of good publications, workbooks and
 other material on Python and Data Science on the web. I tried to keep
 track and read everything, but my time on the job has been limited for
-that. I decided to keep a list of the sources ...</p>
-                <a class="readmore" href="/python-reads-on-data-understanding-and-web-development.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+that. I decided to keep a list of the sources that I´m reading or want
+to read here. They are, in no order:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.fullstackpython.com/">http://www.fullstackpython.com/</a> Awesome resource for Python web
+development.</li>
+<li><a class="reference external" href="https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/">https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/</a>
+Survival analysis in R and Python. Excellent resource to combine
+ipython notebooks with R. (The entire plotly notebooks collection is
+awesome. I would love if plotly was open source or at least free.)</li>
+<li><a class="reference external" href="https://github.com/donnemartin/data-science-ipython-notebooks">https://github.com/donnemartin/data-science-ipython-notebooks</a> This is
+an awesome collection of notebooks with all the parts of a good data
+stack on Python. Still no time to review them all, but so far, very
+good and detailed. <a class="reference external" href="http://nbviewer.ipython.org/github/donnemartin/data-science-ipython-notebooks/blob/master/scipy/effect_size.ipynb">This is
+one</a>
+of the best on the statistical side.</li>
+<li><a class="reference external" href="http://people.duke.edu/~ccc14/sta-663/">http://people.duke.edu/~ccc14/sta-663/</a> This one is very through, even
+if sometimes a bit rough on the edges. Very good reference material.
+There are other materials from the folks at Duke that are very good,
+like <a class="reference external" href="http://people.duke.edu/~ccc14/pcfb/">this</a> one, a bit more
+biological.</li>
+<li><a class="reference external" href="https://github.com/josephmisiti/awesome-machine-learning">https://github.com/josephmisiti/awesome-machine-learning</a> More on the
+line of Machine Learning, this collection is also quite good, if a
+bit extensive. The objective is more to list all resources and
+libraries on several languages about Machine Learning than just
+Python, but nonetheless the Python section is good.</li>
+<li>Keeping the more generalist vibe,<a class="reference external" href="http://www.wzchen.com/data-science-books">this
+list</a>of free books
+about Data Science has the basic stuff for the job.</li>
+</ul>
+<p>I will keep things updated here as the list grows. Please send me
+suggestions of good resources that you want to see on this list!</p>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/finally-python-3.html" rel="bookmark"
-                           title="Permalink to Finally, Python 3!">Finally, Python 3!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-06-27T09:39:00-03:00">
-                Published: Sáb 27 junho 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ispmarin.html">ispmarin</a>
-        </address>
-<p>In <a href="/category/data-science-development.html">data science, development</a>.</p>
-
-</footer><!-- /.post-info -->                <p>It's 2015 and it's the first time that I'm using Python 3
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/finally-python-3.html#finally-python-3">Finally, Python 3!</a></h2>
+    <p>
+      Posted on Sáb 27 junho 2015 in <a href="http://mfactor.sdf.org/category/data-science-development.html">data science, development</a> &#8226;
+    </p>
+  </header>
+  <div>
+      <p>It's 2015 and it's the first time that I'm using Python 3
 professionally. And I have to admit, if I knew that all my scripts were
 going to work so easily with 3, I would have changed way before. There
-were a few hurdles with the Python ...</p>
-                <a class="readmore" href="/finally-python-3.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+were a few hurdles with the Python 3 version of some libraries - patsy,
+I'm looking at you - but so far the transition was painless. The things
+that I had to change were expected, like the print function and some
+dict operations, and xrange. I know it's for the best now, so let's
+roll.</p>
+<p>First of all, I switched from WinPython to Anaconda. Having to work on a
+constrained Windows installation, Anaconda provides better support for
+installing packages than pip alone. And as so far using virtualenv has
+not been a success on Windows, I'm going to try the conda environment
+for my projects.</p>
+<p>On the version control front, I finally got access to a git shell on
+Windows, and now I can keep my sanity working with code. There's even a
+Team Foundation Server plugin for it, and the client is not that bad -
+actually, it's useful and keeps the git terminology, helping immensely
+someone that was used to git on the command line. Not bad, Microsoft.
+Git-cola is still better and is several times smaller than TFS, but hey,
+sometimes we have to use what we got. So my working environment now is</p>
+<p>* Anaconda 2.2.0, Python 3 version</p>
+<p>* Packages:</p>
+<p>-pandas, sklearn, matplotlib, calendar, sqlalchemy with Oracle plugin,
+seaborn (mostly for styles), statsmodels.</p>
+<p>* Editor:</p>
+<p>Vim and ipython notebook (depending on the type of work)</p>
+<p><a class="reference external" href="https://msysgit.github.io/">Git for Windows</a></p>
+<p>and Tableau for some visualizations.</p>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/analytics-in-a-locked-world.html" rel="bookmark"
-                           title="Permalink to Analytics in a locked world">Analytics in a locked world</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-04-21T19:25:00-03:00">
-                Published: Ter 21 abril 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/i-m.html">I M</a>
-        </address>
-<p>In <a href="/category/data-science.html">data science</a>.</p>
-<p>tags: <a href="/tag/pandas.html">pandas</a> <a href="/tag/python.html">Python</a> </p>
-</footer><!-- /.post-info -->                <p>As a data scientist, I have to deal with data from several different
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/analytics-in-a-locked-world.html#analytics-in-a-locked-world">Analytics in a locked world</a></h2>
+    <p>
+      Posted on Ter 21 abril 2015 in <a href="http://mfactor.sdf.org/category/data-science.html">data science</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/pandas.html">pandas</a>,      <a href="http://mfactor.sdf.org/tag/python.html">Python</a>    </p>
+  </header>
+  <div>
+      <p>As a data scientist, I have to deal with data from several different
 sources. This begs for a wide range of tools and great flexibility of
 using these tools, otherwise manipulating the data can be almost
 impossible. And then your employer says that you can only use Windows,
-without admin ...</p>
-                <a class="readmore" href="/analytics-in-a-locked-world.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+without admin rights, and you can only install software from a very
+restrict pre-approved list. What do you do? Go to a corner and cry?</p>
+<p>Almost. But then, you find a breach, a sliver of hope. You can install
+python on your machine. And in this moment, you smile, asking if you're
+up to the challenge. (Dramatic, no?)</p>
+<p>With one of the best Python installations for Windows is
+<a class="reference external" href="https://winpython.github.io/">WinPython</a>, that comes prepackaged
+with <a class="reference external" href="https://github.com/winpython/winpython/issues/56">Numpy, Scipy and
+Pandas</a> and other
+neat stuff, you can start really working. The second best part is that
+you can install on your user folder, so you don't need admin rights.
+Ufta! And the savior for sane workflows in this setting is
+<a class="reference external" href="https://jupyter.org/">Jupyter</a>, the new IPython shell. It is awesome
+for the data and modelling workflow.</p>
+<p>My workflow now consists of:</p>
+<p>1. Getting all raw data in one place, be excel spreadsheets (don't ask),
+CSV files, word files (I said don't ask!), and some data banks. Most of
+my data are time series.</p>
+<p>2. Importing the data or connecting the services on a jupyter python
+notebook. I have to connect to an oracle BD, so
+<a class="reference external" href="http://cx-oracle.sourceforge.net/">cx_Oracle</a> is the connector.</p>
+<p>3. Parsing the data with
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.excel.ExcelFile.parse.html">ExcelFile</a>
+from <a class="reference external" href="http://pandas.pydata.org/">pandas</a>. It can be tricky. As each
+sheet is different, I use a JSON file with the starting line, starting
+and ending columns, number of lines to be read and headers. That way I
+can process it automatically, and if the file changes is quite easy to
+adjust.</p>
+<p>4. Ok, clear the data! This is usually the most problematic part. One of
+the things that I had to do was to convert zero values to NaNs. The
+reason is that zero is a valid value on my data, but not a real one, so
+it would skew all statistics. Pandas can handle NaNs in the<a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.16.0/gotchas.html">Right
+Way</a>,
+so you would be better off. But beware, there are a few problems with
+<a class="reference external" href="http://stackoverflow.com/questions/29747850/error-using-bootstrap-plot-in-pandas-if-values-have-nan">some
+functions</a>,
+so you have to be careful anyway.</p>
+<p>5. With the data in a proper format, (<a class="reference external" href="www.jstatsoft.org/v59/i10/paper">tidy
+format</a>, NaNs for invalid values,
+all values with proper references), I start doing some exploratory
+analysis on the data. For now, basic stuff like line graphs, boxplots,
+averages by year and month, autocorrelation and some rolling means, and
+scatter plots.</p>
+<p>6. With that things start to get more interesting. I decided to use
+<a class="reference external" href="http://scikit-learn.org/stable/">Scikit-Learn</a> to do the regressions
+instead of statsmodels because of the next step, prediction. You have to
+transform the data again so scikit can understand it, but it's<a class="reference external" href="http://stackoverflow.com/questions/29748717/use-scikit-learn-to-do-linear-regression-on-a-time-series-pandas-data-frame">not
+that
+hard</a>,
+and worth the while. Now I do some stardard Linear Squares to get the
+trend and a RANSAC to get more specific results.</p>
+<p>And all this inside a ipython notebook! Pretty awesome, right? Next
+steps, do a full
+<a class="reference external" href="http://en.wikipedia.org/wiki/Box%E2%80%93Jenkins">Box-Jenkins</a> on
+the results.</p>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/development-with-python-on-linux-is-turning-into-windows.html" rel="bookmark"
-                           title="Permalink to Development with Python on Linux is turning into Windows">Development with Python on Linux is turning into Windows</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-03-15T06:05:00-03:00">
-                Published: Dom 15 março 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ispmarin.html">ispmarin</a>
-        </address>
-<p>In <a href="/category/debian.html">debian</a>.</p>
-<p>tags: <a href="/tag/debian.html">debian</a> <a href="/tag/pip.html">pip</a> <a href="/tag/pycharm.html">PyCharm</a> <a href="/tag/python.html">Python</a> </p>
-</footer><!-- /.post-info -->                <p>Yes, the title is a flamebait, but please bear with me.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/development-with-python-on-linux-is-turning-into-windows.html#development-with-python-on-linux-is-turning-into-windows">Development with Python on Linux is turning into Windows</a></h2>
+    <p>
+      Posted on Dom 15 março 2015 in <a href="http://mfactor.sdf.org/category/debian.html">debian</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/debian.html">debian</a>,      <a href="http://mfactor.sdf.org/tag/pip.html">pip</a>,      <a href="http://mfactor.sdf.org/tag/pycharm.html">PyCharm</a>,      <a href="http://mfactor.sdf.org/tag/python.html">Python</a>    </p>
+  </header>
+  <div>
+      <p>Yes, the title is a flamebait, but please bear with me.</p>
 <p><img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /></p>
 <p>As I said in the last post, I installed Debian on my Chromebook using
 <a class="reference external" href="https://github.com/dnschneid/crouton">crouton</a>. It worked quite
 easily, KDE installed. But then I started building my dev environment,
 using Python. But first, a quick digression.</p>
-<p>I have to ...</p>
-                <a class="readmore" href="/development-with-python-on-linux-is-turning-into-windows.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+<p>I have to use Windows at work now. I know, I know, but there's no way
+around it. Setting up a dev environment on Windows is very very tricky
+and not very funny, especially if you don't have admin rights on your
+own machine. I managed to get the basics working, but it was not easy.
+The loop search internet-&gt;download-&gt;install-&gt;internet was not fun at all
+after all these years with apt-get.</p>
+<p>So, when I started setting up my environment on the Debian on the
+chromebook it struck me. <em>I'm doing exactly as I done in Windows.</em> How
+so? First, I installed Python 2.7.9 via apt-get. Nothing funny so far.
+Then I decided to use a virtualenv. Ops. To install it I can use the
+Debian package or download a newer version directly. Ok, ok... but then
+it comes virtualenvwrapper. Ok, I still can install it using the Debian
+repos, but it's an old version. After I set up my virtualenv, I start
+using pip. Pip is ok, but now I have to download all packages from
+different places. I know that this is one of the features of pip, but
+nonetheless is divorced from the operating system, there is no search to
+speak about inside pip, there is no update all, etc etc. Ok, but there
+is still hope, right? Next thing, PyCharm. Bam, gotta go back to the
+internet, download it, install... Windows again!</p>
+<p>You can argue that I chose to use these packages, that there are several
+in the Debian repos that can satisfy my needs. That this is just a rant
+that &quot;package A or B is not in the repos!&quot;, and I tend to agree with
+you. But I didn't have to do nothing like this when I was developing in
+C, C++ or Fortran, including libraries, so I started thinking that maybe
+the Python tools integration with Debian or any other Linux distro is
+not as good as it could be. What can we do to make it easier? So far I
+don't know. Any suggestions?</p>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html" rel="bookmark"
-                           title="Permalink to Using Virtual Machines and Ubuntu to Keep a Sane Development Environment">Using Virtual Machines and Ubuntu to Keep a Sane Development Environment</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-12-11T15:06:00-02:00">
-                Published: Ter 11 dezembro 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ispmarin.html">ispmarin</a>
-        </address>
-<p>In <a href="/category/debian.html">debian</a>.</p>
-<p>tags: <a href="/tag/fortran.html">fortran</a> <a href="/tag/fortran-in-windows.html">fortran in windows</a> <a href="/tag/symbolic-link.html">symbolic link</a> <a href="/tag/symlink.html">symlink</a> <a href="/tag/ubuntu.html">ubuntu</a> <a href="/tag/virtualbox.html">virtualbox</a> <a href="/tag/windows.html">windows</a> </p>
-</footer><!-- /.post-info -->                <p>I tried. I swear I tried. But it's plain and simple painful to develop
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="http://mfactor.sdf.org/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html#using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment">Using Virtual Machines and Ubuntu to Keep a Sane Development Environment</a></h2>
+    <p>
+      Posted on Ter 11 dezembro 2012 in <a href="http://mfactor.sdf.org/category/debian.html">debian</a> &#8226;
+Tagged with
+      <a href="http://mfactor.sdf.org/tag/fortran.html">fortran</a>,      <a href="http://mfactor.sdf.org/tag/fortran-in-windows.html">fortran in windows</a>,      <a href="http://mfactor.sdf.org/tag/symbolic-link.html">symbolic link</a>,      <a href="http://mfactor.sdf.org/tag/symlink.html">symlink</a>,      <a href="http://mfactor.sdf.org/tag/ubuntu.html">ubuntu</a>,      <a href="http://mfactor.sdf.org/tag/virtualbox.html">virtualbox</a>,      <a href="http://mfactor.sdf.org/tag/windows.html">windows</a>    </p>
+  </header>
+  <div>
+      <p>I tried. I swear I tried. But it's plain and simple painful to develop
 in Fortran in Windows. There, I said it. Is it <em>possible</em>? Yes. Is it
 easy? Not a chance in Hell.</p>
 <p>First of all, there aren't a lot of options for Fortran Compilers for
-the ...</p>
-                <a class="readmore" href="/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+the Microsoft Windows Platform (and I'm talking about Windows 7, I would
+imagine that Windows 8 would be worse.). The most sane one, Intel
+Fortran, is even now Intel Visual Fortran Compiler for Windows (<a class="reference external" href="http://software.intel.com/en-us/forums/intel-visual-fortran-compiler-for-windows">I kid
+you
+not</a>.).
+And then there's the interfaces. Microsoft provides for free the
+<a class="reference external" href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">Express</a>
+suit, so things are not that bad, right? No. The Express suit can't use
+Intel Visual Fortran Compiler for Windows support, so you're out of luck
+unless you buy the full Visual Studio Suite, and which one I dunno -
+never understood the Ultimate/Professional/Premium/Alien/KitchenCleaning
+version confusion. Eclipse CDT/Photran would be a good one instead,
+right? No. Intel Visual Fortran Compiler for Windows also doesn't
+support Eclipse CDT/Photran. Where to run?</p>
+<p>Maybe MinGW could help us? Yes, maybe. Both Intel Visual Fortran
+Compiler for Windows and MinGW can compile a Fortran source file from
+the command line, but we're in friggin Windows, right? Also, for large
+projects, code completion and syntax errors are a must. I didn't try the
+LLVM/dragonegg and mingw-fortran combination, but as I wouldn't get the
+advantages that I'm looking for, I decided that if I have to use a
+Windows machine, no one would prevent to use a sane, decent Linux
+environment <em>inside</em> that Windows machine. Ubuntu plus VirtualBox it is!</p>
+<p>Downloaded 12.10-amd64, installed in a VDI image, all with standard
+options. Of course Ubuntu would give me some headaches: had to uninstall
+that creepy shopping lens, install Google Chrome. Google Chrome
+installation was interesting: the Software Center gave me an &quot;This
+package is of low quality. Don't install it.&quot; Just hit ignore and
+install it anyway. And Ubuntu froze. Unity recomposed itself, but I
+figured that there is something funky going on between X and VirtualBox,
+so I went back to VirtualBox settings and disabled the 3D video, what
+made things a bit better - but still no changing resolution with
+changing the size of the VM window. Strange. Will probably install KDE
+anyway... so I plugged my external drive to copy all the files to the
+VM. And then, Compiz hanged again. Definitely annoying. So while I
+waited to see what the 12.10 would do (keep freezed, it seems), decided
+to use my 12GB of RAM and my Core i7 and hit an 12.04 installation. It
+started to be a little ironic that I was running away from one platform
+that is impossible to program to another one that refuses to work to
+begin with. I decided to keep going, nonetheless, and see where I would
+get.</p>
+<p>I still kept my hopes that things would be easier after I got an Ubuntu
+running. My plan was to use the VM as a full development environment
+that I could transport easily to different computers. I thought about
+keeping a git repository of the important stuff, but the multiplatform
+problems that I detailed above with Fortran made this a no-go. 12.04 was
+much better than 12.10, and while 12.10 was still frozen, I managed to
+install 12.04, update it, install the required dkms modules for
+VirtualBox. Also downloaded Eclipse CDT, <a class="reference external" href="http://eclipsecolorthemes.org/">Eclipse Colour
+Plugin</a>,
+<a class="reference external" href="http://pydev.org/">Pydev</a> and
+<a class="reference external" href="http://www.eclipse.org/photran/">Photran</a>,
+<a class="reference external" href="http://openjdk.java.net/">OpenJDK</a>, everything running ok! Copied
+from my external drive all the source files, all beautiful. Decided not
+to use 12.10 and stick with 12.04. So now, the next step: moving the VM
+to the external drive.</p>
+<p>After copying the entire VB folder to the external drive, I would have
+to test it and see if there's anything missing. And it works! Now doing
+some backups on external hard drives and transporting happily my virtual
+machines around. It's cumbersome to transport 20GB up and down an
+external drive every time, but it's better than use Windows to program,
+that's for sure!</p>
+<p>One last trick: to share a folder between the Ubuntu guest and Windows
+host and be able to create soft symlinks, I had to issue this command in
+the Windows host:</p>
+<pre class="literal-block">
+VBoxManage setextradata VM_NAME VBoxInternal2/SharedFoldersEnableSymlinksCreate/SHARE_NAME 1
 
-                            <li><a href="https://twitter.com/ispmarin">twitter</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+Where VM_NAME is your virtual machine name. Done!
+</pre>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+  </div>
+</article>
 
-</body>
+  <div class="pagination">
+  </div>
+
+    <footer>
+      <p>&copy; Ivan Marin </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Another Life Form ",
+  "url" : "http://mfactor.sdf.org",
+  "image": "",
+  "description": ""
+}
+</script></body>
 </html>
