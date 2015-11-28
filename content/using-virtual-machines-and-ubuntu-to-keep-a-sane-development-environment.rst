@@ -3,7 +3,7 @@ Using Virtual Machines and Ubuntu to Keep a Sane Development Environment
 :date: 2012-12-11 15:06
 :author: ispmarin
 :category: debian 
-:tags: fortran, fortran in windows, symbolic link, symlink, ubuntu, virtualbox, windows
+:tags: fortran, symlink, ubuntu, virtualbox, windows
 :slug: using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment
 :status: published
 

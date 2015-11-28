@@ -1,68 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
+	<meta charset="utf-8"/>
+	<title>A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK - Another Life Form</title>	
+	<meta name="author" content="Ivan Marin">
+	
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-<meta name="author" content="I M" />
-<meta name="description" content="A long time ago, on a land of big iron and MPI, there were some libraries that were used everywhere. The libraries were fundamental to most of the important computation that was done, they were open source and all the cool kids on the block knew them. They also rarely ..." />
-<meta name="keywords" content="beowulf, big data, cluster manager, debian, haddop, openstack, spark">
-<meta property="og:site_name" content="Another Life Form"/>
-<meta property="og:title" content="A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK"/>
-<meta property="og:description" content="A long time ago, on a land of big iron and MPI, there were some libraries that were used everywhere. The libraries were fundamental to most of the important computation that was done, they were open source and all the cool kids on the block knew them. They also rarely ..."/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://mfactor.sdf.org/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2015-07-20 09:33:00-03:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://mfactor.sdf.org/author/i-m.html">
-<meta property="article:section" content="data science"/>
-<meta property="article:tag" content="beowulf"/>
-<meta property="article:tag" content="big data"/>
-<meta property="article:tag" content="cluster manager"/>
-<meta property="article:tag" content="debian"/>
-<meta property="article:tag" content="haddop"/>
-<meta property="article:tag" content="openstack"/>
-<meta property="article:tag" content="spark"/>
-<meta property="og:image" content="">  <title>Another Life Form &ndash; A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</title>
+	<meta name="description" content="A long time ago, on a land of big iron and MPI, there were some libraries that were used everywhere. The libraries were fundamental to most of the important computation that was done, they were open source and all the cool kids on the block knew them. They also rarely ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/main.css" type="text/css" />
+		
+
+    <link href="http://mfactor.sdf.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
 </head>
+	
 <body>
-  <aside>
-    <div>
-      <a href="http://mfactor.sdf.org">
-        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
-      </a>
-      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
-      <p>Data Scientist</p>
-      <nav>
-        <ul class="list">
-          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
-          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
-        </ul>
-      </nav>
-      <ul class="social">
-        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
-  </aside>
-  <main>
-    <nav>
-      <a href="http://mfactor.sdf.org">Home</a>
-    </nav>
 
-<article>
-  <header>
-    <h1 id="a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack">A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</h1>
-    <p>Posted on Seg 20 julho 2015 in <a href="http://mfactor.sdf.org/category/data-science.html">data science</a></p>
-  </header>
-  <div>
-    <p>A long time ago, on a land of big iron and MPI, there were some
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	        <a href="http://mfactor.sdf.org/feeds/all.atom.xml" rel="alternate"><img src="http://mfactor.sdf.org/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
+	    </div>
+	      <nav class="pages">
+			  <a href="http://mfactor.sdf.org/pages/about.html">About</a>
+	      </nav>
+		<a href="http://mfactor.sdf.org" class="title">Another Life Form</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</h1>
+		
+<div class="metadata">
+  <time datetime="2015-07-20T09:33:00-03:00" pubdate>Seg 20 julho 2015</time>
+    <address class="vcard author">
+      by <a class="url fn" href="http://mfactor.sdf.org/author/i-m.html">I M</a>
+    </address>
+  in <a href="http://mfactor.sdf.org/category/data-science.html">data science</a>
+<p class="tags">tagged <a href="http://mfactor.sdf.org/tag/beowulf.html">beowulf</a>, <a href="http://mfactor.sdf.org/tag/big-data.html">big data</a>, <a href="http://mfactor.sdf.org/tag/debian.html">debian</a>, <a href="http://mfactor.sdf.org/tag/haddop.html">haddop</a>, <a href="http://mfactor.sdf.org/tag/openstack.html">openstack</a>, <a href="http://mfactor.sdf.org/tag/spark.html">spark</a></p></div>		
+		<p>A long time ago, on a land of big iron and MPI, there were some
 libraries that were used everywhere. The libraries were fundamental to
 most of the important computation that was done, they were open source
 and all the cool kids on the block knew them. They also rarely were
@@ -166,41 +148,59 @@ about these points when deploying your cluster, playing better with the
 basic distributions and contributing more, and the distros trying not to
 suffer from NIH syndrome would help.</p>
 <p>I'm all ears for suggestions!</p>
+	
 
-  </div>
-  <div class="tag-cloud">
+	</article>
+
     <p>
-      <a href="http://mfactor.sdf.org/tag/beowulf.html">beowulf</a>
-      <a href="http://mfactor.sdf.org/tag/big-data.html">big data</a>
-      <a href="http://mfactor.sdf.org/tag/cluster-manager.html">cluster manager</a>
-      <a href="http://mfactor.sdf.org/tag/debian.html">debian</a>
-      <a href="http://mfactor.sdf.org/tag/haddop.html">haddop</a>
-      <a href="http://mfactor.sdf.org/tag/openstack.html">openstack</a>
-      <a href="http://mfactor.sdf.org/tag/spark.html">spark</a>
-    </p>
-  </div>
-</article>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
 
-    <footer>
-      <p>&copy; Ivan Marin </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
-  </main>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK",
-  "headline": "A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK",
-  "datePublished": "2015-07-20 09:33:00-03:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "I M",
-    "url": "http://mfactor.sdf.org/author/i-m.html"
-  },
-  "image": "{{ SITEURL }}/theme/img/profile.png",
-  "url": "http://mfactor.sdf.org/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html",
-  "description": "A long time ago, on a land of big iron and MPI, there were some libraries that were used everywhere. The libraries were fundamental to most of the important computation that was done, they were open source and all the cool kids on the block knew them. They also rarely ..."
-}
-</script></body>
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="http://mfactor.sdf.org/category/data-science.html">data science</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/debian.html">debian</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/development.html">development</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/learning.html">Learning</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/linux.html">Linux</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
+				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+	          <aside>
+	            <h2>Blogroll</h2>
+	            <ul>
+	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
+	            </ul>
+	          </aside>
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
 </html>

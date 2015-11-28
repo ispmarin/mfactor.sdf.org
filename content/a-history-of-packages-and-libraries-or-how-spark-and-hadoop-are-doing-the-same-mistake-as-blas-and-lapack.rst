@@ -3,7 +3,7 @@ A history of packages and libraries or: how Spark and Hadoop are doing the same 
 :date: 2015-07-20 09:33
 :author: I M 
 :category: data science 
-:tags: beowulf, big data, cluster manager, debian, haddop, openstack, spark
+:tags: beowulf, big data, debian, haddop, openstack, spark
 :slug: a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack
 :status: published
 

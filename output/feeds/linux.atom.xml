@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/linux.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2015-11-23T21:57:00-02:00</updated><entry><title>Desktop Files on Debian/Ubuntu and XDG</title><link href="http://mfactor.sdf.org/desktop-files.html" rel="alternate"></link><updated>2015-11-23T21:57:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-23:desktop-files.html</id><summary type="html">&lt;p&gt;I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;desktop file&lt;/code&gt; is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The &lt;a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html"&gt;standard form&lt;/a&gt; of a desktop file is&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;span class="na"&gt;Version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1.0&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Application&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Foo Viewer&lt;/span&gt;
+&lt;span class="na"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;The best viewer for Foo objects available!&lt;/span&gt;
+&lt;span class="na"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;fooview %F&lt;/span&gt;
+&lt;span class="na"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;fooview&lt;/span&gt;
+&lt;span class="na"&gt;Actions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Gallery;Create;&lt;/span&gt;
+&lt;span class="na"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Network&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This file should be put on a standard path in the system, like &lt;code&gt;~/.local/share/applications&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;And how to check if the file you wrote is valid? Just run &lt;code&gt;desktop-file-validate&lt;/code&gt; and it will point any errors that you have. &lt;/p&gt;
+&lt;h2&gt;KDE blunder&lt;/h2&gt;
+&lt;p&gt;After figuring it out how was the correct format for the file, my menus on KDE (and all actions, like changing the default application)was not changing anything. After searching for a long time, I found a solution: the context menu in Dolphin, to change the default application, was poiting to &lt;code&gt;.local/share/applications/mineapps.list&lt;/code&gt; and KDE 5 was reading the file on &lt;code&gt;.config/mimeapps.list&lt;/code&gt;. The solution? Exporting the default directory where KDE can find its icons. On my system, I changed .zshenv and added&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;XDG_DATA_DIRS=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;XDG_DATA_DIRS&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/.local/share/applications&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;done!&lt;/p&gt;</summary><category term="linux"></category><category term="desktop"></category></entry></feed>

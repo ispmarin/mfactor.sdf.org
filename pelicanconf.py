@@ -5,28 +5,14 @@ from __future__ import unicode_literals
 AUTHOR = u"Ivan Marin"
 SITENAME = u'Another Life Form'
 SITEURL = u'http://mfactor.sdf.org'
-SITETITLE = u"Another Life Form"
-SITESUBTITLE = u'Data Scientist'
-#SITELOGO = u'https://alexandrevicenzi.com/img/profile.png'
-#FAVICON = SITEURL + '/images/favicon.ico'
 
-ROBOTS = u'index, follow'
-
-USE_FOLDER_AS_CATEGORY = True
-MAIN_MENU = True
 PATH = 'content'
 TIMEZONE = 'America/Sao_Paulo'
 DEFAULT_LANG = 'en'
-
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
+LINKS = ((u'Ícaro Medeiros', 'http://www.icaromedeiros.com.br/'),
          )
 
 # Social widget
@@ -37,7 +23,7 @@ SOCIAL = (
 DEFAULT_PAGINATION = 10
 
 
-THEME = '/home/ispmarin/profissional/mfactor.sdf.org/pelican-themes/Flex'
+THEME = '/home/ispmarin/profissional/mfactor.sdf.org/pelican-themes/pelican-simplegrey'
 
 # Uncomment following line if you want document-relative URLs when developing
 

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/ispmarin.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2015-03-15T06:05:00-03:00</updated><entry><title>Development with Python on Linux is turning into Windows</title><link href="http://mfactor.sdf.org/development-with-python-on-linux-is-turning-into-windows.html" rel="alternate"></link><updated>2015-03-15T06:05:00-03:00</updated><author><name>ispmarin</name></author><id>tag:mfactor.sdf.org,2015-03-15:development-with-python-on-linux-is-turning-into-windows.html</id><summary type="html">&lt;p&gt;Yes, the title is a flamebait, but please bear with me.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;As I said in the last post, I installed Debian on my Chromebook using
+&lt;a class="reference external" href="https://github.com/dnschneid/crouton"&gt;crouton&lt;/a&gt;. It worked quite
+easily, KDE installed. But then I started building my dev environment,
+using Python. But first, a quick digression.&lt;/p&gt;
+&lt;p&gt;I have to use Windows at work now. I know, I know, but there's no way
+around it. Setting up a dev environment on Windows is very very tricky
+and not very funny, especially if you don't have admin rights on your
+own machine. I managed to get the basics working, but it was not easy.
+The loop search internet-&amp;gt;download-&amp;gt;install-&amp;gt;internet was not fun at all
+after all these years with apt-get.&lt;/p&gt;
+&lt;p&gt;So, when I started setting up my environment on the Debian on the
+chromebook it struck me. &lt;em&gt;I'm doing exactly as I done in Windows.&lt;/em&gt; How
+so? First, I installed Python 2.7.9 via apt-get. Nothing funny so far.
+Then I decided to use a virtualenv. Ops. To install it I can use the
+Debian package or download a newer version directly. Ok, ok... but then
+it comes virtualenvwrapper. Ok, I still can install it using the Debian
+repos, but it's an old version. After I set up my virtualenv, I start
+using pip. Pip is ok, but now I have to download all packages from
+different places. I know that this is one of the features of pip, but
+nonetheless is divorced from the operating system, there is no search to
+speak about inside pip, there is no update all, etc etc. Ok, but there
+is still hope, right? Next thing, PyCharm. Bam, gotta go back to the
+internet, download it, install... Windows again!&lt;/p&gt;
+&lt;p&gt;You can argue that I chose to use these packages, that there are several
+in the Debian repos that can satisfy my needs. That this is just a rant
+that &amp;quot;package A or B is not in the repos!&amp;quot;, and I tend to agree with
+you. But I didn't have to do nothing like this when I was developing in
+C, C++ or Fortran, including libraries, so I started thinking that maybe
+the Python tools integration with Debian or any other Linux distro is
+not as good as it could be. What can we do to make it easier? So far I
+don't know. Any suggestions?&lt;/p&gt;
+</summary><category term="debian"></category><category term="pip"></category><category term="PyCharm"></category><category term="Python"></category></entry><entry><title>Using Virtual Machines and Ubuntu to Keep a Sane Development Environment</title><link href="http://mfactor.sdf.org/using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html" rel="alternate"></link><updated>2012-12-11T15:06:00-02:00</updated><author><name>ispmarin</name></author><id>tag:mfactor.sdf.org,2012-12-11:using-virtual-machines-and-ubuntu-to-keep-a-sane-development-environment.html</id><summary type="html">&lt;p&gt;I tried. I swear I tried. But it's plain and simple painful to develop
+in Fortran in Windows. There, I said it. Is it &lt;em&gt;possible&lt;/em&gt;? Yes. Is it
+easy? Not a chance in Hell.&lt;/p&gt;
+&lt;p&gt;First of all, there aren't a lot of options for Fortran Compilers for
+the Microsoft Windows Platform (and I'm talking about Windows 7, I would
+imagine that Windows 8 would be worse.). The most sane one, Intel
+Fortran, is even now Intel Visual Fortran Compiler for Windows (&lt;a class="reference external" href="http://software.intel.com/en-us/forums/intel-visual-fortran-compiler-for-windows"&gt;I kid
+you
+not&lt;/a&gt;.).
+And then there's the interfaces. Microsoft provides for free the
+&lt;a class="reference external" href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products"&gt;Express&lt;/a&gt;
+suit, so things are not that bad, right? No. The Express suit can't use
+Intel Visual Fortran Compiler for Windows support, so you're out of luck
+unless you buy the full Visual Studio Suite, and which one I dunno -
+never understood the Ultimate/Professional/Premium/Alien/KitchenCleaning
+version confusion. Eclipse CDT/Photran would be a good one instead,
+right? No. Intel Visual Fortran Compiler for Windows also doesn't
+support Eclipse CDT/Photran. Where to run?&lt;/p&gt;
+&lt;p&gt;Maybe MinGW could help us? Yes, maybe. Both Intel Visual Fortran
+Compiler for Windows and MinGW can compile a Fortran source file from
+the command line, but we're in friggin Windows, right? Also, for large
+projects, code completion and syntax errors are a must. I didn't try the
+LLVM/dragonegg and mingw-fortran combination, but as I wouldn't get the
+advantages that I'm looking for, I decided that if I have to use a
+Windows machine, no one would prevent to use a sane, decent Linux
+environment &lt;em&gt;inside&lt;/em&gt; that Windows machine. Ubuntu plus VirtualBox it is!&lt;/p&gt;
+&lt;p&gt;Downloaded 12.10-amd64, installed in a VDI image, all with standard
+options. Of course Ubuntu would give me some headaches: had to uninstall
+that creepy shopping lens, install Google Chrome. Google Chrome
+installation was interesting: the Software Center gave me an &amp;quot;This
+package is of low quality. Don't install it.&amp;quot; Just hit ignore and
+install it anyway. And Ubuntu froze. Unity recomposed itself, but I
+figured that there is something funky going on between X and VirtualBox,
+so I went back to VirtualBox settings and disabled the 3D video, what
+made things a bit better - but still no changing resolution with
+changing the size of the VM window. Strange. Will probably install KDE
+anyway... so I plugged my external drive to copy all the files to the
+VM. And then, Compiz hanged again. Definitely annoying. So while I
+waited to see what the 12.10 would do (keep freezed, it seems), decided
+to use my 12GB of RAM and my Core i7 and hit an 12.04 installation. It
+started to be a little ironic that I was running away from one platform
+that is impossible to program to another one that refuses to work to
+begin with. I decided to keep going, nonetheless, and see where I would
+get.&lt;/p&gt;
+&lt;p&gt;I still kept my hopes that things would be easier after I got an Ubuntu
+running. My plan was to use the VM as a full development environment
+that I could transport easily to different computers. I thought about
+keeping a git repository of the important stuff, but the multiplatform
+problems that I detailed above with Fortran made this a no-go. 12.04 was
+much better than 12.10, and while 12.10 was still frozen, I managed to
+install 12.04, update it, install the required dkms modules for
+VirtualBox. Also downloaded Eclipse CDT, &lt;a class="reference external" href="http://eclipsecolorthemes.org/"&gt;Eclipse Colour
+Plugin&lt;/a&gt;,
+&lt;a class="reference external" href="http://pydev.org/"&gt;Pydev&lt;/a&gt; and
+&lt;a class="reference external" href="http://www.eclipse.org/photran/"&gt;Photran&lt;/a&gt;,
+&lt;a class="reference external" href="http://openjdk.java.net/"&gt;OpenJDK&lt;/a&gt;, everything running ok! Copied
+from my external drive all the source files, all beautiful. Decided not
+to use 12.10 and stick with 12.04. So now, the next step: moving the VM
+to the external drive.&lt;/p&gt;
+&lt;p&gt;After copying the entire VB folder to the external drive, I would have
+to test it and see if there's anything missing. And it works! Now doing
+some backups on external hard drives and transporting happily my virtual
+machines around. It's cumbersome to transport 20GB up and down an
+external drive every time, but it's better than use Windows to program,
+that's for sure!&lt;/p&gt;
+&lt;p&gt;One last trick: to share a folder between the Ubuntu guest and Windows
+host and be able to create soft symlinks, I had to issue this command in
+the Windows host:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+VBoxManage setextradata VM_NAME VBoxInternal2/SharedFoldersEnableSymlinksCreate/SHARE_NAME 1
+
+
+Where VM_NAME is your virtual machine name. Done!
+&lt;/pre&gt;
+</summary><category term="fortran"></category><category term="symlink"></category><category term="ubuntu"></category><category term="virtualbox"></category><category term="windows"></category></entry></feed>

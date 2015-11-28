@@ -1,63 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
+	<meta charset="utf-8"/>
+	<title>Desktop Files on Debian/Ubuntu and XDG - Another Life Form</title>	
+	<meta name="author" content="Ivan Marin">
+	
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-<meta name="author" content="Ivan Marin" />
-<meta name="description" content="Organizing custom launchers on Debian/Ubuntu XDG compliant" />
-<meta name="keywords" content="linux, desktop">
-<meta property="og:site_name" content="Another Life Form"/>
-<meta property="og:title" content="Desktop Files on Debian/Ubuntu and XDG"/>
-<meta property="og:description" content="Organizing custom launchers on Debian/Ubuntu XDG compliant"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://mfactor.sdf.org/desktop-files.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2015-11-23 00:00:00-02:00"/>
-<meta property="article:modified_time" content="2015-11-23 21:57:00-02:00"/>
-<meta property="article:author" content="http://mfactor.sdf.org/author/ivan-marin.html">
-<meta property="article:section" content="Linux"/>
-<meta property="article:tag" content="linux"/>
-<meta property="article:tag" content="desktop"/>
-<meta property="og:image" content="">  <title>Another Life Form &ndash; Desktop Files on Debian/Ubuntu and XDG</title>
+	<meta name="description" content="Organizing custom launchers on Debian/Ubuntu XDG compliant">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/main.css" type="text/css" />
+		
+
+    <link href="http://mfactor.sdf.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
 </head>
+	
 <body>
-  <aside>
-    <div>
-      <a href="http://mfactor.sdf.org">
-        <img src="http://mfactor.sdf.org/theme/img/profile.png" alt="Another Life Form" title="Another Life Form">
-      </a>
-      <h1><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
-      <p>Data Scientist</p>
-      <nav>
-        <ul class="list">
-          <li><a href="http://mfactor.sdf.org/pages/about.html#about">Introduction</a></li>
-          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
-        </ul>
-      </nav>
-      <ul class="social">
-        <li><a class="sc-linkedin" href="https://br.linkedin.com/in/ispmarin/en" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-github" href="https://github.com/ispmarin" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
-  </aside>
-  <main>
-    <nav>
-      <a href="http://mfactor.sdf.org">Home</a>
-    </nav>
 
-<article>
-  <header>
-    <h1 id="desktop-files">Desktop Files on Debian/Ubuntu and XDG</h1>
-    <p>Posted on Seg 23 novembro 2015 in <a href="http://mfactor.sdf.org/category/linux.html">Linux</a></p>
-  </header>
-  <div>
-    <p>I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.</p>
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	        <a href="http://mfactor.sdf.org/feeds/all.atom.xml" rel="alternate"><img src="http://mfactor.sdf.org/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
+	    </div>
+	      <nav class="pages">
+			  <a href="http://mfactor.sdf.org/pages/about.html">About</a>
+	      </nav>
+		<a href="http://mfactor.sdf.org" class="title">Another Life Form</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Desktop Files on Debian/Ubuntu and XDG</h1>
+		
+<div class="metadata">
+  <time datetime="2015-11-23T00:00:00-02:00" pubdate>Seg 23 novembro 2015</time>
+    <address class="vcard author">
+      by <a class="url fn" href="http://mfactor.sdf.org/author/ivan-marin.html">Ivan Marin</a>
+    </address>
+  in <a href="http://mfactor.sdf.org/category/linux.html">Linux</a>
+<p class="tags">tagged <a href="http://mfactor.sdf.org/tag/linux.html">linux</a>, <a href="http://mfactor.sdf.org/tag/desktop.html">desktop</a></p></div>		
+		<p>I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.</p>
 <p>A <code>desktop file</code> is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The <a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html">standard form</a> of a desktop file is</p>
 <div class="highlight"><pre><span class="k">[Desktop Entry]</span>
 <span class="na">Version</span><span class="o">=</span><span class="s">1.0</span>
@@ -79,36 +66,59 @@
 </pre></div>
 
 
-<p>done!</p>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="http://mfactor.sdf.org/tag/linux.html">linux</a>
-      <a href="http://mfactor.sdf.org/tag/desktop.html">desktop</a>
-    </p>
-  </div>
-</article>
+<p>done!</p>	
 
-    <footer>
-      <p>&copy; Ivan Marin </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
-  </main>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Desktop Files on Debian/Ubuntu and XDG",
-  "headline": "Desktop Files on Debian/Ubuntu and XDG",
-  "datePublished": "2015-11-23 00:00:00-02:00",
-  "dateModified": "2015-11-23 21:57:00-02:00",
-  "author": {
-    "@type": "Person",
-    "name": "Ivan Marin",
-    "url": "http://mfactor.sdf.org/author/ivan-marin.html"
-  },
-  "image": "{{ SITEURL }}/theme/img/profile.png",
-  "url": "http://mfactor.sdf.org/desktop-files.html",
-  "description": "Organizing custom launchers on Debian/Ubuntu XDG compliant"
-}
-</script></body>
+	</article>
+
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="http://mfactor.sdf.org/category/data-science.html">data science</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/debian.html">debian</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/development.html">development</a></li>
+	              <li ><a href="http://mfactor.sdf.org/category/learning.html">Learning</a></li>
+	              <li class="active"><a href="http://mfactor.sdf.org/category/linux.html">Linux</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
+				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+	          <aside>
+	            <h2>Blogroll</h2>
+	            <ul>
+	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
+	            </ul>
+	          </aside>
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
 </html>

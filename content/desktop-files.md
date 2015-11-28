@@ -2,7 +2,7 @@ Title: Desktop Files on Debian/Ubuntu and XDG
 Date: 2015-11-23
 Category: Linux
 Modified: 2015-11-23 21:57
-Tags: linux,desktop
+Tags: linux, desktop
 Slug: desktop-files
 Authors: Ivan Marin
 Summary: Organizing custom launchers on Debian/Ubuntu XDG compliant
