@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/linux.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2015-11-23T21:57:00-02:00</updated><entry><title>Desktop Files on Debian/Ubuntu and XDG</title><link href="http://mfactor.sdf.org/desktop-files.html" rel="alternate"></link><updated>2015-11-23T21:57:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-23:desktop-files.html</id><summary type="html">&lt;p&gt;I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/linux.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2015-11-26T22:42:00-02:00</updated><entry><title>Using `conda` instead of `pip`</title><link href="http://mfactor.sdf.org/conda.html" rel="alternate"></link><updated>2015-11-26T22:42:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-26:conda.html</id><summary type="html">&lt;p&gt;I've been struggling with which environment use to develop on Python applications that 
+are going to be moved around and run on different systems. There is Hadoop and Spark on the mix, so things are getting
+more complicated, too. Thinking about my environment, I have the following requisites:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Determine the level of isolation of the application.&lt;/li&gt;
+&lt;li&gt;Point to the &lt;code&gt;python&lt;/code&gt; binary that I want.&lt;/li&gt;
+&lt;li&gt;Can be moved around &lt;/li&gt;
+&lt;li&gt;Can be deployed and used in systems without internet&lt;/li&gt;
+&lt;li&gt;Can be deployed and used without root access&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So far I have two alternatives: &lt;code&gt;virtualenv&lt;/code&gt; and &lt;code&gt;Anaconda&lt;/code&gt;. I've been using &lt;code&gt;virtualenv&lt;/code&gt; for a while so I know 
+better the limitations. I tried, then, to use &lt;code&gt;Anaconda&lt;/code&gt; to see how it works. The installer is heavy but it comes
+with several useful things (&lt;code&gt;pandas&lt;/code&gt;, for example), so that's ok. Things got a bit complicated using the environments,
+though, with the &lt;code&gt;conda&lt;/code&gt; application. To keep point 2 I changed the recommended &lt;code&gt;PATH&lt;/code&gt; variable to &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;export PATH=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/bin:/home/ispmarin/bin/anaconda3/bin&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;so I get the system &lt;code&gt;python&lt;/code&gt; executable but all the other tools from &lt;code&gt;Anaconda&lt;/code&gt;. Nice. Then I created and environment
+and installed some stuff there. Also works as expected, although it points to the &lt;code&gt;python&lt;/code&gt; binary from inside &lt;code&gt;Anaconda&lt;/code&gt;.
+Acceptable. Then I deactivated the environment, and to my surprise, the &lt;code&gt;python&lt;/code&gt; executable didn't change back to 
+the system one! Damn, that's a problem right there. There 
+&lt;a href="http://stackoverflow.com/questions/33955516/anaconda-activate-deactivate-cycle-messes-up-path"&gt;are&lt;/a&gt; 
+&lt;a href="https://github.com/conda/conda/issues/1846"&gt;several&lt;/a&gt; 
+&lt;a href="https://github.com/conda/conda/pull/1727"&gt;bug&lt;/a&gt; reports on the &lt;code&gt;conda&lt;/code&gt; github, but still no final solution. So &lt;code&gt;conda&lt;/code&gt; is
+out for now.&lt;/p&gt;</summary><category term="python"></category><category term="pip"></category><category term="conda"></category></entry><entry><title>Desktop Files on Debian/Ubuntu and XDG</title><link href="http://mfactor.sdf.org/desktop-files.html" rel="alternate"></link><updated>2015-11-23T21:57:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-23:desktop-files.html</id><summary type="html">&lt;p&gt;I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.&lt;/p&gt;
 &lt;p&gt;A &lt;code&gt;desktop file&lt;/code&gt; is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The &lt;a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html"&gt;standard form&lt;/a&gt; of a desktop file is&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
 &lt;span class="na"&gt;Version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1.0&lt;/span&gt;
