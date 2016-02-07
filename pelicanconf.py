@@ -23,7 +23,7 @@ SOCIAL = (
 DEFAULT_PAGINATION = 10
 
 
-THEME = '/home/ispmarin/profissional/mfactor.sdf.org/pelican-themes/pelican-simplegrey'
+THEME = '/home/ispmarin/profissional/projects/mfactor.sdf.org/pelican-themes/pelican-simplegrey'
 
 # Uncomment following line if you want document-relative URLs when developing
 
