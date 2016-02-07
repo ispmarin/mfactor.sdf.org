@@ -23,7 +23,7 @@ SOCIAL = (
 DEFAULT_PAGINATION = 10
 
 
-THEME = '/home/ispmarin/profissional/projects/mfactor.sdf.org/pelican-themes/pelican-simplegrey'
+THEME = '/home/ispmarin/profissional/projects/mfactor.sdf.org/pelican-simplegrey'
 
 STATIC_PATHS = ['images', 'extra/robots.txt', 'extra/favicon.ico']
 EXTRA_PATH_METADATA = {
