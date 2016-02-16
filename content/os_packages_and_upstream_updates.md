@@ -1,6 +1,6 @@
 Title: Why OS packages (.deb) are out of fashion and the rage is self-update
-Date: 2016-02-16
-Category: OS, debian
+Date: 2016-02-14
+Category: OS
 Tags: os, debian, deb, tools
 Authors: Ivan Marin
 Summary: Why several programs are not packaged in operating systems anymore and everyone are doing self-updates, and how this can be dangerous
