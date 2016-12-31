@@ -1,5 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/ivan-marin.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2016-02-16T00:00:00-02:00</updated><entry><title>Too many tools, not enough carpenters (short version)</title><link href="http://mfactor.sdf.org/too-many-tools-not-enough-carpenters-short-version.html" rel="alternate"></link><updated>2016-02-16T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-16:too-many-tools-not-enough-carpenters-short-version.html</id><summary type="html">&lt;p&gt;I came across a &lt;a href="https://ckmadvisors.com/b/160212.html"&gt;great article&lt;/a&gt; about tools in data science. The TL;DR of the article is, basically, tools will not solve your data problem, skills will. That's what the title is alluding: there are too many (some great, some mediocrer) tools, but not enough people skilled in really understanding the data and doing something useful or valuable with it. I will try to translate the article to a somewhat shorter version of the original, to make the point more accessible.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/ivan-marin.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2016-07-31T09:25:00-03:00</updated><entry><title>Managing passwords with pass</title><link href="http://mfactor.sdf.org/blog/manage-pass.html" rel="alternate"></link><published>2016-07-31T09:25:00-03:00</published><updated>2016-07-31T09:25:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-07-31:blog/manage-pass.html</id><summary type="html">&lt;p&gt;I've been thinking about dumping LastPass for a while now, especially after it was bought by
+some company whatever. But the way that LastPass is useful is quite awesome:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;can generate passwords&lt;/li&gt;
+&lt;li&gt;stores all passwords&lt;/li&gt;
+&lt;li&gt;fill login forms automatically (the best feature for me)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So how can I replace it with something with at least similar functionalities but
+under my control?&lt;/p&gt;
+&lt;p&gt;The answer to that is &lt;a class="reference external" href="https://www.passwordstore.org/"&gt;pass&lt;/a&gt;. It stores the
+passwords as encrypted text with &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GPG&lt;/a&gt; on the local filesystem.
+The feedback was so good that other people started using it and developed more
+resources for it, as a &lt;a class="reference external" href="https://qtpass.org/"&gt;GUI&lt;/a&gt; and a &lt;cite&gt;Firefox extension &amp;lt;https://github.com/jvenant/passff#&amp;gt;_&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;I'll describe how I managed to set it up.&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;GPG&lt;/h2&gt;
+&lt;p&gt;First, let's set up the GPG key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo apt-get install gpgv2
+&lt;/pre&gt;
+&lt;p&gt;and generate a key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+gpg --gen-key
+&lt;/pre&gt;
+&lt;p&gt;If the key process takes it too long because of the entropy generation,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;strong&gt;We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 210 more bytes)&lt;/strong&gt;&lt;/blockquote&gt;
+&lt;p&gt;install the &lt;cite&gt;rng-tools&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-get install rng-tools&lt;/blockquote&gt;
+&lt;p&gt;and generate entropy using the &lt;a class="reference external" href="http://serverfault.com/questions/214605/gpg-not-enough-entropy"&gt;command&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+sudo rngd -r /dev/urandom&lt;/blockquote&gt;
+&lt;p&gt;to generate enough entropy for GPG.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;pass&lt;/h2&gt;
+&lt;p&gt;So now let's install &lt;cite&gt;pass&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-get instal pass&lt;/blockquote&gt;
+&lt;p&gt;and create a password store:&lt;/p&gt;
+&lt;blockquote&gt;
+pass init &amp;lt;email used to generate the GPG key&amp;gt;&lt;/blockquote&gt;
+&lt;p&gt;You can now start adding passwords. As I said, I used LassPass heavily, so I had tons of
+passwords stored. To convert them I exported on LastPass my passwords to a CSV and used
+&lt;a class="reference external" href="https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb"&gt;this tool&lt;/a&gt;
+to import the passwords to pass. I now could access all my passwords from the command line.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pass-with-git"&gt;
+&lt;h2&gt;pass with git&lt;/h2&gt;
+&lt;p&gt;But one of the nicest things about Lastpass is be able to synchronize the passwords over the web.
+pass can manage the passwords as a git repository, so that's the route I chose. After importing
+the passwords I initialized the password store as a git repository:&lt;/p&gt;
+&lt;blockquote&gt;
+pass git init&lt;/blockquote&gt;
+&lt;p&gt;Now the changes on the password file would be automatically commited. Using my &lt;a class="reference external" href="http://sdf.org/?tutorials/metaarray"&gt;meta array&lt;/a&gt;
+account on &lt;a class="reference external" href="http://sdf.org"&gt;SDF&lt;/a&gt;, I created a bare remote repository on it (git init --bare) and added as a remote repository
+on my pass folder:&lt;/p&gt;
+&lt;blockquote&gt;
+pass git remote add origin ma.sdf.org:~/git/pass&lt;/blockquote&gt;
+&lt;p&gt;where the bare git repository is at &lt;cite&gt;~/git/pass&lt;/cite&gt;. After that a simple&lt;/p&gt;
+&lt;blockquote&gt;
+pass git push -u --all&lt;/blockquote&gt;
+&lt;p&gt;commited all passwords to the repo.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="alternatives-to-access-the-passwords"&gt;
+&lt;h2&gt;Alternatives to access the passwords&lt;/h2&gt;
+&lt;p&gt;There is a Firefox &lt;a class="reference external" href="https://addons.mozilla.org/pt-BR/firefox/addon/passff/"&gt;extension&lt;/a&gt; that can access
+the stored passwords. It's almost as good as Lastpass, but only for Firefox.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="security"></category><category term="passwords"></category></entry><entry><title>Proper way to run PySpark on a Jupyter Notebook</title><link href="http://mfactor.sdf.org/blog/proper-way-to-run-pyspark-on-a-jupyter-notebook.html" rel="alternate"></link><published>2016-06-27T00:00:00-03:00</published><updated>2016-06-27T00:00:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-06-27:blog/proper-way-to-run-pyspark-on-a-jupyter-notebook.html</id><summary type="html">&lt;p&gt;Using &lt;a href="jupyter.org"&gt;Jupyter Notebooks&lt;/a&gt; with PySpark is the savior combination of all data scientists around the world. The interesting bit about it is that the way that I've saw in the internet to start a PySpark kernel with Jupyter is &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;IPYTHON_OPTS=&amp;quot;notebook --ip 0.0.0.0&amp;quot; ./pyspark 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;if you want to set the notebook open to the world (careful with that!). But if you launch with this command, you will get this message:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[TerminalIPythonApp] WARNING | Subcommand `ipython notebook` is deprecated and will be removed in future versions.
+[TerminalIPythonApp] WARNING | You likely want to use `jupyter notebook` in the future
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This "future" will be probably &lt;a href="https://github.com/apache/spark/blob/master/bin/pyspark#L30"&gt;version 2.0&lt;/a&gt;, but the proper way to do it already works with 1.6.1: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;PYSPARK_DRIVER_PYTHON_OPTS=&amp;#39;notebook --ip 0.0.0.0&amp;#39; ./pyspark
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and done. &lt;/p&gt;</summary><category term="environment"></category><category term="data science"></category><category term="pyspark"></category><category term="jupyter"></category></entry><entry><title>Address normalization with Python and NLTK</title><link href="http://mfactor.sdf.org/blog/address-normalization-with-python-and-nltk.html" rel="alternate"></link><published>2016-05-10T00:00:00-03:00</published><updated>2016-05-10T00:00:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-05-10:blog/address-normalization-with-python-and-nltk.html</id><summary type="html">&lt;p&gt;Addresses in databases, especially ones that are inserted by human operators, are prone to a wide range of forms and errors.
+To be able to correctly identify a location from a address and to compare two entities we need to normalize them.
+(We're calling normalization both the entire process and one of the processing steps.)&lt;/p&gt;
+&lt;p&gt;Two problems: first is to identify address on a string by field, with errors; second is to match with existing address database to remove uncertanty.&lt;/p&gt;
+&lt;h2&gt;Preparation steps&lt;/h2&gt;
+&lt;p&gt;To start tackling the problem we have first to prepare the data. The usual steps for that are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;normalization&lt;/li&gt;
+&lt;li&gt;stemming&lt;/li&gt;
+&lt;li&gt;lemmatization&lt;/li&gt;
+&lt;li&gt;segmentation (tokenization)&lt;/li&gt;
+&lt;li&gt;text rebuild&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Normalization&lt;/h3&gt;
+&lt;p&gt;Normalization consists on transforming the text to a canonical form (equal to all entries) so they can be compared.
+The usual steps are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;standardize encoding&lt;/li&gt;
+&lt;li&gt;remove punctuation&lt;/li&gt;
+&lt;li&gt;transform to lowercase&lt;/li&gt;
+&lt;li&gt;remove stopwords and punctuation (with care!)&lt;/li&gt;
+&lt;li&gt;separate prefixes and suffixes that doesn't contain information&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Stemming&lt;/h3&gt;
+&lt;p&gt;Stemming is the process of reducing words in different forms (conjugated verbs, plural) to a radical form.
+This step is not useful for addresses because most of the addresses are not in different forms.
+Proper names, for example, are very common in addresses and don't benefit a lot from stemming.&lt;/p&gt;
+&lt;h2&gt;Lemmatization&lt;/h2&gt;
+&lt;p&gt;As we're not going to stem the words, we also don't need to lemmatizate them.
+Lemmatization is the process of grouping together the flexionated forms of the words so they can be analysed together.&lt;/p&gt;
+&lt;h3&gt;Segmentation&lt;/h3&gt;
+&lt;p&gt;Segmentation is the task of breaking up the text into tokens, so each token can be analysed separately.
+In our case, the tokenization can be done by address field: preffixes, location, complements and suffixes. For example, the address&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Rua Nove de Julho, 2983 ap 33 bloco 1 CEP 00043-424 São Paulo SP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;can be break up into&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preffix: &lt;code&gt;Rua&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Location: &lt;code&gt;Nove de Julho 2983&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Complements: &lt;code&gt;ap 33 bloco 1 CEP 00043-424&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Suffixes: &lt;code&gt;São Paulo SP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is helpful because now we can match each part of the address with an existing canonical form without a lot of noise.
+Each of the fields can be further processed to extract more information, like the postal code number.&lt;/p&gt;
+&lt;h3&gt;Parsing&lt;/h3&gt;
+&lt;p&gt;The next step is to parse the address.
+Parsing consists in break up the address string into fields that compose the address, the breaking up of the fields
+mentioned above. To parse we have to assume a structure for the address, either by rules or by some techiques like
+ Named Entity Recognization.&lt;/p&gt;
+&lt;h3&gt;Rebuild text&lt;/h3&gt;
+&lt;p&gt;This task consists in rebuild the normalized and annotated text to a final form. This will be done after the match phase.&lt;/p&gt;
+&lt;h2&gt;Identification and Match&lt;/h2&gt;
+&lt;p&gt;After cleaning up and normalizing the text we need to check if the value of the address exists in our canonical database. Two approaches:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Match with existing database&lt;/li&gt;
+&lt;li&gt;Name Entity Recognition on address&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Match with canonical database&lt;/h3&gt;
+&lt;p&gt;If we have a canonical database with the data considered correct, our job is to match the target addresses with the ones
+on this canonical database. This is a &lt;em&gt;match problem&lt;/em&gt;. We can attack this problem following these steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;split address by field (prefix, location, suffixes)&lt;/li&gt;
+&lt;li&gt;retrieve match candidates (search engine)&lt;/li&gt;
+&lt;li&gt;Match address with candidates by similarity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For this approach we're going to work directly on the text patterns, without any kind of machine learning.
+The canonical database is usually provided by the Post Office.&lt;/p&gt;
+&lt;p&gt;The match between two addresses is a way to check if two addresses are the same.
+For example, let's say that we have in our canonical database the entry&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CEP&lt;/th&gt;
+&lt;th&gt;Location&lt;/th&gt;
+&lt;th&gt;City&lt;/th&gt;
+&lt;th&gt;State&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;00043243&lt;/td&gt;
+&lt;td&gt;Nove de Julho&lt;/td&gt;
+&lt;td&gt;São Paulo&lt;/td&gt;
+&lt;td&gt;SP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;00032312&lt;/td&gt;
+&lt;td&gt;Nove de Setembro&lt;/td&gt;
+&lt;td&gt;São Paulo&lt;/td&gt;
+&lt;td&gt;SP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;and we need to compare with the address above. Which one is the best match?
+We could try to do an exact match: only the location strings that are exactly same are the same address.
+But this would miss lots of entries that could have typing errors but are otherwise valid addresses, like&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Rua nov de Julho, 2938&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;So how do we compensate for these errors?&lt;/p&gt;
+&lt;h3&gt;Match&lt;/h3&gt;
+&lt;p&gt;One approach is to retrieve candidates from the canonical database that are similar to the address we want to normalize. Search engines do that using different strategies. We're not going to detail this process, so let's just say that our search engine returned candidates to be compared.&lt;/p&gt;
+&lt;p&gt;For each of these candidates we do a comparison with our target address using some metric of similarity. There are several of such metrics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Jaro distance&lt;/li&gt;
+&lt;li&gt;Jaro-Winkler distance&lt;/li&gt;
+&lt;li&gt;Cosine distance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For now we're going to use Jaro-Winkler distance. We compare the target address with each of the candidates and rank by the similarity between them.&lt;/p&gt;
+&lt;h4&gt;Search engines&lt;/h4&gt;
+&lt;p&gt;Search engines usually already make the string similarity comparison to retrive the candidates, so it could, in principle, already compute the similarity score withou the need to program it by ourselves. But sometimes the search engine similarity algorithm cannot be tuned to the type of text, like addresses. We also have more information than only the Location string, like the postal code and suffixes. This could help in the decision process.&lt;/p&gt;
+&lt;h3&gt;NER&lt;/h3&gt;
+&lt;p&gt;Instead of using regular expressions to break up the address text into components we could create a Named Entity Recognizer and let it separate the address by fields.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tag canonical database with relevant tags&lt;/li&gt;
+&lt;li&gt;train CRF with tagged database&lt;/li&gt;
+&lt;li&gt;classify each address&lt;/li&gt;
+&lt;li&gt;match classified entity with canonical base&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Decision process&lt;/h2&gt;
+&lt;p&gt;After the text normalization and match we hopefully have a list of candidates with a similarity score between the target and a canonical address. How we decide if the address is indeed the correct address? We can set a score threshold, for example, based on our experience, and test the error rate. We also can create a classification model and train manually with some entries.&lt;/p&gt;
+&lt;h2&gt;In Python&lt;/h2&gt;
+&lt;p&gt;Let's show the steps above now with some Python and the Natural Language Toolkit.&lt;/p&gt;</summary><category term="data science"></category><category term="NLP"></category><category term="text mining"></category></entry><entry><title>Basic Python Setup for Data Science on Linux</title><link href="http://mfactor.sdf.org/blog/basic-python-setup-for-data-science-on-linux.html" rel="alternate"></link><published>2016-03-17T00:00:00-03:00</published><updated>2016-03-17T00:00:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-03-17:blog/basic-python-setup-for-data-science-on-linux.html</id><summary type="html">&lt;p&gt;Data scientists usually have a very diverse background and very different proficiency levels with some tools. This, as I usually say, is not negative, on the contrary! The best data science teams should have this diversity because the problems that they face are diverse by nature. 
+As I said before, I've been trying to set a system for data science with the tenets of reproducible research (RR). 
+To do that, not only the project should be organized to support RR, but the work environment should support RR too. &lt;/p&gt;
+&lt;p&gt;So the idea of this post is to explain some basic concepts about Linux, linux shells, environment variables and how to glue everything together on a productive Python environment. &lt;/p&gt;
+&lt;h2&gt;Linux and Linux shells&lt;/h2&gt;
+&lt;h3&gt;Quick detour&lt;/h3&gt;
+&lt;p&gt;First, to get this out of the way: I really like the open source software philosophy and the software that the community writes, but sometimes you have to give and see that some battles are best fought elsewhere. &lt;em&gt;Linux&lt;/em&gt;, technically, is just the &lt;a href="https://en.wikipedia.org/wiki/Linux_kernel"&gt;kernel&lt;/a&gt; of a &lt;a href="https://en.wikipedia.org/wiki/Operating_system"&gt;operating system&lt;/a&gt;, usually composed of free and open source software, called &lt;a href="https://en.wikipedia.org/wiki/Linux_distribution"&gt;distribution&lt;/a&gt;. 
+That's why sometimes you see "Debian GNU/Linux" distribution, because Debian, the Linux distribution, is composed of the &lt;a href="https://www.gnu.org/home.en.html"&gt;GNU&lt;/a&gt; tools and the Linux kernel. 
+But the name "Linux" got very popular and usually means &lt;em&gt;both&lt;/em&gt; the kernel and the distribution. So don't worry if you say only Linux. I don't. &lt;/p&gt;
+&lt;h3&gt;Shell, terminal, console&lt;/h3&gt;
+&lt;p&gt;So, after this enormous rant, what is a shell? A &lt;a href="https://en.wikipedia.org/wiki/Unix_shell"&gt;shell&lt;/a&gt; command line interpreter that works as a user interface. 
+A command line interpreter is exactly that, it interpretes and executes the commands given into instructions to the operating system. 
+So shell is mostly just a program that reads commands typed into it! And best of all, it hides the details of the operating system. 
+Shells can be used in an interactive fashion, where users type the commands, or in an automated way via &lt;em&gt;scripts&lt;/em&gt;. A script is a file with a series of commands to be executed. 
+To be more specific, there are the interactive login, interactive non-login and script shells. 
+Each has a different way to set environment variables and are called differently. The shell is also called &lt;em&gt;command line&lt;/em&gt; or &lt;em&gt;terminal&lt;/em&gt;. &lt;/p&gt;
+&lt;h3&gt;Running a command&lt;/h3&gt;
+&lt;p&gt;Now let's see how a shell executes a command. Let's say we want to run &lt;code&gt;man ls&lt;/code&gt;, to get the manual page of the command &lt;code&gt;ls&lt;/code&gt;. 
+There are two ways for the shell to call the executable &lt;code&gt;man&lt;/code&gt; with the argument &lt;code&gt;ls&lt;/code&gt;. 
+The first one is to give the full path of the command to the shell: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;  /usr/bin/man
+what manual page do you want?
+
+&amp;gt; file /usr/bin/man
+/usr/bin/man: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), 
+dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, 
+for GNU/Linux 2.6.32, BuildID[sha1]=ce062f3e946ea23a804345bc92b18983ab05c839, stripped
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So the shell will execute the command located on the directory &lt;code&gt;/usr/bin/man&lt;/code&gt;. 
+The other one is how the shell stores information for each session: using one specific &lt;em&gt;environment variable&lt;/em&gt;. 
+In this case, the shell searches the &lt;code&gt;PATH&lt;/code&gt; variable for the directories where it should seek the executable files. 
+If the shell finds on one of the dirs, the program is called. If not it returns an error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;&amp;gt; echo &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So for our example, as the &lt;code&gt;man&lt;/code&gt; command is located on the &lt;code&gt;/usr/bin&lt;/code&gt; folder, calling only &lt;code&gt;man&lt;/code&gt; on the shell will execute it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; man
+what manual page do you want?
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let's see now what environment variables are. With them we can understand a bit better how Python finds its packages.&lt;/p&gt;
+&lt;h3&gt;Environment Variables&lt;/h3&gt;
+&lt;p&gt;Environment variables are &lt;a href="https://en.wikipedia.org/wiki/Environment_variable"&gt;"a set of dynamic named values that can affect the way running processes will behave in a computer"&lt;/a&gt;.
+On a higher level, each program executed by the OS has its own set of environment variables. 
+When a shell is started, it reads a predefined set of files and define the environment variables for that shell session. 
+The files where the variables are defined and the order of the variable definitions depends on the shell and if the shell is interactive or script.
+&lt;a href="https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/"&gt;This&lt;/a&gt; has the order for &lt;a href="http://www.zsh.org/"&gt;ZSH&lt;/a&gt; and &lt;a href="https://www.gnu.org/software/bash/"&gt;Bash&lt;/a&gt; files that are &lt;em&gt;sourced&lt;/em&gt;, defining the environment variables and executing the commands inside them.
+(&lt;em&gt;Sourcing&lt;/em&gt; a file executes the lines of code inside that file as they were typed on the shell.)&lt;/p&gt;
+&lt;p&gt;Several variables are common to all &lt;a href="https://help.ubuntu.com/community/EnvironmentVariables"&gt;Unix&lt;/a&gt;. 
+One of them is called &lt;code&gt;PATH&lt;/code&gt; and it tells which directories should be searched for programs to be executed. 
+Another very common variable is called &lt;code&gt;HOME&lt;/code&gt; and identifies the path to the home folder for each user.
+To understand what that means more pratically, we want to add a new folder in our &lt;code&gt;PATH&lt;/code&gt; variable, so the shell can find the executable without us having to type the entire file path. 
+We are using &lt;code&gt;bash&lt;/code&gt; and we want to change only the user path, so we edit the &lt;code&gt;.bashrc&lt;/code&gt; file on his home folder, adding the line&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;export PATH=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:/home/user/bin/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;export&lt;/code&gt; means to attribute to the variable &lt;code&gt;PATH&lt;/code&gt; the value &lt;code&gt;/home/user/bin&lt;/code&gt;. 
+The &lt;code&gt;$PATH&lt;/code&gt; part means to use the existing value of the variable &lt;code&gt;PATH&lt;/code&gt; and to append it with the path after it. 
+Now, every time a new shell is created for this user, this new folder will be added to the &lt;code&gt;PATH&lt;/code&gt; variable, and the programs on this folder can be executed without having to type the entire file path.&lt;/p&gt;
+&lt;h2&gt;Python paths and libraries&lt;/h2&gt;
+&lt;p&gt;One of the great advantages of using Python for data science is the vast array of libraries available. 
+This can be also a great pain when you have to manage different projects and different requirements. 
+Virtualenvs does that by manipulating some environment variables. See where this is going?
+The idea is to understand how Python works with some directories and paths and manipulate them for the Python interpreter and the libraries, in a way where each project can have its own dependecies and module versions.&lt;/p&gt;
+&lt;p&gt;Python uses environment variables defined at compile time and before execution.
+The list of &lt;a href="https://docs.python.org/2/using/cmdline.html#environment-variables"&gt;environment variables&lt;/a&gt; defines some environment variables that can be changed before execution. 
+To check inside Python which variables are defined, run inside a Python shell&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Feb&lt;/span&gt; &lt;span class="mi"&gt;22&lt;/span&gt; &lt;span class="mi"&gt;2016&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                                                    
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;GCC&lt;/span&gt; &lt;span class="mf"&gt;5.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;20160220&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;linux2&lt;/span&gt;                                                                                               
+&lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; 
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;                                                                                                           
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/plat-x86_64-linux-gnu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/lib-tk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/lib-old&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/lib-dynload&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/dist-packages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/dist-packages/gtk-2.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/pymodules/python2.7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;These are the paths where the Python intepreter will search for modules by default. &lt;/p&gt;
+&lt;h3&gt;Virtualenvs&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://virtualenv.pypa.io/en/latest/"&gt;Virtualenvs&lt;/a&gt; were created to isolate an environment, decoupling
+the modules for each virtual environment and the system. 
+We're going to use them to create our development environments. 
+Virtualenv manipulates the paths and set to different directories than the standard ones. 
+Let's create a virtualenv using &lt;a href="https://virtualenvwrapper.readthedocs.org/en/latest/"&gt;virtualenvwrapper&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; mkvirtualenv test
+Running virtualenv with interpreter /usr/bin/python2
+New python executable in test/bin/python2
+Also creating executable in test/bin/python
+Installing setuptools, pip...done.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With that the virtualenv is created and the variables have been changed to reflect the local environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Feb&lt;/span&gt; &lt;span class="mi"&gt;22&lt;/span&gt; &lt;span class="mi"&gt;2016&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;GCC&lt;/span&gt; &lt;span class="mf"&gt;5.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;20160220&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;linux2&lt;/span&gt;
+&lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7/plat-x86_64-linux-gnu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7/lib-tk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7/lib-old&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7/lib-dynload&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/plat-x86_64-linux-gnu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/lib-tk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/local/lib/python2.7/site-packages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="s1"&gt;&amp;#39;/home/user/.virtualenvs/test/lib/python2.7/site-packages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice now that new paths are added for packages to be searched and used, so new packages are installed on these folders.
+The virtualenv directory can be changed, from the default &lt;code&gt;~/.virtualenvs&lt;/code&gt; to any other folder where the user has access.&lt;/p&gt;
+&lt;p&gt;This structure allows to manage several different virtualenvs, each with its own packages and configurations.&lt;/p&gt;
+&lt;h3&gt;Changing the path to the Python executable&lt;/h3&gt;
+&lt;p&gt;What if a new Python version should be compiled and used? Probably the system will have to keep its Python version,
+as Linux distributions use Python for system operations. 
+One way to to it is to compile the needed Python version and put the path to the Python executable on the &lt;code&gt;PATH&lt;/code&gt; variable. From there new virtualenvs can be created using this specific Python version.&lt;/p&gt;
+&lt;h3&gt;Project structure&lt;/h3&gt;
+&lt;p&gt;To keep packages, versions and dependencies separated, each project should have its own virtualenv. 
+For each virtualenv the necessary packages are installed using &lt;a href="https://pypi.python.org/pypi/pip"&gt;pip&lt;/a&gt;. 
+The virtualenv directory should also be set to a known location, like &lt;code&gt;~/bin/virtualenvs&lt;/code&gt;. 
+It's also good practice to keep a &lt;a href="https://pip.pypa.io/en/stable/user_guide/"&gt;requirements.txt&lt;/a&gt; file on the git repository.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;That was a lot, for sure! Hopefully this will make clear how to use virtualenvs and environment variables to keep the
+development and data analysis easier to manage, reproduce and deploy.&lt;/p&gt;</summary><category term="datascience"></category><category term="python"></category></entry><entry><title>Too many tools, not enough carpenters (short version)</title><link href="http://mfactor.sdf.org/blog/too-many-tools-not-enough-carpenters-short-version.html" rel="alternate"></link><published>2016-02-16T00:00:00-02:00</published><updated>2016-02-16T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-16:blog/too-many-tools-not-enough-carpenters-short-version.html</id><summary type="html">&lt;p&gt;I came across a &lt;a href="https://ckmadvisors.com/b/160212.html"&gt;great article&lt;/a&gt; about tools in data science. The TL;DR of the article is, basically, tools will not solve your data problem, skills will. That's what the title is alluding: there are too many (some great, some mediocrer) tools, but not enough people skilled in really understanding the data and doing something useful or valuable with it. I will try to translate the article to a somewhat shorter version of the original, to make the point more accessible.&lt;/p&gt;
 &lt;p&gt;++++++++++++++&lt;/p&gt;
 &lt;p&gt;Big corporations are full with data but soon discover that transforming this data into something useful or valuable is very hard. On the other hand, startups are built from the ground up with data science ingrained on the very core, with a qualified team of data scientists, mainly because this data is the source of revenue.&lt;/p&gt;
 &lt;p&gt;Consumers don't pay for software a long time ago, so if you want to make money with software, you have to sell it to the enterprise. Data science is very hot right now, so software for data science is a no-brainer, right? Wrong. Big corporations are not like your startup: data is spread out in hundreds or thousands of systems that don't communicate. Huge amounts of data is generated and stored but until recently nobody thought about accessing or even less analysing this data. And as these corporations don't have data scientists in-house, nobody is really sure how this data can be used or even what this data &lt;em&gt;is&lt;/em&gt;.&lt;/p&gt;
@@ -18,12 +363,12 @@
 &lt;p&gt;An organization that lacks such data science talent could spend many millions on data analytics tools and still not come anywhere close to the same results. When someone asks me to show them “the tool” that created these results, I introduce them to our data scientists. For the large enterprise, the challenge is finding and developing that talent base. &lt;/p&gt;
 &lt;p&gt;The market is gradually evolving into a more mature data science environment, away from the idea of extracting value of data is equal to buying more software licenses.&lt;/p&gt;
 &lt;p&gt;++++++++++++++&lt;/p&gt;
-&lt;p&gt;Hopefully these ideas can kickstart a healthy discussion about the place of tools and skill to be able to use the data that a company has to benefit all.&lt;/p&gt;</summary><category term="data science"></category><category term="tools"></category></entry><entry><title>From Maple to Spark</title><link href="http://mfactor.sdf.org/from-maple-to-spark.html" rel="alternate"></link><updated>2016-02-15T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-15:from-maple-to-spark.html</id><summary type="html">&lt;p&gt;All started with cleaning up my bin folder.&lt;/p&gt;
+&lt;p&gt;Hopefully these ideas can kickstart a healthy discussion about the place of tools and skill to be able to use the data that a company has to benefit all.&lt;/p&gt;</summary><category term="data science"></category><category term="tools"></category></entry><entry><title>From Maple to Spark</title><link href="http://mfactor.sdf.org/blog/from-maple-to-spark.html" rel="alternate"></link><published>2016-02-15T00:00:00-02:00</published><updated>2016-02-15T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-15:blog/from-maple-to-spark.html</id><summary type="html">&lt;p&gt;All started with cleaning up my bin folder.&lt;/p&gt;
 &lt;p&gt;Describe the idea of first using Maple in Physics, then doing our own computer programs and simulations, the time it took to write them and the support that we had for it, to today environment of using more "basic" programming languages and environments, less complete, but more efficient.&lt;/p&gt;
-&lt;p&gt;Why Matlab and Mathematica are not used in business organizations, as they are supposedly more feature complete and simple to use?&lt;/p&gt;</summary><category term="tools"></category><category term="maple"></category><category term="scientific software"></category><category term="python"></category><category term="spark"></category></entry><entry><title>Why OS packages (.deb) are out of fashion and the rage is self-update</title><link href="http://mfactor.sdf.org/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html" rel="alternate"></link><updated>2016-02-14T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-14:why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html</id><summary type="html">&lt;p&gt;Show my &lt;code&gt;bin&lt;/code&gt; folder, structure and commands. Number of sofwares that are not packaged by OS anymore, time to package, rapid fire versions and update channels. Why this can be dangerous (Mac update package platform, ars technica).&lt;/p&gt;</summary><category term="os"></category><category term="debian"></category><category term="deb"></category><category term="tools"></category></entry><entry><title>Data Science workflow with reproducible research - Jupyter notebooks</title><link href="http://mfactor.sdf.org/data-science-workflow-with-reproducible-research-jupyter-notebooks.html" rel="alternate"></link><updated>2016-01-16T21:07:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-01-16:data-science-workflow-with-reproducible-research-jupyter-notebooks.html</id><summary type="html">&lt;p&gt;As a follow up of the &lt;a href="http://mfactor.sdf.org/data-science-workflow-with-reproducible-research.html"&gt;previous post&lt;/a&gt;, here I present a &lt;a href="https://jupyter.org"&gt;Jupyter&lt;/a&gt; notebook that incorporates a few
+&lt;p&gt;Why Matlab and Mathematica are not used in business organizations, as they are supposedly more feature complete and simple to use?&lt;/p&gt;</summary><category term="tools"></category><category term="maple"></category><category term="scientific software"></category><category term="python"></category><category term="spark"></category></entry><entry><title>Why OS packages (.deb) are out of fashion and the rage is self-update</title><link href="http://mfactor.sdf.org/blog/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html" rel="alternate"></link><published>2016-02-14T00:00:00-02:00</published><updated>2016-02-14T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-14:blog/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html</id><summary type="html">&lt;p&gt;Show my &lt;code&gt;bin&lt;/code&gt; folder, structure and commands. Number of sofwares that are not packaged by OS anymore, time to package, rapid fire versions and update channels. Why this can be dangerous (Mac update package platform, ars technica).&lt;/p&gt;</summary><category term="os"></category><category term="debian"></category><category term="deb"></category><category term="tools"></category></entry><entry><title>Data Science workflow with reproducible research - Jupyter notebooks</title><link href="http://mfactor.sdf.org/blog/data-science-workflow-with-reproducible-research-jupyter-notebooks.html" rel="alternate"></link><published>2016-01-16T21:07:00-02:00</published><updated>2016-01-16T21:07:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-01-16:blog/data-science-workflow-with-reproducible-research-jupyter-notebooks.html</id><summary type="html">&lt;p&gt;As a follow up of the &lt;a href="http://mfactor.sdf.org/blog/data-science-workflow-with-reproducible-research.html"&gt;previous post&lt;/a&gt;, here I present a &lt;a href="https://jupyter.org"&gt;Jupyter&lt;/a&gt; notebook that incorporates a few
 things that makes easier to follow the ideias of the data project structure. &lt;/p&gt;
 &lt;p&gt;The notebook can be found &lt;a href="https://github.com/ispmarin/ds_workshop/blob/master/src/template_ds_workshop.ipynb"&gt;here&lt;/a&gt;. 
-Using the idea of auto documentation of the notebooks, this notebook details the ideas. &lt;/p&gt;</summary><category term="data science"></category><category term="data"></category></entry><entry><title>Data Science workflow with reproducible research</title><link href="http://mfactor.sdf.org/data-science-workflow-with-reproducible-research.html" rel="alternate"></link><updated>2015-12-08T22:42:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-12-08:data-science-workflow-with-reproducible-research.html</id><summary type="html">&lt;h1&gt;Data science workflow&lt;/h1&gt;
+Using the idea of auto documentation of the notebooks, this notebook details the ideas. &lt;/p&gt;</summary><category term="data science"></category><category term="data"></category></entry><entry><title>Data Science workflow with reproducible research</title><link href="http://mfactor.sdf.org/blog/data-science-workflow-with-reproducible-research.html" rel="alternate"></link><published>2015-12-08T22:42:00-02:00</published><updated>2015-12-08T22:42:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-12-08:blog/data-science-workflow-with-reproducible-research.html</id><summary type="html">&lt;h1&gt;Data science workflow&lt;/h1&gt;
 &lt;p&gt;I've been wondering and tinkering about how to structure my data science projects, thinking on the lines of &lt;a href="http://reproducibleresearch.net/"&gt;Reproducible Research&lt;/a&gt; and separation of information. There is a lot of talk about the CRISP-DM &lt;a href="https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining"&gt;Cross Industry Standard Process for Data Mining&lt;/a&gt; and I believe that CRISP-DM is indeed a good approach. There are others like &lt;a href="https://en.wikipedia.org/wiki/SEMMA"&gt;SEMMA&lt;/a&gt; that are similar. But how these processes come down to a real project organization? Breaking down the steps, in a general overview, a data science project generally has&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;data&lt;/code&gt;, either the datasets or samples, that will be worked on&lt;/li&gt;
@@ -47,7 +392,7 @@ Using the idea of auto documentation of the notebooks, this notebook details the
 &lt;p&gt;The last requirement depends on the language or languages that are being used in the project. This is a rather lengthy subject, so I will restrict myself to Python. I use &lt;code&gt;virtualenvs&lt;/code&gt; without site packages and keep them on the &lt;code&gt;src&lt;/code&gt; folder. Each project has its own virtualenv. Other requirements, like map data, is also included on the project structure, so the entire project folder can be moved without great impact. Virtualenvs are not that portable between systems and this has been a problem so far without solution, especially if the other system doesn't have internet access. &lt;/p&gt;
 &lt;h2&gt;Project Example&lt;/h2&gt;
 &lt;p&gt;As an example I have the &lt;code&gt;polls&lt;/code&gt; project, with the following directory structure:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="na"&gt;.pools&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="na"&gt;.pools&lt;/span&gt;
 &lt;span class="err"&gt;+--&lt;/span&gt; &lt;span class="nf"&gt;data&lt;/span&gt;
    &lt;span class="err"&gt;+--&lt;/span&gt; &lt;span class="err"&gt;20151206&lt;/span&gt;
       &lt;span class="err"&gt;+--&lt;/span&gt; &lt;span class="nf"&gt;polls.csv&lt;/span&gt;
@@ -94,7 +439,7 @@ Using the idea of auto documentation of the notebooks, this notebook details the
 
 
 &lt;p&gt;One of the things that I also consider is the use of symbolic links from the &lt;code&gt;src&lt;/code&gt; folder to the &lt;code&gt;results&lt;/code&gt; folder or do a copy of a figure, from example. &lt;/p&gt;
-&lt;p&gt;On the next article I plan to show a pattern for &lt;code&gt;jupyter&lt;/code&gt; notebooks to handle this structure. &lt;/p&gt;</summary><category term="data science"></category><category term="data"></category></entry><entry><title>Using `conda` instead of `pip`</title><link href="http://mfactor.sdf.org/conda.html" rel="alternate"></link><updated>2015-11-26T22:42:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-26:conda.html</id><summary type="html">&lt;p&gt;I've been struggling with which environment use to develop on Python applications that 
+&lt;p&gt;On the next article I plan to show a pattern for &lt;code&gt;jupyter&lt;/code&gt; notebooks to handle this structure. &lt;/p&gt;</summary><category term="data science"></category><category term="data"></category></entry><entry><title>Using `conda` instead of `pip`</title><link href="http://mfactor.sdf.org/blog/conda.html" rel="alternate"></link><published>2015-11-26T22:42:00-02:00</published><updated>2015-11-26T22:42:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-26:blog/conda.html</id><summary type="html">&lt;p&gt;I've been struggling with which environment use to develop on Python applications that 
 are going to be moved around and run on different systems. There is Hadoop and Spark on the mix, so things are getting
 more complicated, too. Thinking about my environment, I have the following requisites:&lt;/p&gt;
 &lt;ol&gt;
@@ -108,7 +453,7 @@ more complicated, too. Thinking about my environment, I have the following requi
 better the limitations. I tried, then, to use &lt;code&gt;Anaconda&lt;/code&gt; to see how it works. The installer is heavy but it comes
 with several useful things (&lt;code&gt;pandas&lt;/code&gt;, for example), so that's ok. Things got a bit complicated using the environments,
 though, with the &lt;code&gt;conda&lt;/code&gt; application. To keep point 2 I changed the recommended &lt;code&gt;PATH&lt;/code&gt; variable to &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;export PATH=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/bin:/home/ispmarin/bin/anaconda3/bin&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;export PATH=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/bin:/home/ispmarin/bin/anaconda3/bin&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -119,9 +464,9 @@ the system one! Damn, that's a problem right there. There
 &lt;a href="http://stackoverflow.com/questions/33955516/anaconda-activate-deactivate-cycle-messes-up-path"&gt;are&lt;/a&gt; 
 &lt;a href="https://github.com/conda/conda/issues/1846"&gt;several&lt;/a&gt; 
 &lt;a href="https://github.com/conda/conda/pull/1727"&gt;bug&lt;/a&gt; reports on the &lt;code&gt;conda&lt;/code&gt; github, but still no final solution. So &lt;code&gt;conda&lt;/code&gt; is
-out for now.&lt;/p&gt;</summary><category term="python"></category><category term="pip"></category><category term="conda"></category></entry><entry><title>Desktop Files on Debian/Ubuntu and XDG</title><link href="http://mfactor.sdf.org/desktop-files.html" rel="alternate"></link><updated>2015-11-23T21:57:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-23:desktop-files.html</id><summary type="html">&lt;p&gt;I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.&lt;/p&gt;
+out for now.&lt;/p&gt;</summary><category term="python"></category><category term="pip"></category><category term="conda"></category></entry><entry><title>Desktop Files on Debian/Ubuntu and XDG</title><link href="http://mfactor.sdf.org/blog/desktop-files.html" rel="alternate"></link><published>2015-11-23T21:57:00-02:00</published><updated>2015-11-23T21:57:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-11-23:blog/desktop-files.html</id><summary type="html">&lt;p&gt;I've been struggling for a while now with custom launchers. First, a bit of organizatoin on how the launchers are supposed to work.&lt;/p&gt;
 &lt;p&gt;A &lt;code&gt;desktop file&lt;/code&gt; is a file that describes a launcher for an application. This file will be indexed by a Window Manager, like KDE or XFCE and can be shown on the menus and etc. The &lt;a href="http://standards.freedesktop.org/desktop-entry-spec/latest/apa.html"&gt;standard form&lt;/a&gt; of a desktop file is&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
 &lt;span class="na"&gt;Version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1.0&lt;/span&gt;
 &lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Application&lt;/span&gt;
 &lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Foo Viewer&lt;/span&gt;
@@ -137,14 +482,14 @@ out for now.&lt;/p&gt;</summary><category term="python"></category><category ter
 &lt;p&gt;And how to check if the file you wrote is valid? Just run &lt;code&gt;desktop-file-validate&lt;/code&gt; and it will point any errors that you have. &lt;/p&gt;
 &lt;h2&gt;KDE blunder&lt;/h2&gt;
 &lt;p&gt;After figuring it out how was the correct format for the file, my menus on KDE (and all actions, like changing the default application)was not changing anything. After searching for a long time, I found a solution: the context menu in Dolphin, to change the default application, was poiting to &lt;code&gt;.local/share/applications/mineapps.list&lt;/code&gt; and KDE 5 was reading the file on &lt;code&gt;.config/mimeapps.list&lt;/code&gt;. The solution? Exporting the default directory where KDE can find its icons. On my system, I changed .zshenv and added&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;XDG_DATA_DIRS=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;XDG_DATA_DIRS&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/.local/share/applications&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;XDG_DATA_DIRS=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;XDG_DATA_DIRS&lt;/span&gt;&lt;span class="x"&gt;:/home/ispmarin/.local/share/applications&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;done!&lt;/p&gt;</summary><category term="linux"></category><category term="desktop"></category></entry><entry><title>How to learn Physics (and Mathematics) with History</title><link href="http://mfactor.sdf.org/physics-and-history.html" rel="alternate"></link><updated>2015-08-19T19:30:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-08-19:physics-and-history.html</id><summary type="html">&lt;p&gt;Watching the new Cosmos series about Faraday I was struck by a very simple thought: seeing how things evolved made simpler for me to understand physical concepts. I don’t know if I had that epiphany before or if that’s common, but for me it was a revelation. Very simple things, like magnetic fields, were way more clear after showing what Faraday was trying to achieve and was thinking than any Electromagnetism A that I did as an undergrad. And I believe that this might help my new endeavor: understanding probability deeply.&lt;/p&gt;
+&lt;p&gt;done!&lt;/p&gt;</summary><category term="linux"></category><category term="desktop"></category></entry><entry><title>How to learn Physics (and Mathematics) with History</title><link href="http://mfactor.sdf.org/blog/physics-and-history.html" rel="alternate"></link><published>2015-08-19T19:30:00-03:00</published><updated>2015-08-19T19:30:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-08-19:blog/physics-and-history.html</id><summary type="html">&lt;p&gt;Watching the new Cosmos series about Faraday I was struck by a very simple thought: seeing how things evolved made simpler for me to understand physical concepts. I don’t know if I had that epiphany before or if that’s common, but for me it was a revelation. Very simple things, like magnetic fields, were way more clear after showing what Faraday was trying to achieve and was thinking than any Electromagnetism A that I did as an undergrad. And I believe that this might help my new endeavor: understanding probability deeply.&lt;/p&gt;
 &lt;p&gt;I’ve been reading Lady Luck, by Warren Weaver, and I’m loving it. It has a very unique balance between telling the history of probability with showing the basic concepts in a very clear way. Another fantastic thing about this book is that it doesn’t save on words: Warren repeats and repeats what it is and what is not, so it’s perfectly clear on every moment what he’s talking about. That’s uncommon for a math book: usually the authors assume that everyone knows what he means and that a beginner easily can understand everything that is going on when a formula or a concept is demonstrated. The terror of physicists – “it can be easily demonstrated” is avoided at all costs. The trade off is that sometimes verbosity can be a little tiresome, but for me it has a clarity that I wished all my undergrad textbooks had. And that’s the connection between the Cosmos episode and this book: both show the concepts from a basic point of view, but they excel in going deep in the subject without being condescending or jumping “obvious” steps, showing the history behind that idea and how it came to be.&lt;/p&gt;
 &lt;p&gt;At least on my first years as a Physics undergrad, all students were eager to experiment, to go hands on the physics labs or the observatory. Two things were hammered down on us, one good and one bad. The good one was that we had to have method: just poking things randomly would not take us very far, as fun as it was. Teaching this method (called, despite all controversy, the scientific method) was one of the best things that I could have learned as an undergrad. The bad thing was that we were buried in math courses without any kind of context. On the first year alone we had an ordinary and partial differential equations course, a analytical geometry course, two calculus courses and a basic programming course, plus some optional advanced physics math courses. I know that this is common on physics courses, but those were just dumped on us. Some physics teachers tried to give us context, but it was more on the ping-pong version (“this you will see on your calculus course”, “this you will see on your physics course” and so on) and not very helpful. This demotivated me and several other students. Why did we need to learn all this calculus and geometry without any tangible reason? (The “you’re going to need this to understand that” is not very helpful, at all. You don’t know that yet!). Only after my first classical mechanics course things started to make more sense, and got better with a great electromagnetism teacher that showed how things were put together by Maxwell and Faraday.&lt;/p&gt;
-&lt;p&gt;Maybe this is about the “math first”or “physics first” dilemma for a Physics course. If you already know the math you can concentrate on the Physics ideas and results. If you know the physics principles before, the math is the best support for those ideas to flourish and be useful. (On an aside, I don’t agree with a teacher that I had that said “all you need is the physical intuition, the math is the easy part! Follow your intuition!” and every time we needed the math, he would fail.) I can see both sides now and would propose a third option: teach the history first. With the context things would be easier on both sides, the ideas would permeate the ideas on both sides and maybe provide more support for thought and understanding. This maybe would prevent the effect of trusting only on the math, without reflecting what the math is telling you. As another great teacher said, “What is a sign? It’s the difference of sending the astronaut to the moon or killing him!”&lt;/p&gt;</summary><category term="physics"></category><category term="mathematics"></category><category term="history"></category><category term="learning"></category></entry><entry><title>Finally, Python 3!</title><link href="http://mfactor.sdf.org/finally-python-3.html" rel="alternate"></link><updated>2015-06-27T09:39:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-06-27:finally-python-3.html</id><summary type="html">&lt;p&gt;It's 2015 and it's the first time that I'm using Python 3
+&lt;p&gt;Maybe this is about the “math first”or “physics first” dilemma for a Physics course. If you already know the math you can concentrate on the Physics ideas and results. If you know the physics principles before, the math is the best support for those ideas to flourish and be useful. (On an aside, I don’t agree with a teacher that I had that said “all you need is the physical intuition, the math is the easy part! Follow your intuition!” and every time we needed the math, he would fail.) I can see both sides now and would propose a third option: teach the history first. With the context things would be easier on both sides, the ideas would permeate the ideas on both sides and maybe provide more support for thought and understanding. This maybe would prevent the effect of trusting only on the math, without reflecting what the math is telling you. As another great teacher said, “What is a sign? It’s the difference of sending the astronaut to the moon or killing him!”&lt;/p&gt;</summary><category term="physics"></category><category term="mathematics"></category><category term="history"></category><category term="learning"></category></entry><entry><title>Finally, Python 3!</title><link href="http://mfactor.sdf.org/blog/finally-python-3.html" rel="alternate"></link><published>2015-06-27T09:39:00-03:00</published><updated>2015-06-27T09:39:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-06-27:blog/finally-python-3.html</id><summary type="html">&lt;p&gt;It's 2015 and it's the first time that I'm using Python 3
 professionally. And I have to admit, if I knew that all my scripts were
 going to work so easily with 3, I would have changed way before. There
 were a few hurdles with the Python 3 version of some libraries - patsy,
@@ -172,4 +517,4 @@ seaborn (mostly for styles), statsmodels.&lt;/p&gt;
 &lt;p&gt;Vim and ipython notebook (depending on the type of work)&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://msysgit.github.io/"&gt;Git for Windows&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;and Tableau for some visualizations.&lt;/p&gt;
-</summary></entry></feed>
+</summary></entry><entry><title>Different SSH keys for Different Hosts</title><link href="http://mfactor.sdf.org/blog/my-super-post.html" rel="alternate"></link><published>2010-10-04T18:40:00-03:00</published><updated>2010-10-04T18:40:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2010-10-03:blog/my-super-post.html</id><summary type="html"></summary><category term="thats"></category><category term="awesome"></category></entry></feed>

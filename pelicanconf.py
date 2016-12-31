@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u"Ivan Marin"
 SITENAME = u'Another Life Form'
-SITEURL = u'http://mfactor.sdf.org'
+SITEURL = u'http://mfactor.sdf.org/blog'
 
 PATH = 'content'
 TIMEZONE = 'America/Sao_Paulo'
@@ -23,7 +23,7 @@ SOCIAL = (
 DEFAULT_PAGINATION = 10
 
 
-THEME = '/home/ispmarin/profissional/projects/mfactor.sdf.org/pelican-simplegrey'
+THEME = '/home/ispmarin/profissional/projetos/blog/pelican-simplegrey'
 
 STATIC_PATHS = ['images', 'extra/robots.txt', 'extra/favicon.ico']
 EXTRA_PATH_METADATA = {

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Managing passwords with <cite>pass</cite> - Another Life Form</title>	
+	<meta name="author" content="Ivan Marin">
+	
+
+	<meta name="description" content="How I stopped using LastPass and love pass">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/main.css" type="text/css" />
+		
+
+    <link href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	        <a href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" rel="alternate"><img src="http://mfactor.sdf.org/blog/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
+	    </div>
+	      <nav class="pages">
+			  <a href="http://mfactor.sdf.org/blog/pages/about.html">About</a>
+	      </nav>
+		<a href="http://mfactor.sdf.org/blog" class="title">Another Life Form</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Managing passwords with <cite>pass</cite></h1>
+		
+<div class="metadata">
+  <time datetime="2016-07-31T09:25:00-03:00" pubdate>dom 31 julho 2016</time>
+    <address class="vcard author">
+      by <a class="url fn" href="http://mfactor.sdf.org/blog/author/ivan-marin.html">Ivan Marin</a>
+    </address>
+  in <a href="http://mfactor.sdf.org/blog/category/os.html">os</a>
+<p class="tags">tagged <a href="http://mfactor.sdf.org/blog/tag/security.html">security</a>, <a href="http://mfactor.sdf.org/blog/tag/passwords.html">passwords</a></p></div>		
+		<p>I've been thinking about dumping LastPass for a while now, especially after it was bought by
+some company whatever. But the way that LastPass is useful is quite awesome:</p>
+<ul class="simple">
+<li>can generate passwords</li>
+<li>stores all passwords</li>
+<li>fill login forms automatically (the best feature for me)</li>
+</ul>
+<p>So how can I replace it with something with at least similar functionalities but
+under my control?</p>
+<p>The answer to that is <a class="reference external" href="https://www.passwordstore.org/">pass</a>. It stores the
+passwords as encrypted text with <a class="reference external" href="https://www.gnupg.org/">GPG</a> on the local filesystem.
+The feedback was so good that other people started using it and developed more
+resources for it, as a <a class="reference external" href="https://qtpass.org/">GUI</a> and a <cite>Firefox extension &lt;https://github.com/jvenant/passff#&gt;_</cite>.</p>
+<p>I'll describe how I managed to set it up.</p>
+<div class="section" id="id1">
+<h2>GPG</h2>
+<p>First, let's set up the GPG key:</p>
+<pre class="literal-block">
+sudo apt-get install gpgv2
+</pre>
+<p>and generate a key:</p>
+<pre class="literal-block">
+gpg --gen-key
+</pre>
+<p>If the key process takes it too long because of the entropy generation,</p>
+<blockquote>
+<strong>We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 210 more bytes)</strong></blockquote>
+<p>install the <cite>rng-tools</cite>:</p>
+<blockquote>
+sudo apt-get install rng-tools</blockquote>
+<p>and generate entropy using the <a class="reference external" href="http://serverfault.com/questions/214605/gpg-not-enough-entropy">command</a></p>
+<blockquote>
+sudo rngd -r /dev/urandom</blockquote>
+<p>to generate enough entropy for GPG.</p>
+</div>
+<div class="section" id="id2">
+<h2>pass</h2>
+<p>So now let's install <cite>pass</cite>:</p>
+<blockquote>
+sudo apt-get instal pass</blockquote>
+<p>and create a password store:</p>
+<blockquote>
+pass init &lt;email used to generate the GPG key&gt;</blockquote>
+<p>You can now start adding passwords. As I said, I used LassPass heavily, so I had tons of
+passwords stored. To convert them I exported on LastPass my passwords to a CSV and used
+<a class="reference external" href="https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb">this tool</a>
+to import the passwords to pass. I now could access all my passwords from the command line.</p>
+</div>
+<div class="section" id="pass-with-git">
+<h2>pass with git</h2>
+<p>But one of the nicest things about Lastpass is be able to synchronize the passwords over the web.
+pass can manage the passwords as a git repository, so that's the route I chose. After importing
+the passwords I initialized the password store as a git repository:</p>
+<blockquote>
+pass git init</blockquote>
+<p>Now the changes on the password file would be automatically commited. Using my <a class="reference external" href="http://sdf.org/?tutorials/metaarray">meta array</a>
+account on <a class="reference external" href="http://sdf.org">SDF</a>, I created a bare remote repository on it (git init --bare) and added as a remote repository
+on my pass folder:</p>
+<blockquote>
+pass git remote add origin ma.sdf.org:~/git/pass</blockquote>
+<p>where the bare git repository is at <cite>~/git/pass</cite>. After that a simple</p>
+<blockquote>
+pass git push -u --all</blockquote>
+<p>commited all passwords to the repo.</p>
+</div>
+<div class="section" id="alternatives-to-access-the-passwords">
+<h2>Alternatives to access the passwords</h2>
+<p>There is a Firefox <a class="reference external" href="https://addons.mozilla.org/pt-BR/firefox/addon/passff/">extension</a> that can access
+the stored passwords. It's almost as good as Lastpass, but only for Firefox.</p>
+</div>
+	
+
+	</article>
+
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/data-science.html">data science</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/debian.html">debian</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/development.html">development</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/learning.html">Learning</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/linux.html">Linux</a></li>
+	              <li class="active"><a href="http://mfactor.sdf.org/blog/category/os.html">os</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/tools.html">tools</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/yeah.html">yeah</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
+				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+	          <aside>
+	            <h2>Blogroll</h2>
+	            <ul>
+	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
+	            </ul>
+	          </aside>
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

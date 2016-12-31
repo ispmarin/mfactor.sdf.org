@@ -1,2 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/os.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2016-02-14T00:00:00-02:00</updated><entry><title>Why OS packages (.deb) are out of fashion and the rage is self-update</title><link href="http://mfactor.sdf.org/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html" rel="alternate"></link><updated>2016-02-14T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-14:why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html</id><summary type="html">&lt;p&gt;Show my &lt;code&gt;bin&lt;/code&gt; folder, structure and commands. Number of sofwares that are not packaged by OS anymore, time to package, rapid fire versions and update channels. Why this can be dangerous (Mac update package platform, ars technica).&lt;/p&gt;</summary><category term="os"></category><category term="debian"></category><category term="deb"></category><category term="tools"></category></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/os.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2016-07-31T09:25:00-03:00</updated><entry><title>Managing passwords with pass</title><link href="http://mfactor.sdf.org/blog/manage-pass.html" rel="alternate"></link><published>2016-07-31T09:25:00-03:00</published><updated>2016-07-31T09:25:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-07-31:blog/manage-pass.html</id><summary type="html">&lt;p&gt;I've been thinking about dumping LastPass for a while now, especially after it was bought by
+some company whatever. But the way that LastPass is useful is quite awesome:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;can generate passwords&lt;/li&gt;
+&lt;li&gt;stores all passwords&lt;/li&gt;
+&lt;li&gt;fill login forms automatically (the best feature for me)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So how can I replace it with something with at least similar functionalities but
+under my control?&lt;/p&gt;
+&lt;p&gt;The answer to that is &lt;a class="reference external" href="https://www.passwordstore.org/"&gt;pass&lt;/a&gt;. It stores the
+passwords as encrypted text with &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GPG&lt;/a&gt; on the local filesystem.
+The feedback was so good that other people started using it and developed more
+resources for it, as a &lt;a class="reference external" href="https://qtpass.org/"&gt;GUI&lt;/a&gt; and a &lt;cite&gt;Firefox extension &amp;lt;https://github.com/jvenant/passff#&amp;gt;_&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;I'll describe how I managed to set it up.&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;GPG&lt;/h2&gt;
+&lt;p&gt;First, let's set up the GPG key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo apt-get install gpgv2
+&lt;/pre&gt;
+&lt;p&gt;and generate a key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+gpg --gen-key
+&lt;/pre&gt;
+&lt;p&gt;If the key process takes it too long because of the entropy generation,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;strong&gt;We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 210 more bytes)&lt;/strong&gt;&lt;/blockquote&gt;
+&lt;p&gt;install the &lt;cite&gt;rng-tools&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-get install rng-tools&lt;/blockquote&gt;
+&lt;p&gt;and generate entropy using the &lt;a class="reference external" href="http://serverfault.com/questions/214605/gpg-not-enough-entropy"&gt;command&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+sudo rngd -r /dev/urandom&lt;/blockquote&gt;
+&lt;p&gt;to generate enough entropy for GPG.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;pass&lt;/h2&gt;
+&lt;p&gt;So now let's install &lt;cite&gt;pass&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-get instal pass&lt;/blockquote&gt;
+&lt;p&gt;and create a password store:&lt;/p&gt;
+&lt;blockquote&gt;
+pass init &amp;lt;email used to generate the GPG key&amp;gt;&lt;/blockquote&gt;
+&lt;p&gt;You can now start adding passwords. As I said, I used LassPass heavily, so I had tons of
+passwords stored. To convert them I exported on LastPass my passwords to a CSV and used
+&lt;a class="reference external" href="https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb"&gt;this tool&lt;/a&gt;
+to import the passwords to pass. I now could access all my passwords from the command line.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pass-with-git"&gt;
+&lt;h2&gt;pass with git&lt;/h2&gt;
+&lt;p&gt;But one of the nicest things about Lastpass is be able to synchronize the passwords over the web.
+pass can manage the passwords as a git repository, so that's the route I chose. After importing
+the passwords I initialized the password store as a git repository:&lt;/p&gt;
+&lt;blockquote&gt;
+pass git init&lt;/blockquote&gt;
+&lt;p&gt;Now the changes on the password file would be automatically commited. Using my &lt;a class="reference external" href="http://sdf.org/?tutorials/metaarray"&gt;meta array&lt;/a&gt;
+account on &lt;a class="reference external" href="http://sdf.org"&gt;SDF&lt;/a&gt;, I created a bare remote repository on it (git init --bare) and added as a remote repository
+on my pass folder:&lt;/p&gt;
+&lt;blockquote&gt;
+pass git remote add origin ma.sdf.org:~/git/pass&lt;/blockquote&gt;
+&lt;p&gt;where the bare git repository is at &lt;cite&gt;~/git/pass&lt;/cite&gt;. After that a simple&lt;/p&gt;
+&lt;blockquote&gt;
+pass git push -u --all&lt;/blockquote&gt;
+&lt;p&gt;commited all passwords to the repo.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="alternatives-to-access-the-passwords"&gt;
+&lt;h2&gt;Alternatives to access the passwords&lt;/h2&gt;
+&lt;p&gt;There is a Firefox &lt;a class="reference external" href="https://addons.mozilla.org/pt-BR/firefox/addon/passff/"&gt;extension&lt;/a&gt; that can access
+the stored passwords. It's almost as good as Lastpass, but only for Firefox.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="security"></category><category term="passwords"></category></entry><entry><title>Why OS packages (.deb) are out of fashion and the rage is self-update</title><link href="http://mfactor.sdf.org/blog/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html" rel="alternate"></link><published>2016-02-14T00:00:00-02:00</published><updated>2016-02-14T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2016-02-14:blog/why-os-packages-deb-are-out-of-fashion-and-the-rage-is-self-update.html</id><summary type="html">&lt;p&gt;Show my &lt;code&gt;bin&lt;/code&gt; folder, structure and commands. Number of sofwares that are not packaged by OS anymore, time to package, rapid fire versions and update channels. Why this can be dangerous (Mac update package platform, ars technica).&lt;/p&gt;</summary><category term="os"></category><category term="debian"></category><category term="deb"></category><category term="tools"></category></entry></feed>
