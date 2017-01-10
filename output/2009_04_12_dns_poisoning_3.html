@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Continuação: DNS poisoning Virtua Bradesco - 2 | Another Life Form
+</title>
+  <link rel="canonical" href="/2009_04_12_dns_poisoning_3.html">
+
+  <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="/feeds/network.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="A história do DNS do Virtua comprometido continua. Eis um scan das portas da famigerada máquina na Coréia: nostromo:~$ nmap -P0 210.205.6.50 Starting Nmap 4.68 ( http://nmap.org ) at 2009-04-12 22:51 BRT ispmarin@nostromo:~$ nmap 210.205.6.50 Starting Nmap 4.68 ( http://nmap …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Continuação: <span class="caps">DNS</span> poisoning Virtua Bradesco -&nbsp;2
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2009-04-12T23:02:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        Dom 12 Abril 2009
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/network.html">network</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/history.html">#history</a>,         <a href="/tag/net.html">#net</a>,         <a href="/tag/security.html">#security</a>,         <a href="/tag/virtua.html">#virtua</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>A história do <span class="caps">DNS</span> do Virtua comprometido continua. Eis um scan das
+portas da famigerada máquina na&nbsp;Coréia:</p>
+<hr class="docutils" />
+<p>nostromo:~$ nmap -P0&nbsp;210.205.6.50</p>
+<p>Starting Nmap 4.68 ( <a class="reference external" href="http://nmap.org">http://nmap.org</a> ) at 2009-04-12 22:51 <span class="caps">BRT</span></p>
+<p><a class="reference external" href="mailto:ispmarin&#64;nostromo">ispmarin&#64;nostromo</a>:~$ nmap&nbsp;210.205.6.50</p>
+<div class="line-block">
+<div class="line">Starting Nmap 4.68 ( <a class="reference external" href="http://nmap.org">http://nmap.org</a> ) at 2009-04-12 22:52 <span class="caps">BRT</span></div>
+<div class="line-block">
+<div class="line">Interesting ports on 210.205.6.50:</div>
+<div class="line">Not shown: 1698 closed ports</div>
+<div class="line"><span class="caps">PORT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="caps">STATE</span>&nbsp;&nbsp;&nbsp; <span class="caps">SERVICE</span></div>
+<div class="line">21/tcp&nbsp;&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; ftp</div>
+<div class="line">22/tcp&nbsp;&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; ssh</div>
+<div class="line">25/tcp&nbsp;&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; smtp</div>
+<div class="line">80/tcp&nbsp;&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; http</div>
+<div class="line">110/tcp&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; pop3</div>
+<div class="line">135/tcp&nbsp;&nbsp; filtered msrpc</div>
+<div class="line">136/tcp&nbsp;&nbsp; filtered profile</div>
+<div class="line">137/tcp&nbsp;&nbsp; filtered netbios-ns</div>
+<div class="line">138/tcp&nbsp;&nbsp; filtered netbios-dgm</div>
+<div class="line">139/tcp&nbsp;&nbsp; filtered netbios-ssn</div>
+<div class="line">199/tcp&nbsp;&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; smux</div>
+<div class="line">445/tcp&nbsp;&nbsp; filtered microsoft-ds</div>
+<div class="line">3128/tcp&nbsp; filtered squid-http</div>
+<div class="line">3306/tcp&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; mysql</div>
+<div class="line">4444/tcp&nbsp; filtered krb524</div>
+<div class="line">9876/tcp&nbsp; open&nbsp;&nbsp;&nbsp;&nbsp; sd</div>
+<div class="line">17300/tcp filtered kuang2</div>
+</div>
+</div>
+<p>Nmap done: 1 <span class="caps">IP</span> address (1 host up) scanned in 141.190&nbsp;seconds</p>
+<hr class="docutils" />
+<p>Com um sd aberto, há uma chance muito boa de ser uma máquina invadida. É
+Windows, para&nbsp;variar&#8230;</p>
+<p>Edit 23:39: kuang2 é uma espécie de vírus modificada para pegar senhas.
+Lame. Resta saber o que vai virar a partir de agora. Sitrep agora está
+em compasso de espera. Qualquer novidade,&nbsp;posto.</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

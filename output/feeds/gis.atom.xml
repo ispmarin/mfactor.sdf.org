@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - gis</title><link href="/" rel="alternate"></link><link href="/feeds/gis.atom.xml" rel="self"></link><id>/</id><updated>2012-08-10T13:17:00-03:00</updated><entry><title>Installing PostGis 1.5.5 on Debian Squeeze</title><link href="/2012_08_10_installing-postgis-debian-squeeze.html" rel="alternate"></link><published>2012-08-10T13:17:00-03:00</published><updated>2012-08-10T13:17:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2012-08-10:/2012_08_10_installing-postgis-debian-squeeze.html</id><summary type="html">&lt;p&gt;On the ongoing projects here at my
+&lt;a class="reference external" href="http://albatroz.shs.eesc.usp.br"&gt;lab&lt;/a&gt;, a new student here at my lab
+needed to perform again the installation for PostgreSQL 9.1 and PostGIS,
+to spacially enable the database. But, for now, there is no PostGIS
+package for Debian Squeeze! Despair, oh my! The usual solutions, like …&lt;/p&gt;</summary><content type="html">&lt;p&gt;On the ongoing projects here at my
+&lt;a class="reference external" href="http://albatroz.shs.eesc.usp.br"&gt;lab&lt;/a&gt;, a new student here at my lab
+needed to perform again the installation for PostgreSQL 9.1 and PostGIS,
+to spacially enable the database. But, for now, there is no PostGIS
+package for Debian Squeeze! Despair, oh my! The usual solutions, like
+pulling from Wheezy (the present Testing) also didn&amp;#8217;t work, as for some
+reason the package that we want, postgresql-9.1-postgis, tries to pull
+an infinitude of packages from wheezy (even gtk packages!), so we need
+to go the old school fashion: ./configure. What are the dependencies?
+Here we&amp;nbsp;go:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;libgeos-dev&lt;/p&gt;
+&lt;p&gt;grass&lt;/p&gt;
+&lt;p&gt;libproj-dev&lt;/p&gt;
+&lt;p&gt;libgdal-grass&lt;/p&gt;
+&lt;p&gt;python-pyproj&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So a standard apt-get install should suffice - and of course,
+considering that both posgresql-9.1 and posgresql-server-9.1-dev are&amp;nbsp;installed:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="mailto:root&amp;#64;rohan"&gt;root&amp;#64;rohan&lt;/a&gt;:~/postgis-1.5.5# dpkg -l | grep postgre&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;ii postgresql-9.1 9.1.4-2~bpo60+1 object-relational &lt;span class="caps"&gt;SQL&lt;/span&gt; database,
+version 9.1 server&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-client-9.1 9.1.4-2~bpo60+1 front-end programs for
+PostgreSQL 9.1&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-client-common 130~bpo60+2 manager for multiple
+PostgreSQL client versions&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-common 130~bpo60+2 PostgreSQL database-cluster
+manager&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-contrib-9.1 9.1.4-2~bpo60+1 additional facilities
+for PostgreSQL&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-plpython-9.1 9.1.4-2~bpo60+1 &lt;span class="caps"&gt;PL&lt;/span&gt;/Python procedural
+language for PostgreSQL 9.1&lt;/div&gt;
+&lt;div class="line"&gt;ii postgresql-server-dev-9.1 9.1.4-2~bpo60+1 development files
+for PostgreSQL 9.1 server-side programming&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Done! The rest is a simple ./configure, make, make install.&amp;nbsp;Voilà!&lt;/p&gt;
+&lt;p&gt;So, if you&amp;#8217;re starting from scratch, let&amp;#8217;s recapitulate: first enable
+&lt;a class="reference external" href="http://backports-master.debian.org/Instructions/"&gt;Debian Backports&lt;/a&gt;,
+them install the needed&amp;nbsp;packages:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;apt-get install -t squeeze-backports&amp;nbsp;posgresql-9.1&amp;nbsp;postgresql-client-9.1&amp;nbsp;postgresql-client-common&amp;nbsp;postgresql-common&amp;nbsp;postgresql-contrib-9.1&amp;nbsp;postgresql-plpython-9.1&amp;nbsp;postgresql-server-dev-9.1&lt;/p&gt;
+&lt;p&gt;apt-get install libgeos-dev&amp;nbsp;grass libproj-dev&amp;nbsp;libgdal-grass&amp;nbsp;python-pyproj&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And finally download PostGIS from
+&lt;a class="reference external" href="http://postgis.refractions.net/documentation/manual-1.5/ch02.html#id2608330"&gt;here&lt;/a&gt;,
+unpack it, and&amp;nbsp;run&lt;/p&gt;
+&lt;blockquote&gt;
+./configure; make; make install&lt;/blockquote&gt;
+&lt;p&gt;That should do the&amp;nbsp;trick!&lt;/p&gt;
+</content><category term="client versions"></category><category term="cluster manager"></category><category term="database cluster"></category><category term="debian"></category><category term="debian backports"></category><category term="debian gis"></category><category term="gis"></category><category term="howto"></category><category term="postgis"></category><category term="postgre"></category><category term="postgresql"></category><category term="postgresql server"></category></entry><entry><title>From scratch and testing ideas: DebianGIS with Postgresql, Drupal and OpenLayers</title><link href="/2011_11_27_debiangis-with-postgresql-drupal-and-openlayers.html" rel="alternate"></link><published>2011-11-27T12:49:00-02:00</published><updated>2011-11-27T12:49:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2011-11-27:/2011_11_27_debiangis-with-postgresql-drupal-and-openlayers.html</id><summary type="html">&lt;p&gt;Here we go again to try to build a server for &lt;span class="caps"&gt;GIS&lt;/span&gt; using&amp;nbsp;Debian.&lt;/p&gt;
+&lt;p&gt;Downloaded the image&amp;nbsp;from&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://cdimage.debian.org/debian-cd/6.0.3/amd64/iso-cd/debian-6.0.3-amd64-netinst.iso"&gt;http://cdimage.debian.org/debian-cd/6.0.3/amd64/iso-cd/debian-6.0.3-amd64-netinst.iso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For the basic install (I&amp;#8217;ll be doing the install in a &lt;span class="caps"&gt;VM&lt;/span&gt;). Language:
+Portuguese Brazilian. All other …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Here we go again to try to build a server for &lt;span class="caps"&gt;GIS&lt;/span&gt; using&amp;nbsp;Debian.&lt;/p&gt;
+&lt;p&gt;Downloaded the image&amp;nbsp;from&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://cdimage.debian.org/debian-cd/6.0.3/amd64/iso-cd/debian-6.0.3-amd64-netinst.iso"&gt;http://cdimage.debian.org/debian-cd/6.0.3/amd64/iso-cd/debian-6.0.3-amd64-netinst.iso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For the basic install (I&amp;#8217;ll be doing the install in a &lt;span class="caps"&gt;VM&lt;/span&gt;). Language:
+Portuguese Brazilian. All other options were kept as the defaults,
+choosing single filesystem and all mount points on the same partition.
+Other change: ext4 instead of ext3, and removed the option of the
+Desktop. The installation was over under 15&amp;nbsp;min.&lt;/p&gt;
+&lt;p&gt;Now, configuring the backport repositories: From
+&lt;a class="reference external" href="http://backports-master.debian.org/Instructions/"&gt;here&lt;/a&gt;[debian
+backports], add this line to the&amp;nbsp;/etc/apt/sources.list:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+deb http://backports.debian.org/debian-backports squeeze-backports main
+&lt;/pre&gt;
+&lt;p&gt;Do an apt-get update, and install the necessary packages. First, from
+main&amp;nbsp;reps:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+apt-get --no-install-recommends install vim make build-essential gcc g++ gfortran ssh
+&lt;/pre&gt;
+&lt;p&gt;Done. Time to start installing the web&amp;nbsp;packages:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+apt-get --no-install-recommends -t squeeze-backports install apache2 postgresql-9.1 postgis php5-pgsql php5 php5-cgi php5-gd vsftpd
+&lt;/pre&gt;
+&lt;p&gt;That&amp;#8217;s why I _love_ Debian. Let&amp;#8217;s proceed: now it&amp;#8217;s time to configure
+the basic database for the next step, installing drupal. Following this
+&lt;a class="reference external" href="http://drupal.org/node/284991"&gt;drupal&amp;nbsp;documentation,&amp;nbsp;&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+su - postgres
+createuser --pwprompt --encrypted --no-adduser --no-createdb drupal
+createdb --encoding=UNICODE --owner=drupal drupaldb
+&lt;/pre&gt;
+&lt;p&gt;Done! User and database for drupal created. Now it&amp;#8217;s time to dowload
+drupal itself. I chose to download drupal 7 from the website than from
+the debian repositories because of some debian particularities, like
+versioning. I downloaded the latest version from
+&lt;a class="reference external" href="http://drupal.org/project/drupal"&gt;here&lt;/a&gt;[drupal.org]:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+wget http://ftp.drupal.org/files/projects/drupal-7.9.tar.gz
+&lt;/pre&gt;
+&lt;p&gt;And downloaded to /var/www. As I&amp;#8217;m planning this server to be run
+exclusively as a &lt;span class="caps"&gt;GIS&lt;/span&gt; server, I extracted all drupal files to /var/www,
+and _not_ inside the directory drupal-7.9. After redirecting the ports
+from Virtualbox, we&amp;#8217;re ready to start the drupal installation. First,
+changing the permission for the files to 775, user and group to
+www-data, and following &lt;a class="reference external" href="http://drupal.org/documentation/install/developers"&gt;drupal installation
+instructions&lt;/a&gt;[drupal.org]:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+cp sites/default/default.settings.php sites/default/settings.php
+&lt;/pre&gt;
+&lt;p&gt;Just remember that if there is an error with php, you have to restart
+apache and close your browser: google chrome kept insisting in
+downloading install.php instead of running it, even if phpinfo() was
+running ok. So let&amp;#8217;s continue: Standard installation, English, and use
+the database name (drupaldb) and user (drupal) with the password that
+was configured before, and drupal should install. The ftp server that
+drupal uses for update (we installed the vsftpd) should be also
+configured: in the file /etc/vsftpd.conf, the local users option must be&amp;nbsp;enabled:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Uncomment this to allow local users to log in.
+local_enable = YES
+&lt;/pre&gt;
+&lt;p&gt;Drupal should be running! Time to install new modules, the ones that
+&lt;a class="reference external" href="http://drupal.org/node/627816"&gt;OpenLayers&lt;/a&gt;&amp;nbsp;[drupal.org]&amp;nbsp;requests:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://drupal.org/project/views"&gt;Views:&lt;/a&gt;&amp;nbsp;&lt;a class="reference external" href="http://ftp.drupal.org/files/projects/views-7.x-3.0-rc3.tar.gz"&gt;http://ftp.drupal.org/files/projects/views-7.x-3.0-rc3.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://drupal.org/project/openlayers"&gt;OpenLayers&lt;/a&gt;:&amp;nbsp;&lt;a class="reference external" href="http://ftp.drupal.org/files/projects/openlayers-7.x-2.0-beta1.tar.gz"&gt;http://ftp.drupal.org/files/projects/openlayers-7.x-2.0-beta1.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://drupal.org/project/ctools"&gt;Chaos
+Tools:&lt;/a&gt;&amp;nbsp;&lt;a class="reference external" href="http://ftp.drupal.org/files/projects/ctools-7.x-1.0-rc1.tar.gz"&gt;http://ftp.drupal.org/files/projects/ctools-7.x-1.0-rc1.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And went to the Modules administration in drupal to enable the new
+modules. That&amp;#8217;s it! The webserver is working with all the necessary&amp;nbsp;modules!&lt;/p&gt;
+&lt;p&gt;There is another tool that seems to be very useful in this context:
+&lt;a class="reference external" href="http://drupal.org/project/drush"&gt;drush&lt;/a&gt;. To make it work, php-pear
+must be installed.&amp;nbsp;Now,&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+pear channel-discovery pear.drush.org
+pear install drush/drush
+&lt;/pre&gt;
+&lt;p&gt;After that, another module will be integrated:
+&lt;a class="reference external" href="http://drupal.org/project/geofield"&gt;geofield&lt;/a&gt;, for the geographical
+data manipulation. Drush didn&amp;#8217;t help, so I had to install by hand drupal&amp;nbsp;libraries&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+http://ftp.drupal.org/files/projects/libraries-7.x-1.0.tar.gz
+&lt;/pre&gt;
+&lt;p&gt;And after enabling it, installed the geofield&amp;nbsp;module:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://drupal.org/project/geofield"&gt;Geofield:&lt;/a&gt;&amp;nbsp;&lt;a class="reference external" href="http://ftp.drupal.org/files/projects/geofield-7.x-1.0-beta2.tar.gz"&gt;http://ftp.drupal.org/files/projects/geofield-7.x-1.0-beta2.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Enabled it, and it&amp;#8217;s working! Server up and fully loaded. Now it&amp;#8217;s time
+to start writing&amp;nbsp;code&amp;#8230;&lt;/p&gt;
+&lt;p&gt;* &lt;span class="caps"&gt;NOTE&lt;/span&gt; * I didn&amp;#8217;t take &lt;span class="caps"&gt;ANY&lt;/span&gt; security measures to secure the server.
+There are several things that should be changed to secure apache,
+drupal, ssh,&amp;nbsp;ftp&amp;#8230;&lt;/p&gt;
+</content><category term="debian"></category><category term="debiangis"></category><category term="gis"></category></entry></feed>

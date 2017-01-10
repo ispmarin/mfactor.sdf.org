@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Basic Python Setup for Data Science on Linux | Another Life Form
+</title>
+  <link rel="canonical" href="/2016_03_17_basic_python_ds.html">
+
+  <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="/feeds/data-science.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="How to setup a basic data science environment with Python and Linux">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Basic Python Setup for Data Science on&nbsp;Linux
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2016-03-17T00:00:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        Qui 17 Março 2016
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/data-science.html">data science</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/datascience.html">#datascience</a>,         <a href="/tag/python.html">#python</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Data scientists usually have a very diverse background and very different proficiency levels with some tools. This, as I usually say, is not negative, on the contrary! The best data science teams should have this diversity because the problems that they face are diverse by nature. 
+As I said before, I&#8217;ve been trying to set a system for data science with the tenets of reproducible research (<span class="caps">RR</span>). 
+To do that, not only the project should be organized to support <span class="caps">RR</span>, but the work environment should support <span class="caps">RR</span>&nbsp;too. </p>
+<p>So the idea of this post is to explain some basic concepts about Linux, linux shells, environment variables and how to glue everything together on a productive Python&nbsp;environment. </p>
+<h2>Linux and Linux&nbsp;shells</h2>
+<h3>Quick&nbsp;detour</h3>
+<p>First, to get this out of the way: I really like the open source software philosophy and the software that the community writes, but sometimes you have to give and see that some battles are best fought elsewhere. <em>Linux</em>, technically, is just the <a href="https://en.wikipedia.org/wiki/Linux_kernel">kernel</a> of a <a href="https://en.wikipedia.org/wiki/Operating_system">operating system</a>, usually composed of free and open source software, called <a href="https://en.wikipedia.org/wiki/Linux_distribution">distribution</a>. 
+That&#8217;s why sometimes you see &#8220;Debian <span class="caps">GNU</span>/Linux&#8221; distribution, because Debian, the Linux distribution, is composed of the <a href="https://www.gnu.org/home.en.html"><span class="caps">GNU</span></a> tools and the Linux kernel. 
+But the name &#8220;Linux&#8221; got very popular and usually means <em>both</em> the kernel and the distribution. So don&#8217;t worry if you say only Linux. I&nbsp;don&#8217;t. </p>
+<h3>Shell, terminal,&nbsp;console</h3>
+<p>So, after this enormous rant, what is a shell? A <a href="https://en.wikipedia.org/wiki/Unix_shell">shell</a> command line interpreter that works as a user interface. 
+A command line interpreter is exactly that, it interpretes and executes the commands given into instructions to the operating system. 
+So shell is mostly just a program that reads commands typed into it! And best of all, it hides the details of the operating system. 
+Shells can be used in an interactive fashion, where users type the commands, or in an automated way via <em>scripts</em>. A script is a file with a series of commands to be executed. 
+To be more specific, there are the interactive login, interactive non-login and script shells. 
+Each has a different way to set environment variables and are called differently. The shell is also called <em>command line</em> or <em>terminal</em>. </p>
+<h3>Running a&nbsp;command</h3>
+<p>Now let&#8217;s see how a shell executes a command. Let&#8217;s say we want to run <code>man ls</code>, to get the manual page of the command <code>ls</code>. 
+There are two ways for the shell to call the executable <code>man</code> with the argument <code>ls</code>. 
+The first one is to give the full path of the command to the&nbsp;shell: </p>
+<div class="highlight"><pre><span></span>&gt;  /usr/bin/man
+what manual page do you want?
+
+&gt; file /usr/bin/man
+/usr/bin/man: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), 
+dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, 
+for GNU/Linux 2.6.32, BuildID[sha1]=ce062f3e946ea23a804345bc92b18983ab05c839, stripped
+</pre></div>
+
+
+<p>So the shell will execute the command located on the directory <code>/usr/bin/man</code>. 
+The other one is how the shell stores information for each session: using one specific <em>environment variable</em>. 
+In this case, the shell searches the <code>PATH</code> variable for the directories where it should seek the executable files. 
+If the shell finds on one of the dirs, the program is called. If not it returns an&nbsp;error:</p>
+<div class="highlight"><pre><span></span><span class="x">&gt; echo </span><span class="p">$</span><span class="nv">PATH</span><span class="x"></span>
+<span class="x">/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games</span>
+</pre></div>
+
+
+<p>So for our example, as the <code>man</code> command is located on the <code>/usr/bin</code> folder, calling only <code>man</code> on the shell will execute&nbsp;it:</p>
+<div class="highlight"><pre><span></span>&gt; man
+what manual page do you want?
+</pre></div>
+
+
+<p>Let&#8217;s see now what environment variables are. With them we can understand a bit better how Python finds its&nbsp;packages.</p>
+<h3>Environment&nbsp;Variables</h3>
+<p>Environment variables are <a href="https://en.wikipedia.org/wiki/Environment_variable">&#8220;a set of dynamic named values that can affect the way running processes will behave in a computer&#8221;</a>.
+On a higher level, each program executed by the <span class="caps">OS</span> has its own set of environment variables. 
+When a shell is started, it reads a predefined set of files and define the environment variables for that shell session. 
+The files where the variables are defined and the order of the variable definitions depends on the shell and if the shell is interactive or script.
+<a href="https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/">This</a> has the order for <a href="http://www.zsh.org/"><span class="caps">ZSH</span></a> and <a href="https://www.gnu.org/software/bash/">Bash</a> files that are <em>sourced</em>, defining the environment variables and executing the commands inside them.
+(<em>Sourcing</em> a file executes the lines of code inside that file as they were typed on the&nbsp;shell.)</p>
+<p>Several variables are common to all <a href="https://help.ubuntu.com/community/EnvironmentVariables">Unix</a>. 
+One of them is called <code>PATH</code> and it tells which directories should be searched for programs to be executed. 
+Another very common variable is called <code>HOME</code> and identifies the path to the home folder for each user.
+To understand what that means more pratically, we want to add a new folder in our <code>PATH</code> variable, so the shell can find the executable without us having to type the entire file path. 
+We are using <code>bash</code> and we want to change only the user path, so we edit the <code>.bashrc</code> file on his home folder, adding the&nbsp;line</p>
+<div class="highlight"><pre><span></span><span class="x">export PATH=</span><span class="p">$</span><span class="nv">PATH</span><span class="x">:/home/user/bin/</span>
+</pre></div>
+
+
+<p>The <code>export</code> means to attribute to the variable <code>PATH</code> the value <code>/home/user/bin</code>. 
+The <code>$PATH</code> part means to use the existing value of the variable <code>PATH</code> and to append it with the path after it. 
+Now, every time a new shell is created for this user, this new folder will be added to the <code>PATH</code> variable, and the programs on this folder can be executed without having to type the entire file&nbsp;path.</p>
+<h2>Python paths and&nbsp;libraries</h2>
+<p>One of the great advantages of using Python for data science is the vast array of libraries available. 
+This can be also a great pain when you have to manage different projects and different requirements. 
+Virtualenvs does that by manipulating some environment variables. See where this is going?
+The idea is to understand how Python works with some directories and paths and manipulate them for the Python interpreter and the libraries, in a way where each project can have its own dependecies and module&nbsp;versions.</p>
+<p>Python uses environment variables defined at compile time and before execution.
+The list of <a href="https://docs.python.org/2/using/cmdline.html#environment-variables">environment variables</a> defines some environment variables that can be changed before execution. 
+To check inside Python which variables are defined, run inside a Python&nbsp;shell</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span>
+<span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">11</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">22</span> <span class="mi">2016</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">42</span><span class="p">)</span>                                                    
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">5.3</span><span class="o">.</span><span class="mi">1</span> <span class="mi">20160220</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>                                                                                               
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>                                                                                                           
+<span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/python2.7&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/python2.7/plat-x86_64-linux-gnu&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/python2.7/lib-tk&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/python2.7/lib-old&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/python2.7/lib-dynload&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/local/lib/python2.7/dist-packages&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/python2.7/dist-packages&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/python2.7/dist-packages/gtk-2.0&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/pymodules/python2.7&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>These are the paths where the Python intepreter will search for modules by&nbsp;default. </p>
+<h3>Virtualenvs</h3>
+<p><a href="https://virtualenv.pypa.io/en/latest/">Virtualenvs</a> were created to isolate an environment, decoupling
+the modules for each virtual environment and the system. 
+We&#8217;re going to use them to create our development environments. 
+Virtualenv manipulates the paths and set to different directories than the standard ones. 
+Let&#8217;s create a virtualenv using <a href="https://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a>:</p>
+<div class="highlight"><pre><span></span>&gt; mkvirtualenv test
+Running virtualenv with interpreter /usr/bin/python2
+New python executable in test/bin/python2
+Also creating executable in test/bin/python
+Installing setuptools, pip...done.
+</pre></div>
+
+
+<p>With that the virtualenv is created and the variables have been changed to reflect the local&nbsp;environment:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span>
+<span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">11</span><span class="o">+</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">22</span> <span class="mi">2016</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">42</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">5.3</span><span class="o">.</span><span class="mi">1</span> <span class="mi">20160220</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7/plat-x86_64-linux-gnu&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7/lib-tk&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7/lib-old&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7/lib-dynload&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/python2.7&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/python2.7/plat-x86_64-linux-gnu&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/usr/lib/python2.7/lib-tk&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/local/lib/python2.7/site-packages&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;/home/user/.virtualenvs/test/lib/python2.7/site-packages&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Notice now that new paths are added for packages to be searched and used, so new packages are installed on these folders.
+The virtualenv directory can be changed, from the default <code>~/.virtualenvs</code> to any other folder where the user has&nbsp;access.</p>
+<p>This structure allows to manage several different virtualenvs, each with its own packages and&nbsp;configurations.</p>
+<h3>Changing the path to the Python&nbsp;executable</h3>
+<p>What if a new Python version should be compiled and used? Probably the system will have to keep its Python version,
+as Linux distributions use Python for system operations. 
+One way to to it is to compile the needed Python version and put the path to the Python executable on the <code>PATH</code> variable. From there new virtualenvs can be created using this specific Python&nbsp;version.</p>
+<h3>Project&nbsp;structure</h3>
+<p>To keep packages, versions and dependencies separated, each project should have its own virtualenv. 
+For each virtualenv the necessary packages are installed using <a href="https://pypi.python.org/pypi/pip">pip</a>. 
+The virtualenv directory should also be set to a known location, like <code>~/bin/virtualenvs</code>. 
+It&#8217;s also good practice to keep a <a href="https://pip.pypa.io/en/stable/user_guide/">requirements.txt</a> file on the git&nbsp;repository.</p>
+<h2>Conclusion</h2>
+<p>That was a lot, for sure! Hopefully this will make clear how to use virtualenvs and environment variables to keep the
+development and data analysis easier to manage, reproduce and&nbsp;deploy.</p>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

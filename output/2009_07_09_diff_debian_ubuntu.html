@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Diferenças entre Ubuntu e Debian | Another Life Form
+</title>
+  <link rel="canonical" href="/2009_07_09_diff_debian_ubuntu.html">
+
+  <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="/feeds/debian.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="Lendo a lista de usuários Debian (debian-user), vi uma discussão que achei muito interessante, sobre as principais diferenças entre o Debian e o Ubuntu. O autor, AndyC, liberou o artigo para ser postado no wiki.debian.org, então reproduzo aqui o post. Leitura muito interessante, que vou tentar depois traduzir …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Diferenças entre Ubuntu e&nbsp;Debian
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2009-07-09T12:05:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        Qui 09 Julho 2009
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/debian.html">debian</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/debian.html">#debian</a>,         <a href="/tag/development.html">#development</a>,         <a href="/tag/open-source.html">#open source</a>,         <a href="/tag/ubuntu.html">#ubuntu</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Lendo a lista de usuários Debian (debian-user), vi uma discussão que
+achei muito interessante, sobre as principais diferenças entre o Debian
+e o Ubuntu. O autor, AndyC, liberou o artigo para ser postado no
+wiki.debian.org, então reproduzo aqui o post. Leitura muito
+interessante, que vou tentar depois traduzir para o&nbsp;Português.</p>
+<hr class="docutils" />
+<p>Post deAndrew Carter,&nbsp;debian-user&#64;</p>
+<div class="line-block">
+<div class="line">Lots of differences: some big, some small but all may be significant.
+I</div>
+<div class="line-block">
+<div class="line">am _NOT_speaking in an official capacity for the Debian project or,</div>
+<div class="line">indeed, for Ubuntu to whom I&#8217;m also a contributor.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">When Ubuntu first started, one of their developers said to me &#8220;If we</div>
+<div class="line-block">
+<div class="line">could have called it Debian for desktops, we would have done&#8221;. That
+was</div>
+<div class="line">their focus then: it has widened significantly now. But the core
+focus</div>
+<div class="line">for Ubuntu remains the user experience and a small core of
+applications.</div>
+</div>
+</div>
+<p>Largely subjectively, from as far to the outside as I can get&nbsp;:)</p>
+<div class="line-block">
+<div class="line">Rationale/design goals</div>
+<div class="line-block">
+<div class="line">======================</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Packages in Ubuntu main are very highly polished, very well maintained</div>
+<div class="line-block">
+<div class="line">and Canonical/Ubuntu go the extra mile to make the experience easy
+for</div>
+<div class="line">the user. That comes at one or more of several costs:</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Choice</div>
+<div class="line-block">
+<div class="line">======</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Lack of choice - you get one mail client rather than a choice of</div>
+<div class="line-block">
+<div class="line">several &#8220;out of the box&#8221;, for example. Choices are made for you - its
+an</div>
+<div class="line">issue of supportability. Debian offers you more flexibility at the
+price</div>
+<div class="line">of complexity or being willing to support your choices.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Architectures</div>
+<div class="line-block">
+<div class="line">=============</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Lack of architectures: if you&#8217;re not on Intel/<span class="caps">AMD64</span> or, possibly,</div>
+<div class="line-block">
+<div class="line"><span class="caps">ARM</span>/Sparc/<span class="caps">PPC</span> (depending on release) - you can&#8217;t run Ubuntu. Debian</div>
+<div class="line">running on 11 or so architectures does mean that a) the process is</div>
+<div class="line">sometimes slow b) the code gets debugged c) is made portable/fixes
+are</div>
+<div class="line">contributed upstream.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Developer/user ratio</div>
+<div class="line-block">
+<div class="line">====================</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Canonical has relatively few paid developers, a highly motivated</div>
+<div class="line-block">
+<div class="line">volunteeer developer community, a much larger community advocacy and</div>
+<div class="line">marketing budget and a vast number of new users. This does</div>
+<div class="line">mean that their developers are massively outnumbered by their users
+and</div>
+<div class="line">priorities have to be set. Packages in universe/multiverse may
+therefore</div>
+<div class="line">receive less attention than those in main in Ubuntu.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">At least in theory, every package in Debian is equal and has a known
+named</div>
+<div class="line-block">
+<div class="line">maintainer who takes an interest :) It does mean that Debian does
+much of</div>
+<div class="line">the heavy lifting of packaging and initial support for out of the way</div>
+<div class="line">packages - it also means that, if I want support for R and <span class="caps">CRAN</span>, for
+example,</div>
+<div class="line">I&#8217;d go straight to Debian because the maintainer has a personal and</div>
+<div class="line">professional interest for seeing it work well as an integrated
+system.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Release cycles</div>
+<div class="line-block">
+<div class="line">==============</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">&#8220;We demand rigidly defined areas of doubt and uncertainty&#8221; - Canonical</div>
+<div class="line-block">
+<div class="line">has those because it releases once every six months. This consistency</div>
+<div class="line">comes at a price: users expect new whizzy features with each release
+and</div>
+<div class="line">the development cycle is very short indeed. Long term support
+releases</div>
+<div class="line">happen every 18 months and are supported for three years on the</div>
+<div class="line">desktop/five years on the server. That&#8217;s hard. It&#8217;s _very_ hard to</div>
+<div class="line">support new hardware with long term releases. &#8220;Normal&#8221; releases may
+mix</div>
+<div class="line">packages from Debian stable with testing, unstable or even
+experimental</div>
+<div class="line">(whizzy features) but get only a short testing time.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Debian &#8220;releases when ready&#8221; but then supports that release until
+about</div>
+<div class="line-block">
+<div class="line">a year after the _next_ release. 22 months to release Etch, 22
+months to</div>
+<div class="line">release Lenny + 12 months = 56 months. Slow moving progress through</div>
+<div class="line">testing to release, regular point updates with security fixes.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Freeness vs. pragmatism</div>
+<div class="line-block">
+<div class="line">=======================</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Ubuntu may sometimes take a pragmatic attitude for &#8220;software that
+works&#8221;</div>
+<div class="line-block">
+<div class="line">for users. They also have the ability, which Debian does not, to
+enter</div>
+<div class="line">into commercial agreements for third party apps e.g. Oracle/VMWare.</div>
+<div class="line">[<span class="caps">DFSG</span> - not &#8220;licence just for Debian&#8221;]. Canonical benefits from
+Debian</div>
+<div class="line">idealism but it can&#8217;t flow the other way :(</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Upgrades between releases</div>
+<div class="line-block">
+<div class="line">=========================</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">You&#8217;ll hear lots of views on this. <span class="caps">SUBJECTIVE</span> <span class="caps">OPINION</span> <span class="caps">FOLLOWS</span>:<span class="caps">GUT</span></div>
+<div class="line-block">
+<div class="line"><span class="caps">FEELING</span> <span class="caps">AND</span> <span class="caps">EXPERIENCE</span> <span class="caps">IN</span> <span class="caps">EQUAL</span> <span class="caps">PARTS</span>. Ubuntu is harder to upgrade</div>
+<div class="line">cleanly between releases and it may actually be quicker to reinstall.</div>
+<div class="line">You certainly can&#8217;t skip a release so you&#8217;d need to do 8.04, 8.10,</div>
+<div class="line">9.04, 9.10 (for example). This is partly a consequence of short
+release</div>
+<div class="line">cycles above. Debian is _far_ more polished here /<span class="caps">SUBJECTIVE</span></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Summary</div>
+<div class="line-block">
+<div class="line">=======</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">All of this is very well explained by The Official Ubuntu Book and
+Mark</div>
+<div class="line-block">
+<div class="line">Shuttleworth&#8217;s latest interview for ?? Linux Format ?? magazine.</div>
+<div class="line">Its also worth reading newsgroups/fora and planet.debian.org /</div>
+<div class="line">planet.ubuntu.com to get a better appreciation of the similarities
+and</div>
+<div class="line">differences in approach. Debian and Ubuntu each have strengths: its a</div>
+<div class="line">(sometimes uneasy) symbiosis - both distributions share many of the
+same</div>
+<div class="line">developers, for example, but not necessarily end goals - but Debian</div>
+<div class="line">gains as much as Ubuntu if they&#8217;ll just fix their bloody bug #1 :)</div>
+</div>
+</div>
+<p>Hope this&nbsp;helps,</p>
+<p>AndyC</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

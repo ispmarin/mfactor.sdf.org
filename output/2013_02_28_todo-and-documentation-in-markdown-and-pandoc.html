@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>TODO and documentation in markdown and pandoc | Another Life Form
+</title>
+  <link rel="canonical" href="/2013_02_28_todo-and-documentation-in-markdown-and-pandoc.html">
+
+  <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="/feeds/tools.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="Hi all, Writing a TODO and some documentation for a code under development can be a bit jarring at the beginning, especially when there’s more than one developer working on the same code. Things get even more interesting when the other developer is not using any kind of VCS …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1><span class="caps">TODO</span> and documentation in markdown and&nbsp;pandoc
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2013-02-28T11:27:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        Qui 28 Fevereiro 2013
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/tools.html">tools</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/code.html">#code</a>,         <a href="/tag/conversion-pdf.html">#conversion pdf</a>,         <a href="/tag/doxygen.html">#doxygen</a>,         <a href="/tag/markdown.html">#markdown</a>,         <a href="/tag/pandoc.html">#pandoc</a>,         <a href="/tag/syntax-highlight.html">#syntax highlight</a>,         <a href="/tag/todo.html">#todo</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Hi&nbsp;all,</p>
+<p>Writing a <span class="caps">TODO</span> and some documentation for a code under development can
+be a bit jarring at the beginning, especially when there&#8217;s more than one
+developer working on the same code. Things get even more interesting
+when the other developer is not using any kind of <span class="caps">VCS</span> and we have to use
+the good old fashioned code-by-email-what-changed-by-phone. After
+working with git for a while, doing that can feel a little bit&#8230;
+retrograde, but these are the conditions, and sometimes is best if we
+don&#8217;t change&nbsp;them.</p>
+<p>So I thought for a long time how to keep track of the changes in this
+scenario. Another detail: the code in question is not open source, so I
+wouldn&#8217;t be able to rely on github or other tools. So I decided to
+use<a class="reference external" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>
+to write the changes and
+<a class="reference external" href="http://johnmacfarlane.net/pandoc/demos.html">pandoc</a> to generate a
+<span class="caps">PDF</span> out of it. markdown syntax is quite simple, and pandoc can generate
+very good PDFs out of them, so now is more important to concentrate on
+writing the <span class="caps">TODO</span> than refining the&nbsp;tools.</p>
+<p>The conversion from markdown to <span class="caps">PDF</span> is a breeze with&nbsp;pandoc:</p>
+<blockquote>
+pandoc <span class="caps">README</span> -o readme.pdf</blockquote>
+<p>Done! What if we have some code in it, and want to highlight it? No
+problem. Add a block code delimiter in&nbsp;markdown:</p>
+<blockquote>
+<div class="line-block">
+<div class="line">&#8220;` {.fortran .numberLines}</div>
+<div class="line-block">
+<div class="line">call madfunction(i-1, 1, 1.0/dt, c)</div>
+<div class="line">write(6,*) &#8220;Running madfunction&#8221;</div>
+<div class="line">&#8220;`</div>
+</div>
+</div>
+</blockquote>
+<p>And convert it with&nbsp;pandoc:</p>
+<blockquote>
+pandoc <span class="caps">TODO</span>.md &nbsp;&#8212;highlight-style pygments -o <span class="caps">TODO</span>.pdf</blockquote>
+<p>And voilá! Code with syntax highlight in the <span class="caps">PDF</span>. Very, very, very
+helpful. You can also change the syntax colors changing the option
+&lt;pygments&gt; and use several different ones, as kate, zenburn, expresso,&nbsp;etc.</p>
+<p>Keeping the doc in markdown will also help when the code, or at least
+parts of it, are uploaded to github or any other tracker. In the future,
+if the documentation of the code itself is done in doxygen, for example,
+the markdown can be included in the doxygen generation file.&nbsp;Neat.</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

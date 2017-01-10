@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Installing PostGis 1.5.5 on Debian Squeeze | Another Life Form
+</title>
+  <link rel="canonical" href="/2012_08_10_installing-postgis-debian-squeeze.html">
+
+  <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="/feeds/gis.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="On the ongoing projects here at my lab, a new student here at my lab needed to perform again the installation for PostgreSQL 9.1 and PostGIS, to spacially enable the database. But, for now, there is no PostGIS package for Debian Squeeze! Despair, oh my! The usual solutions, like …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Installing PostGis 1.5.5 on Debian&nbsp;Squeeze
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2012-08-10T13:17:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        Sex 10 Agosto 2012
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/gis.html">gis</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/client-versions.html">#client versions</a>,         <a href="/tag/cluster-manager.html">#cluster manager</a>,         <a href="/tag/database-cluster.html">#database cluster</a>,         <a href="/tag/debian.html">#debian</a>,         <a href="/tag/debian-backports.html">#debian backports</a>,         <a href="/tag/debian-gis.html">#debian gis</a>,         <a href="/tag/gis.html">#gis</a>,         <a href="/tag/howto.html">#howto</a>,         <a href="/tag/postgis.html">#postgis</a>,         <a href="/tag/postgre.html">#postgre</a>,         <a href="/tag/postgresql.html">#postgresql</a>,         <a href="/tag/postgresql-server.html">#postgresql server</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>On the ongoing projects here at my
+<a class="reference external" href="http://albatroz.shs.eesc.usp.br">lab</a>, a new student here at my lab
+needed to perform again the installation for PostgreSQL 9.1 and PostGIS,
+to spacially enable the database. But, for now, there is no PostGIS
+package for Debian Squeeze! Despair, oh my! The usual solutions, like
+pulling from Wheezy (the present Testing) also didn&#8217;t work, as for some
+reason the package that we want, postgresql-9.1-postgis, tries to pull
+an infinitude of packages from wheezy (even gtk packages!), so we need
+to go the old school fashion: ./configure. What are the dependencies?
+Here we&nbsp;go:</p>
+<blockquote>
+<p>libgeos-dev</p>
+<p>grass</p>
+<p>libproj-dev</p>
+<p>libgdal-grass</p>
+<p>python-pyproj</p>
+</blockquote>
+<p>So a standard apt-get install should suffice - and of course,
+considering that both posgresql-9.1 and posgresql-server-9.1-dev are&nbsp;installed:</p>
+<blockquote>
+<div class="line-block">
+<div class="line"><a class="reference external" href="mailto:root&#64;rohan">root&#64;rohan</a>:~/postgis-1.5.5# dpkg -l | grep postgre</div>
+<div class="line-block">
+<div class="line">ii postgresql-9.1 9.1.4-2~bpo60+1 object-relational <span class="caps">SQL</span> database,
+version 9.1 server</div>
+<div class="line">ii postgresql-client-9.1 9.1.4-2~bpo60+1 front-end programs for
+PostgreSQL 9.1</div>
+<div class="line">ii postgresql-client-common 130~bpo60+2 manager for multiple
+PostgreSQL client versions</div>
+<div class="line">ii postgresql-common 130~bpo60+2 PostgreSQL database-cluster
+manager</div>
+<div class="line">ii postgresql-contrib-9.1 9.1.4-2~bpo60+1 additional facilities
+for PostgreSQL</div>
+<div class="line">ii postgresql-plpython-9.1 9.1.4-2~bpo60+1 <span class="caps">PL</span>/Python procedural
+language for PostgreSQL 9.1</div>
+<div class="line">ii postgresql-server-dev-9.1 9.1.4-2~bpo60+1 development files
+for PostgreSQL 9.1 server-side programming</div>
+</div>
+</div>
+</blockquote>
+<p>Done! The rest is a simple ./configure, make, make install.&nbsp;Voilà!</p>
+<p>So, if you&#8217;re starting from scratch, let&#8217;s recapitulate: first enable
+<a class="reference external" href="http://backports-master.debian.org/Instructions/">Debian Backports</a>,
+them install the needed&nbsp;packages:</p>
+<blockquote>
+<p>apt-get install -t squeeze-backports&nbsp;posgresql-9.1&nbsp;postgresql-client-9.1&nbsp;postgresql-client-common&nbsp;postgresql-common&nbsp;postgresql-contrib-9.1&nbsp;postgresql-plpython-9.1&nbsp;postgresql-server-dev-9.1</p>
+<p>apt-get install libgeos-dev&nbsp;grass libproj-dev&nbsp;libgdal-grass&nbsp;python-pyproj</p>
+</blockquote>
+<p>And finally download PostGIS from
+<a class="reference external" href="http://postgis.refractions.net/documentation/manual-1.5/ch02.html#id2608330">here</a>,
+unpack it, and&nbsp;run</p>
+<blockquote>
+./configure; make; make install</blockquote>
+<p>That should do the&nbsp;trick!</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

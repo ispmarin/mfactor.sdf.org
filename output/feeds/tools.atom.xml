@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - tools</title><link href="/" rel="alternate"></link><link href="/feeds/tools.atom.xml" rel="self"></link><id>/</id><updated>2016-02-15T00:00:00-02:00</updated><entry><title>From Maple to Spark</title><link href="/2016_02_15_maple_spark.html" rel="alternate"></link><published>2016-02-15T00:00:00-02:00</published><updated>2016-02-15T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2016-02-15:/2016_02_15_maple_spark.html</id><summary type="html">&lt;p&gt;Doing scientific computing and business projects, from Maple to&amp;nbsp;Spark&lt;/p&gt;</summary><content type="html">&lt;p&gt;All started with cleaning up my bin&amp;nbsp;folder.&lt;/p&gt;
+&lt;p&gt;Describe the idea of first using Maple in Physics, then doing our own 
+computer programs and simulations, the time it took to write them and 
+the support that we had for it, to today environment of using more &amp;#8220;basic&amp;#8221; 
+programming languages and environments, less complete, but more&amp;nbsp;efficient.&lt;/p&gt;
+&lt;p&gt;Why Matlab and Mathematica are not used in business organizations, 
+as they are supposedly more feature complete and simple to&amp;nbsp;use?&lt;/p&gt;</content><category term="tools"></category><category term="maple"></category><category term="scientific software"></category><category term="python"></category><category term="spark"></category></entry><entry><title>Gnome 3.16 on Debian Unstable: New adventures on the Window Manager lands</title><link href="/2015_05_24_gnome-3-16-on-debian-unstable.html" rel="alternate"></link><published>2015-05-24T15:49:00-03:00</published><updated>2015-05-24T15:49:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2015-05-24:/2015_05_24_gnome-3-16-on-debian-unstable.html</id><summary type="html">&lt;p&gt;I finally got my hands on a decent monitor, the &lt;a class="reference external" href="http://accessories.la.dell.com/sna/productdetail.aspx?c=br&amp;amp;l=pt&amp;amp;s=dhs&amp;amp;cs=brdhs1&amp;amp;sku=480-ACXS"&gt;Dell
+&lt;span class="caps"&gt;U2515H&lt;/span&gt;&lt;/a&gt;.
+It has been, so far, an awesome monitor. But that showed a few issues
+with my standard Debian installation, with &lt;span class="caps"&gt;KDE&lt;/span&gt; 4.14 on Debian Unstable.
+It seemed that every &lt;span class="caps"&gt;GTK&lt;/span&gt; application decided to throw a fit together …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I finally got my hands on a decent monitor, the &lt;a class="reference external" href="http://accessories.la.dell.com/sna/productdetail.aspx?c=br&amp;amp;l=pt&amp;amp;s=dhs&amp;amp;cs=brdhs1&amp;amp;sku=480-ACXS"&gt;Dell
+&lt;span class="caps"&gt;U2515H&lt;/span&gt;&lt;/a&gt;.
+It has been, so far, an awesome monitor. But that showed a few issues
+with my standard Debian installation, with &lt;span class="caps"&gt;KDE&lt;/span&gt; 4.14 on Debian Unstable.
+It seemed that every &lt;span class="caps"&gt;GTK&lt;/span&gt; application decided to throw a fit together and
+nothing worked. I tried to adjust a lot of stuff on gtk-qt to fix it to
+no avail but as it was &lt;span class="caps"&gt;GTK&lt;/span&gt; that was giving me headaches, maybe
+installing Gnome things would be better on &lt;span class="caps"&gt;KDE&lt;/span&gt; side. So after a really
+long time I decided to test a new window manager while at it, and now
+I&amp;#8217;m running Gnome 3.16 on Debian Unstable. (Also, it is a good change of
+pace while I wait for &lt;span class="caps"&gt;KDE&lt;/span&gt; 5 hit&amp;nbsp;Unstable.)&lt;/p&gt;
+&lt;p&gt;But, as every transition&amp;#8230; things got a little rough. The &lt;a class="reference external" href="https://plus.google.com/+LinusTorvalds/posts/UkoAaLDpF4i"&gt;famous
+rant&lt;/a&gt; by
+Linus Torvalds rings very true: they simplified so much that it&amp;#8217;s dumb
+(even if Linus is &lt;a class="reference external" href="https://plus.google.com/115250422803614415116/posts/KygiWsQc4Wm"&gt;using it
+again&lt;/a&gt;).
+There are some things that I found to be incredible as design decisions,
+and Gnome Extensions is one of&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;C&amp;#8217;mon, how am I supposed to keep different systems updated, with the
+same extensions? How do I know that they will work before I install
+them? Who makes them? There are a few packaged in Debian, but not
+enough. And to see how this is crazy, I had to install extensions to
+show a suspend button, wicd-gtk on a tray, and I still can&amp;#8217;t find one to
+easily lock my screen or close the session! So both things that
+shouldn&amp;#8217;t be broken, standard desktop stuff and extensions, are broken
+in one&amp;nbsp;go.&lt;/p&gt;
+&lt;p&gt;Also, there is no easy way to change the system fonts, colors or
+everything else. I had to use gnome-tweak-tool to do all this, a
+non-standard tool, and still there are a ton of stuff that I should be
+able to configure and it is removed. Even in more lighter environments,
+like &lt;span class="caps"&gt;LXDE&lt;/span&gt;, I stil can change the icons or set a random image as my
+wallpaper, as a user. I don&amp;#8217;t want to copy stuff to /usr or other system
+directories, I should be able to override the system paths with folders
+on my home directory, preferably under .local or .config. (And if you&amp;#8217;re
+thinking that I must go to the image, right-click it to set as wallpaper
+as the only way to do it, no, that is no proper behavior.) The fact that
+even if I do the right-click thing, now I have a folder called
+Wallpapers on my home folder buggers me. I didn&amp;#8217;t ask for a wallpaper
+folder, just use any path that I gave you! &lt;span class="caps"&gt;ME&lt;/span&gt;, not Gnome programmers,
+know were my files should&amp;nbsp;go.&lt;/p&gt;
+&lt;p&gt;Also, I can&amp;#8217;t lock my screen if &lt;span class="caps"&gt;GDM&lt;/span&gt; is not running. This is now really
+bad, not just annoyances like before. They hand-wave this away saying
+that this will be solved with Wayland, but Wayland has been in
+development for a while and it&amp;#8217;s not shipping as production ready for
+another not known time, so I would have to wait for it to lock my
+screen? I don&amp;#8217;t want to run &lt;span class="caps"&gt;GDM&lt;/span&gt;, I should be able to run whatever login
+manager I want and be able to lock my screen in the &lt;span class="caps"&gt;WM&lt;/span&gt;. If Gnome keeps
+following this &amp;#8220;Windows&amp;#8221; path all the complaints in the last years would
+be true. The dependency on their own backyard instead of keeping things
+interchangeable is a very troubling sign, and like the systemd debacle,
+it just keeps getting&amp;nbsp;worse.&lt;/p&gt;
+&lt;p&gt;I understand the need for standards, and &lt;span class="caps"&gt;XDG&lt;/span&gt; directives are ok, but
+instead of thinking that the users are dumb, please at least let us
+choose. I know this is kinda of a old rant against Gnome, and it can get
+very ugly if I start mentioning Gnome 2, but from a fresh start, Gnome
+right now is bad. Yadda yadda use another window manager, I get it. I
+will, as soon I can get my hands on &lt;span class="caps"&gt;KDE&lt;/span&gt; 5. But for now, maybe another
+voice trying to show what is broken, from an outside perspective, can
+help a bit into steering things on a better&amp;nbsp;path.&lt;/p&gt;
+</content></entry><entry><title>TODO and documentation in markdown and pandoc</title><link href="/2013_02_28_todo-and-documentation-in-markdown-and-pandoc.html" rel="alternate"></link><published>2013-02-28T11:27:00-03:00</published><updated>2013-02-28T11:27:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2013-02-28:/2013_02_28_todo-and-documentation-in-markdown-and-pandoc.html</id><summary type="html">&lt;p&gt;Hi&amp;nbsp;all,&lt;/p&gt;
+&lt;p&gt;Writing a &lt;span class="caps"&gt;TODO&lt;/span&gt; and some documentation for a code under development can
+be a bit jarring at the beginning, especially when there&amp;#8217;s more than one
+developer working on the same code. Things get even more interesting
+when the other developer is not using any kind of &lt;span class="caps"&gt;VCS …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hi&amp;nbsp;all,&lt;/p&gt;
+&lt;p&gt;Writing a &lt;span class="caps"&gt;TODO&lt;/span&gt; and some documentation for a code under development can
+be a bit jarring at the beginning, especially when there&amp;#8217;s more than one
+developer working on the same code. Things get even more interesting
+when the other developer is not using any kind of &lt;span class="caps"&gt;VCS&lt;/span&gt; and we have to use
+the good old fashioned code-by-email-what-changed-by-phone. After
+working with git for a while, doing that can feel a little bit&amp;#8230;
+retrograde, but these are the conditions, and sometimes is best if we
+don&amp;#8217;t change&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;So I thought for a long time how to keep track of the changes in this
+scenario. Another detail: the code in question is not open source, so I
+wouldn&amp;#8217;t be able to rely on github or other tools. So I decided to
+use&lt;a class="reference external" href="http://daringfireball.net/projects/markdown/syntax"&gt;markdown&lt;/a&gt;
+to write the changes and
+&lt;a class="reference external" href="http://johnmacfarlane.net/pandoc/demos.html"&gt;pandoc&lt;/a&gt; to generate a
+&lt;span class="caps"&gt;PDF&lt;/span&gt; out of it. markdown syntax is quite simple, and pandoc can generate
+very good PDFs out of them, so now is more important to concentrate on
+writing the &lt;span class="caps"&gt;TODO&lt;/span&gt; than refining the&amp;nbsp;tools.&lt;/p&gt;
+&lt;p&gt;The conversion from markdown to &lt;span class="caps"&gt;PDF&lt;/span&gt; is a breeze with&amp;nbsp;pandoc:&lt;/p&gt;
+&lt;blockquote&gt;
+pandoc &lt;span class="caps"&gt;README&lt;/span&gt; -o readme.pdf&lt;/blockquote&gt;
+&lt;p&gt;Done! What if we have some code in it, and want to highlight it? No
+problem. Add a block code delimiter in&amp;nbsp;markdown:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&amp;#8220;` {.fortran .numberLines}&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;call madfunction(i-1, 1, 1.0/dt, c)&lt;/div&gt;
+&lt;div class="line"&gt;write(6,*) &amp;#8220;Running madfunction&amp;#8221;&lt;/div&gt;
+&lt;div class="line"&gt;&amp;#8220;`&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And convert it with&amp;nbsp;pandoc:&lt;/p&gt;
+&lt;blockquote&gt;
+pandoc &lt;span class="caps"&gt;TODO&lt;/span&gt;.md &amp;nbsp;&amp;#8212;highlight-style pygments -o &lt;span class="caps"&gt;TODO&lt;/span&gt;.pdf&lt;/blockquote&gt;
+&lt;p&gt;And voilá! Code with syntax highlight in the &lt;span class="caps"&gt;PDF&lt;/span&gt;. Very, very, very
+helpful. You can also change the syntax colors changing the option
+&amp;lt;pygments&amp;gt; and use several different ones, as kate, zenburn, expresso,&amp;nbsp;etc.&lt;/p&gt;
+&lt;p&gt;Keeping the doc in markdown will also help when the code, or at least
+parts of it, are uploaded to github or any other tracker. In the future,
+if the documentation of the code itself is done in doxygen, for example,
+the markdown can be included in the doxygen generation file.&amp;nbsp;Neat.&lt;/p&gt;
+</content><category term="code"></category><category term="conversion pdf"></category><category term="doxygen"></category><category term="markdown"></category><category term="pandoc"></category><category term="syntax highlight"></category><category term="todo"></category></entry><entry><title>And who said it… back to Eclipse</title><link href="/2012_10_22_fortran_eclipse.html" rel="alternate"></link><published>2012-10-22T20:29:00-02:00</published><updated>2012-10-22T20:29:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2012-10-22:/2012_10_22_fortran_eclipse.html</id><summary type="html">&lt;p&gt;Hey&amp;nbsp;all,&lt;/p&gt;
+&lt;p&gt;I should have warned everyone: sometimes what seems to be the best is
+not, and old habits die hard. Or, in a more direct way, after all the
+fuss with Vim, I&amp;#8217;m back to Eclipse. I know, I&amp;nbsp;know&amp;#8230;&lt;/p&gt;
+&lt;p&gt;Vim is great. Really, vim is great. But …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hey&amp;nbsp;all,&lt;/p&gt;
+&lt;p&gt;I should have warned everyone: sometimes what seems to be the best is
+not, and old habits die hard. Or, in a more direct way, after all the
+fuss with Vim, I&amp;#8217;m back to Eclipse. I know, I&amp;nbsp;know&amp;#8230;&lt;/p&gt;
+&lt;p&gt;Vim is great. Really, vim is great. But it&amp;#8217;s just not what I need right
+now. I programmed in vim in python and &lt;span class="caps"&gt;FORTRAN&lt;/span&gt;. I wrote makefiles again.
+I even made a rep with vim rc scripts in github. But no dice. I&amp;#8217;m a very
+visual guy, and not being able to see what I was doing, where I was
+going, was a dealbreaker. It seems that if I don&amp;#8217;t have a clear picture
+in my head on what&amp;#8217;s going on, as I have with Linux systems in general
+and as I don&amp;#8217;t have when I&amp;#8217;m writing new code, not being able to see
+what files are part of the project, autocompletion out of the box, so on
+and so forth, is not good. After I got all in my head, vim is very
+productive, as I don&amp;#8217;t have to reach for the mouse and I code all from
+memory. But to prototype, to create new code, Eclipse so far is
+superior. I know it sounds counterintuitive, but autocompletion is one
+of the several examples. Just being able to press &lt;span class="caps"&gt;CTRL&lt;/span&gt; + Space and the
+function definition is filled saves me a lot of time in two ways: first,
+I don&amp;#8217;t have to go to that piece of code to see what the interface is,
+and second, as I keep my variable names consistent, sometimes just
+putting the definition of the function is enough, not having to type
+anything&amp;nbsp;else.&lt;/p&gt;
+&lt;p&gt;Vanilla Eclipse Juno &lt;span class="caps"&gt;CDT&lt;/span&gt;, Pydev, Photran, and Eclipse Colours, and
+that&amp;#8217;s it. Juno now supports git out of the box too. Other trick that is
+saving me a lot of headaches is to keep several workspaces, one for each
+kind of project. Right now I have pywork for Python code and lavalwork
+for some code from&amp;nbsp;Laval.&lt;/p&gt;
+&lt;p&gt;So here it is. I&amp;#8217;m back, Eclipse! Just don&amp;#8217;t throw me under the bus with
+those ugly java exceptions&amp;#8230;&amp;nbsp;:-)&lt;/p&gt;
+</content><category term="eclipse"></category><category term="eclipse cdt"></category><category term="programming"></category><category term="vim"></category></entry><entry><title>Fiddling with Makefiles, for the last time</title><link href="/2012_09_18_makefiles.html" rel="alternate"></link><published>2012-09-18T16:11:00-03:00</published><updated>2012-09-18T16:11:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:None,2012-09-18:/2012_09_18_makefiles.html</id><summary type="html">&lt;p&gt;I was struggling with writing another makefile in my life, but it seems
+that if you want to automate some tasks in vim, you have to write one.
+I&amp;#8217;ll also use several compilers to check interoperability of the new
+code that I&amp;#8217;ll be working, so creating a makefile …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was struggling with writing another makefile in my life, but it seems
+that if you want to automate some tasks in vim, you have to write one.
+I&amp;#8217;ll also use several compilers to check interoperability of the new
+code that I&amp;#8217;ll be working, so creating a makefile, even if just for one
+file, is worthwhile. But of course I never properly learned how to write
+one by myself, so here is my post. First, automatic variables, directly
+from the
+&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Automatic-Variables"&gt;manual&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;$&amp;#64;&lt;/tt&gt;The file name of the target of the rule. If the target is an
+archive member, then ‘$&amp;#64;’ is the name of the archive file. In a pattern
+rule that has multiple targets (see&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Pattern-Intro"&gt;Introduction to Pattern
+Rules&lt;/a&gt;),
+‘$&amp;#64;’ is the name of whichever target caused the rule&amp;#8217;s recipe to be&amp;nbsp;run.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;$%&lt;/tt&gt;The target member name, when the target is an archive member.
+See&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Archives"&gt;Archives&lt;/a&gt;.
+For example, if the target is&amp;nbsp;foo.a(bar.o)&amp;nbsp;then ‘$%’ is&amp;nbsp;bar.o&amp;nbsp;and ‘$&amp;#64;’
+is&amp;nbsp;foo.a. ‘$%’ is empty when the target is not an archive&amp;nbsp;member.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;$&amp;lt;&lt;/tt&gt;The name of the first prerequisite. If the target got its recipe
+from an implicit rule, this will be the first prerequisite added by the
+implicit rule (see&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Implicit-Rules"&gt;Implicit
+Rules&lt;/a&gt;).&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;tt class="docutils literal"&gt;$?&lt;/tt&gt;The names of all the prerequisites that are newer than the
+target, with spaces between them. For prerequisites which are archive
+members, only the named member is used
+(see&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Archives"&gt;Archives&lt;/a&gt;).&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;tt class="docutils literal"&gt;$^&lt;/tt&gt;The names of all the prerequisites, with spaces between them.
+For prerequisites which are archive members, only the named member is
+used
+(see&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Archives"&gt;Archives&lt;/a&gt;).
+A target has only one prerequisite on each other file it depends on,
+no matter how many times each file is listed as a prerequisite. So if
+you list a prerequisite more than once for a target, the value
+of&amp;nbsp;&lt;tt class="docutils literal"&gt;$^&lt;/tt&gt;&amp;nbsp;contains just one copy of the name. This list
+does&amp;nbsp;&lt;strong&gt;not&lt;/strong&gt;&amp;nbsp;contain any of the order-only prerequisites; for those
+see the ‘$|’ variable, below.&lt;/div&gt;
+&lt;div class="line"&gt;&lt;tt class="docutils literal"&gt;$+&lt;/tt&gt;This is like ‘$^’, but prerequisites listed more than once
+are duplicated in the order they were listed in the makefile. This is
+primarily useful for use in linking commands where it is meaningful to
+repeat library file names in a particular order.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;$|&lt;/tt&gt;The names of all the order-only prerequisites, with spaces
+between&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;$*&lt;/tt&gt;The stem with which an implicit rule matches (see&amp;nbsp;&lt;a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Pattern-Match"&gt;How Patterns
+Match&lt;/a&gt;).
+If the target is&amp;nbsp;dir/a.foo.b&amp;nbsp;and the target pattern is&amp;nbsp;a.%.b&amp;nbsp;then the
+stem is&amp;nbsp;dir/foo. The stem is useful for constructing names of related
+files.&amp;nbsp;In a static pattern rule, the stem is part of the file name that
+matched the ‘%’ in the target&amp;nbsp;pattern.&lt;/p&gt;
+&lt;p&gt;So the most used ones in the makefiles that I&amp;#8217;ve seen are $&amp;#64;, $&amp;gt; and $^.
+So, $&amp;#64; means the name of the compilation rule, $^ means the source
+files. For&amp;nbsp;example,&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+FC = gfortran
+FCFLAGS = -g -fbounds-check
+FCFLAGS = -O2
+IFC = ifort
+IFCFLAGS = -g
+#FCFLAGS += -I/usr/include
+#LDFLAGS =
+SRC = bio-f.f
+bio-gfortran: $(SRC)
+ $(FC) $(FCFLAGS) -o $&amp;#64; $^ $(LDFLAGS)
+bio-ifort: $(SRC)
+ $(IFC) $(IFCFLAGS) -o $&amp;#64; $^ $(IFCFLAGS)
+gf: bio-gfortran
+ifort: bio-ifort
+# Utility targets
+.PHONY: clean veryclean
+clean:
+ rm -f *.o *.mod *.MOD
+&lt;/pre&gt;
+&lt;p&gt;What I&amp;#8217;m doing basically is to tell to compile in this fashion: for the
+rule bionapl-gfortran, $&amp;#64; means this name and $^ means the source files.
+So this&amp;nbsp;line,&lt;/p&gt;
+&lt;p&gt;$(&lt;span class="caps"&gt;FC&lt;/span&gt;) $(&lt;span class="caps"&gt;FCFLAGS&lt;/span&gt;) -o $&amp;#64; $^ $(&lt;span class="caps"&gt;LDFLAGS&lt;/span&gt;)&lt;/p&gt;
+&lt;p&gt;is use the compiler defined by &lt;span class="caps"&gt;FC&lt;/span&gt; with the compiler flags &lt;span class="caps"&gt;FCFLAGS&lt;/span&gt; using
+the output name (-o $&amp;#64;) bio-gfortran and the source file ($^) that &lt;span class="caps"&gt;SRC&lt;/span&gt;
+tells you to use. The line below is the same&amp;nbsp;thing.&lt;/p&gt;
+&lt;p&gt;Note the line gf: bio-gfortran and the one below. This is just a
+convenient renaming: instead of&amp;nbsp;calling&lt;/p&gt;
+&lt;p&gt;make&amp;nbsp;bio-gfortran&lt;/p&gt;
+&lt;p&gt;I can call and&amp;nbsp;etc.&lt;/p&gt;
+&lt;p&gt;make&amp;nbsp;gf&lt;/p&gt;
+&lt;p&gt;The meaning for the $&amp;#64; and $^ can be a little more complicated with
+build dependencies, but this is enough for now. I&amp;#8217;m sure the programmers
+on standby will provide better options and how to save changing the name
+for each compilation, etc. Feel free to&amp;nbsp;contribute!&lt;/p&gt;
+</content><category term="compilation"></category><category term="computational physics"></category><category term="science"></category></entry></feed>
