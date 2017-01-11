@@ -1,275 +1,102 @@
-<!doctype html>
-<html lang="">	
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8"/>
-	<title>Another Life Form</title>	
-	<meta name="author" content="Ivan Marin">
-	
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
-	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-		
+  <title>Another Life Form | 
+</title>
+  <link rel="canonical" href="http://mfactor.sdf.org/index5.html">
 
-    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/feeds/all.atom.xml" title="Full Atom Feed">
+
+
+  <link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/theme/css/style.css">
+
+
 </head>
-	
+
 <body>
-
+  <header class="header">
     <div class="container">
-	  
-	  <header role="banner">
-	    <div class="feeds">
-	        <a href="/feeds/all.atom.xml" rel="alternate"><img src="/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
-	    </div>
-		<a href="" class="title">Another Life Form</a>
-      </header>
-	
-	  <div class="wrapper">
-
-		  <div role="main" class="content">
-
-
-
-      <article>
-        <h1><a href="/2017_07_31_manage_pass.html">Managing passwords with <cite>pass</cite></a></h1>
-        <p>I&#8217;ve been thinking about dumping LastPass for a while now, especially after it was bought by
-some company whatever. But the way that LastPass is useful is quite&nbsp;awesome:</p>
-<ul class="simple">
-<li>can generate&nbsp;passwords</li>
-<li>stores all&nbsp;passwords</li>
-<li>fill login forms automatically (the best feature for&nbsp;me)</li>
-</ul>
-<p>So how can I replace it with something with at least similar functionalities but
-under my&nbsp;control?</p>
-<p>The answer to that is <a class="reference external" href="https://www.passwordstore.org/">pass</a>. It stores the
-passwords as encrypted text with <a class="reference external" href="https://www.gnupg.org/"><span class="caps">GPG</span></a> on the local filesystem.
-The feedback was so good that other people started using it and developed more
-resources for it, as a <a class="reference external" href="https://qtpass.org/"><span class="caps">GUI</span></a> and a <cite>Firefox extension &lt;https://github.com/jvenant/passff#&gt;_</cite>.</p>
-<p>I&#8217;ll describe how I managed to set it&nbsp;up.</p>
-<div class="section" id="id1">
-<h2><span class="caps">GPG</span></h2>
-<p>First, let&#8217;s set up the <span class="caps">GPG</span>&nbsp;key:</p>
-<pre class="literal-block">
-sudo apt-get install gpgv2
-</pre>
-<p>and generate a&nbsp;key:</p>
-<pre class="literal-block">
-gpg --gen-key
-</pre>
-<p>If the key process takes it too long because of the entropy&nbsp;generation,</p>
-<blockquote>
-<strong>We need to generate a lot of random bytes. It is a good idea to perform
-some other action (type on the keyboard, move the mouse, utilize the
-disks) during the prime generation; this gives the random number
-generator a better chance to gain enough entropy.
-Not enough random bytes available.  Please do some other work to give
-the <span class="caps">OS</span> a chance to collect more entropy! (Need 210 more bytes)</strong></blockquote>
-<p>install the <cite>rng-tools</cite>:</p>
-<blockquote>
-sudo apt-get install rng-tools</blockquote>
-<p>and generate entropy using the <a class="reference external" href="http://serverfault.com/questions/214605/gpg-not-enough-entropy">command</a></p>
-<blockquote>
-sudo rngd -r /dev/urandom</blockquote>
-<p>to generate enough entropy for <span class="caps">GPG</span>.</p>
-</div>
-<div class="section" id="id2">
-<h2>pass</h2>
-<p>So now let&#8217;s install <cite>pass</cite>:</p>
-<blockquote>
-sudo apt-get instal pass</blockquote>
-<p>and create a password&nbsp;store:</p>
-<blockquote>
-pass init &lt;email used to generate the <span class="caps">GPG</span> key&gt;</blockquote>
-<p>You can now start adding passwords. As I said, I used LassPass heavily, so I had tons of
-passwords stored. To convert them I exported on LastPass my passwords to a <span class="caps">CSV</span> and used
-<a class="reference external" href="https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb">this tool</a>
-to import the passwords to pass. I now could access all my passwords from the command&nbsp;line.</p>
-</div>
-<div class="section" id="pass-with-git">
-<h2>pass with&nbsp;git</h2>
-<p>But one of the nicest things about Lastpass is be able to synchronize the passwords over the web.
-pass can manage the passwords as a git repository, so that&#8217;s the route I chose. After importing
-the passwords I initialized the password store as a git&nbsp;repository:</p>
-<blockquote>
-pass git init</blockquote>
-<p>Now the changes on the password file would be automatically commited. Using my <a class="reference external" href="http://sdf.org/?tutorials/metaarray">meta array</a>
-account on <a class="reference external" href="http://sdf.org"><span class="caps">SDF</span></a>, I created a bare remote repository on it (git init &#8212;bare) and added as a remote repository
-on my pass&nbsp;folder:</p>
-<blockquote>
-pass git remote add origin ma.sdf.org:~/git/pass</blockquote>
-<p>where the bare git repository is at <cite>~/git/pass</cite>. After that a&nbsp;simple</p>
-<blockquote>
-pass git push -u &#8212;all</blockquote>
-<p>commited all passwords to the&nbsp;repo.</p>
-</div>
-<div class="section" id="alternatives-to-access-the-passwords">
-<h2>Alternatives to access the&nbsp;passwords</h2>
-<p>There is a Firefox <a class="reference external" href="https://addons.mozilla.org/pt-BR/firefox/addon/passff/">extension</a> that can access
-the stored passwords. It&#8217;s almost as good as Lastpass, but only for&nbsp;Firefox.</p>
-</div>
-
-      </article>
-
-      <hr />
-
-        <div>
-          <h3>Last posts</h3>
-          <ol class="archive">
-    
-
-
-      <li>
-<a href="/2016_06_27_jupyter_pyspark.html" rel="bookmark" title="Permalink to Proper way to run PySpark on a Jupyter&nbsp;Notebook">Proper way to run PySpark on a Jupyter&nbsp;Notebook</a>
-  <time datetime="2016-06-27T00:00:00-03:00" pubdate>Seg 27 Junho 2016</time>
-<p class="tags">tags: <a href="/tag/environment.html">environment</a><a href="/tag/data-science.html">data science</a><a href="/tag/pyspark.html">pyspark</a><a href="/tag/jupyter.html">jupyter</a></p></a>      </li>
-
-
-      <li>
-<a href="/2016_05_10_python_nltk_address.html" rel="bookmark" title="Permalink to Address normalization with Python and <span class="caps">NLTK</span>">Address normalization with Python and <span class="caps">NLTK</span></a>
-  <time datetime="2016-05-10T00:00:00-03:00" pubdate>Ter 10 Maio 2016</time>
-<p class="tags">tags: <a href="/tag/data-science.html">data science</a><a href="/tag/nlp.html">NLP</a><a href="/tag/text-mining.html">text mining</a></p></a>      </li>
-
-
-      <li>
-<a href="/2016_03_17_basic_python_ds.html" rel="bookmark" title="Permalink to Basic Python Setup for Data Science on&nbsp;Linux">Basic Python Setup for Data Science on&nbsp;Linux</a>
-  <time datetime="2016-03-17T00:00:00-03:00" pubdate>Qui 17 Março 2016</time>
-<p class="tags">tags: <a href="/tag/datascience.html">datascience</a><a href="/tag/python.html">python</a></p></a>      </li>
-
-
-      <li>
-<a href="/2016_02_16_tools_carpenters.html" rel="bookmark" title="Permalink to Too many tools, not enough carpenters (short&nbsp;version)">Too many tools, not enough carpenters (short&nbsp;version)</a>
-  <time datetime="2016-02-16T00:00:00-02:00" pubdate>Ter 16 Fevereiro 2016</time>
-<p class="tags">tags: <a href="/tag/data-science.html">data science</a><a href="/tag/tools.html">tools</a></p></a>      </li>
-
-
-      <li>
-<a href="/2016_02_15_maple_spark.html" rel="bookmark" title="Permalink to From Maple to&nbsp;Spark">From Maple to&nbsp;Spark</a>
-  <time datetime="2016-02-15T00:00:00-02:00" pubdate>Seg 15 Fevereiro 2016</time>
-<p class="tags">tags: <a href="/tag/tools.html">tools</a><a href="/tag/maple.html">maple</a><a href="/tag/scientific-software.html">scientific software</a><a href="/tag/python.html">python</a><a href="/tag/spark.html">spark</a></p></a>      </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </ol>
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="http://mfactor.sdf.org">Another Life Form</a></h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="http://mfactor.sdf.org/pages/about.html">About</a></li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </header>
 
-		  </div>	
-		  
-		  <div class="sidebar">
+  <div class="main">
+    <div class="container">
+      <h1>Articles
+</h1>
+      <hr>
+<article class="row teaser">
+  <header class="col-sm-4 text-muted">
+    <ul>
+      <li title="2009-01-03T01:38:00-02:00">
+        <i class="fa fa-clock-o"></i>
+        Sáb 03 Janeiro 2009
+      </li>
+      <li>
+        <i class="fa fa-folder-open-o"></i>
+        <a href="http://mfactor.sdf.org/category/sleep.html">sleep</a>
+      </li>
+      <li>
+        <i class="fa fa-user-o"></i>
+        <a href="http://mfactor.sdf.org/author/ivan-marin.html">Ivan Marin</a>      </li>
+    </ul>
+  </header>
+  <div class="col-sm-8">
+    <h4 class="title"><a href="http://mfactor.sdf.org/2009_01_03_sleeping_late.html">3 Smart things about sleeping&nbsp;late</a></h4>
+    <div class="content">
+      1 // You may need more sleep than you think. Research by Henry Ford Hospital Sleep Disorders Center found that people who slept eight hours and then claimed they were “well rested” actually performed better and were more alert if they slept another two hours. That figures. Until the invention of …
+    </div>
+  </div>
+</article>
+<hr>
+<ul class="pagination">
+  <li class="page-item">
+    <a class="page-link" href="http://mfactor.sdf.org/index4.html">
+      <span aria-hidden="true">&laquo;</span>
+      <span class="sr-only">Previous</span>
+    </a>
+  </li>
+  <li class="page-item disabled">
+    <span class="page-link">5 of 5</span>
+  </li>
+</ul>
+    </div>
+  </div>
 
-	        <nav>
-	          <h2>Categories</h2>
-	          <ul>
-	              <li ><a href="/category/data-science.html">data science</a></li>
-	              <li ><a href="/category/debian.html">debian</a></li>
-	              <li ><a href="/category/development.html">development</a></li>
-	              <li ><a href="/category/gis.html">gis</a></li>
-	              <li ><a href="/category/learning.html">Learning</a></li>
-	              <li ><a href="/category/linux.html">Linux</a></li>
-	              <li ><a href="/category/network.html">network</a></li>
-	              <li ><a href="/category/os.html">os</a></li>
-	              <li ><a href="/category/physics.html">physics</a></li>
-	              <li ><a href="/category/sleep.html">sleep</a></li>
-	              <li ><a href="/category/tools.html">tools</a></li>
-	          </ul>
-	        </nav>
-
-	          <aside>
-	          <h2>Social</h2>
-			    <ul class="social">
-				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
-				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
-			    </ul>
-			  </aside>
-
-	          <aside>
-	            <h2>Blogroll</h2>
-	            <ul>
-	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
-	            </ul>
-	          </aside>
-
-		  </div>
-
-	  </div>
-
-      <footer>
-		<p role="contentinfo">
-		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
-    	</p>
-
-	  </footer>	
-
-	</div>
-	
-
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
 </body>
+
 </html>

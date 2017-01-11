@@ -5,7 +5,7 @@ Managing passwords with `pass`
 :modified: 2016-07-31 09:25
 :tags: security, passwords
 :category: Linux
-:slug: 2017_07_31_manage_pass
+:slug: 2016_07_31_manage_pass
 :authors: Ivan Marin
 :summary: How I stopped using LastPass and love pass
 

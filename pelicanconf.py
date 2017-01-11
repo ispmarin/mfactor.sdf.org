@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u"Ivan Marin"
 SITENAME = u'Another Life Form'
-SITEURL = ''#u'http://mfactor.sdf.org'
+SITEURL = u'http://mfactor.sdf.org'
 
 PATH = 'content'
 OUTPUT_PATH = 'output'

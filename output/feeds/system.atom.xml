@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - system</title><link href="http://mfactor.sdf.org/" rel="alternate"></link><link href="http://mfactor.sdf.org/feeds/system.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/</id><updated>2017-01-10T10:20:00-02:00</updated><entry><title>Different SSH keys for Different Hosts</title><link href="http://mfactor.sdf.org/2017_01_10_ssh_keys_hosts.html" rel="alternate"></link><published>2017-01-10T10:20:00-02:00</published><updated>2017-01-10T10:20:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2017-01-10:/2017_01_10_ssh_keys_hosts.html</id><summary type="html">&lt;p class="first last"&gt;Keep your keys private and&amp;nbsp;separated&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;The idea is simple: each of the &lt;span class="caps"&gt;SSH&lt;/span&gt; keys should grant access to only one system.
+The rationale is that if one of the keys is compromised the other keys are not. Simple,&amp;nbsp;really.&lt;/p&gt;
+&lt;p&gt;To do it, the first step is to generate the keys&amp;nbsp;separatedely:&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+ssh-keygen -t rsa -b &lt;span class="m"&gt;4096&lt;/span&gt; -C &lt;span class="s2"&gt;&amp;quot;yourmail&amp;#64;mail.com&amp;quot;&lt;/span&gt; -f ~/.ssh/github
+&lt;/pre&gt;
+&lt;p&gt;This command generates a key pair with 4096 bits and the email above as signature.
+The key will be on the full path and the filename,
+something like &lt;code&gt;/home/user/.ssh/github&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now the &lt;cite&gt;config&lt;/cite&gt; file for &lt;cite&gt;ssh&lt;/cite&gt; must be configured to correspond to the expected&amp;nbsp;keys:&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+Host github.com
+    IdentityFile ~/.ssh/github
+
+Host bitbucket.com
+    IdentityFile ~/.ssh/bitbucket
+&lt;/pre&gt;
+&lt;p&gt;and that´s it. For each server now a different key is used. A good reference is
+&lt;a class="reference external" href="https://confluence.atlassian.com/bitbucket/configure-multiple-ssh-identities-for-gitbash-mac-osx-linux-271943168.html"&gt;https://confluence.atlassian.com/bitbucket/configure-multiple-ssh-identities-for-gitbash-mac-osx-linux-271943168.html&lt;/a&gt;&lt;/p&gt;
+</content><category term="ssh"></category><category term="keys"></category></entry></feed>
