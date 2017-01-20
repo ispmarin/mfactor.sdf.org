@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - development</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/development.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2015-06-27T09:39:00-03:00</updated><entry><title>Finally, Python 3!</title><link href="http://mfactor.sdf.org/blog/2015_06_27_finally_python_3.html" rel="alternate"></link><published>2015-06-27T09:39:00-03:00</published><updated>2015-06-27T09:39:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-06-27:/blog/2015_06_27_finally_python_3.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2015 and it&amp;#8217;s the first time that I&amp;#8217;m using Python 3
+professionally. And I have to admit, if I knew that all my scripts were
+going to work so easily with 3, I would have changed way before. There
+were a few hurdles with the Python …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2015 and it&amp;#8217;s the first time that I&amp;#8217;m using Python 3
+professionally. And I have to admit, if I knew that all my scripts were
+going to work so easily with 3, I would have changed way before. There
+were a few hurdles with the Python 3 version of some libraries - patsy,
+I&amp;#8217;m looking at you - but so far the transition was painless. The things
+that I had to change were expected, like the print function and some
+dict operations, and xrange. I know it&amp;#8217;s for the best now, so let&amp;#8217;s&amp;nbsp;roll.&lt;/p&gt;
+&lt;p&gt;First of all, I switched from WinPython to Anaconda. Having to work on a
+constrained Windows installation, Anaconda provides better support for
+installing packages than pip alone. And as so far using virtualenv has
+not been a success on Windows, I&amp;#8217;m going to try the conda environment
+for my&amp;nbsp;projects.&lt;/p&gt;
+&lt;p&gt;On the version control front, I finally got access to a git shell on
+Windows, and now I can keep my sanity working with code. There&amp;#8217;s even a
+Team Foundation Server plugin for it, and the client is not that bad -
+actually, it&amp;#8217;s useful and keeps the git terminology, helping immensely
+someone that was used to git on the command line. Not bad, Microsoft.
+Git-cola is still better and is several times smaller than &lt;span class="caps"&gt;TFS&lt;/span&gt;, but hey,
+sometimes we have to use what we got. So my working environment now&amp;nbsp;is&lt;/p&gt;
+&lt;p&gt;* Anaconda 2.2.0, Python 3&amp;nbsp;version&lt;/p&gt;
+&lt;p&gt;*&amp;nbsp;Packages:&lt;/p&gt;
+&lt;p&gt;-pandas, sklearn, matplotlib, calendar, sqlalchemy with Oracle plugin,
+seaborn (mostly for styles),&amp;nbsp;statsmodels.&lt;/p&gt;
+&lt;p&gt;*&amp;nbsp;Editor:&lt;/p&gt;
+&lt;p&gt;Vim and ipython notebook (depending on the type of&amp;nbsp;work)&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://msysgit.github.io/"&gt;Git for&amp;nbsp;Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and Tableau for some&amp;nbsp;visualizations.&lt;/p&gt;
+</content></entry></feed>

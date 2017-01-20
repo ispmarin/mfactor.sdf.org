@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Gnome 3.16 on Debian Unstable: New adventures on the Window Manager lands | Another Life Form
+</title>
+  <link rel="canonical" href="http://mfactor.sdf.org/blog/2015_05_24_gnome-3-16-on-debian-unstable.html">
+
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/tools.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/style.css">
+
+
+<meta name="description" content="I finally got my hands on a decent monitor, the Dell U2515H. It has been, so far, an awesome monitor. But that showed a few issues with my standard Debian installation, with KDE 4.14 on Debian Unstable. It seemed that every GTK application decided to throw a fit together …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="http://mfactor.sdf.org/blog">Another Life Form</a></h1>
+          <p class="text-muted">Science, Data Science and Python</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Gnome 3.16 on Debian Unstable: New adventures on the Window Manager&nbsp;lands
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2015-05-24T15:49:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        dom 24 maio 2015
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="http://mfactor.sdf.org/blog/category/tools.html">tools</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="http://mfactor.sdf.org/blog/author/ivan-marin.html">Ivan Marin</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>I finally got my hands on a decent monitor, the <a class="reference external" href="http://accessories.la.dell.com/sna/productdetail.aspx?c=br&amp;l=pt&amp;s=dhs&amp;cs=brdhs1&amp;sku=480-ACXS">Dell
+<span class="caps">U2515H</span></a>.
+It has been, so far, an awesome monitor. But that showed a few issues
+with my standard Debian installation, with <span class="caps">KDE</span> 4.14 on Debian Unstable.
+It seemed that every <span class="caps">GTK</span> application decided to throw a fit together and
+nothing worked. I tried to adjust a lot of stuff on gtk-qt to fix it to
+no avail but as it was <span class="caps">GTK</span> that was giving me headaches, maybe
+installing Gnome things would be better on <span class="caps">KDE</span> side. So after a really
+long time I decided to test a new window manager while at it, and now
+I&#8217;m running Gnome 3.16 on Debian Unstable. (Also, it is a good change of
+pace while I wait for <span class="caps">KDE</span> 5 hit&nbsp;Unstable.)</p>
+<p>But, as every transition&#8230; things got a little rough. The <a class="reference external" href="https://plus.google.com/+LinusTorvalds/posts/UkoAaLDpF4i">famous
+rant</a> by
+Linus Torvalds rings very true: they simplified so much that it&#8217;s dumb
+(even if Linus is <a class="reference external" href="https://plus.google.com/115250422803614415116/posts/KygiWsQc4Wm">using it
+again</a>).
+There are some things that I found to be incredible as design decisions,
+and Gnome Extensions is one of&nbsp;them.</p>
+<p>C&#8217;mon, how am I supposed to keep different systems updated, with the
+same extensions? How do I know that they will work before I install
+them? Who makes them? There are a few packaged in Debian, but not
+enough. And to see how this is crazy, I had to install extensions to
+show a suspend button, wicd-gtk on a tray, and I still can&#8217;t find one to
+easily lock my screen or close the session! So both things that
+shouldn&#8217;t be broken, standard desktop stuff and extensions, are broken
+in one&nbsp;go.</p>
+<p>Also, there is no easy way to change the system fonts, colors or
+everything else. I had to use gnome-tweak-tool to do all this, a
+non-standard tool, and still there are a ton of stuff that I should be
+able to configure and it is removed. Even in more lighter environments,
+like <span class="caps">LXDE</span>, I stil can change the icons or set a random image as my
+wallpaper, as a user. I don&#8217;t want to copy stuff to /usr or other system
+directories, I should be able to override the system paths with folders
+on my home directory, preferably under .local or .config. (And if you&#8217;re
+thinking that I must go to the image, right-click it to set as wallpaper
+as the only way to do it, no, that is no proper behavior.) The fact that
+even if I do the right-click thing, now I have a folder called
+Wallpapers on my home folder buggers me. I didn&#8217;t ask for a wallpaper
+folder, just use any path that I gave you! <span class="caps">ME</span>, not Gnome programmers,
+know were my files should&nbsp;go.</p>
+<p>Also, I can&#8217;t lock my screen if <span class="caps">GDM</span> is not running. This is now really
+bad, not just annoyances like before. They hand-wave this away saying
+that this will be solved with Wayland, but Wayland has been in
+development for a while and it&#8217;s not shipping as production ready for
+another not known time, so I would have to wait for it to lock my
+screen? I don&#8217;t want to run <span class="caps">GDM</span>, I should be able to run whatever login
+manager I want and be able to lock my screen in the <span class="caps">WM</span>. If Gnome keeps
+following this &#8220;Windows&#8221; path all the complaints in the last years would
+be true. The dependency on their own backyard instead of keeping things
+interchangeable is a very troubling sign, and like the systemd debacle,
+it just keeps getting&nbsp;worse.</p>
+<p>I understand the need for standards, and <span class="caps">XDG</span> directives are ok, but
+instead of thinking that the users are dumb, please at least let us
+choose. I know this is kinda of a old rant against Gnome, and it can get
+very ugly if I start mentioning Gnome 2, but from a fresh start, Gnome
+right now is bad. Yadda yadda use another window manager, I get it. I
+will, as soon I can get my hands on <span class="caps">KDE</span> 5. But for now, maybe another
+voice trying to show what is broken, from an outside perspective, can
+help a bit into steering things on a better&nbsp;path.</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

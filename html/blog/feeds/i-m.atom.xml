@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - I M</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/i-m.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2015-07-08T04:45:00-03:00</updated><entry><title>Python reads on data understanding and web development</title><link href="http://mfactor.sdf.org/blog/2015_07_08_python-reads.html" rel="alternate"></link><published>2015-07-08T04:45:00-03:00</published><updated>2015-07-08T04:45:00-03:00</updated><author><name>I M</name></author><id>tag:mfactor.sdf.org,2015-07-08:/blog/2015_07_08_python-reads.html</id><summary type="html">&lt;p&gt;I´ve been overwhelmed by the number of good publications, workbooks and
+other material on Python and Data Science on the web. I tried to keep
+track and read everything, but my time on the job has been limited for
+that. I decided to keep a list of the sources …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I´ve been overwhelmed by the number of good publications, workbooks and
+other material on Python and Data Science on the web. I tried to keep
+track and read everything, but my time on the job has been limited for
+that. I decided to keep a list of the sources that I´m reading or want
+to read here. They are, in no&amp;nbsp;order:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.fullstackpython.com/"&gt;http://www.fullstackpython.com/&lt;/a&gt; Awesome resource for Python web&amp;nbsp;development.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/"&gt;https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/&lt;/a&gt;
+Survival analysis in R and Python. Excellent resource to combine
+ipython notebooks with R. (The entire plotly notebooks collection is
+awesome. I would love if plotly was open source or at least&amp;nbsp;free.)&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/donnemartin/data-science-ipython-notebooks"&gt;https://github.com/donnemartin/data-science-ipython-notebooks&lt;/a&gt; This is
+an awesome collection of notebooks with all the parts of a good data
+stack on Python. Still no time to review them all, but so far, very
+good and detailed. &lt;a class="reference external" href="http://nbviewer.ipython.org/github/donnemartin/data-science-ipython-notebooks/blob/master/scipy/effect_size.ipynb"&gt;This is
+one&lt;/a&gt;
+of the best on the statistical&amp;nbsp;side.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://people.duke.edu/~ccc14/sta-663/"&gt;http://people.duke.edu/~ccc14/sta-663/&lt;/a&gt; This one is very through, even
+if sometimes a bit rough on the edges. Very good reference material.
+There are other materials from the folks at Duke that are very good,
+like &lt;a class="reference external" href="http://people.duke.edu/~ccc14/pcfb/"&gt;this&lt;/a&gt; one, a bit more&amp;nbsp;biological.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/josephmisiti/awesome-machine-learning"&gt;https://github.com/josephmisiti/awesome-machine-learning&lt;/a&gt; More on the
+line of Machine Learning, this collection is also quite good, if a
+bit extensive. The objective is more to list all resources and
+libraries on several languages about Machine Learning than just
+Python, but nonetheless the Python section is&amp;nbsp;good.&lt;/li&gt;
+&lt;li&gt;Keeping the more generalist vibe,&lt;a class="reference external" href="http://www.wzchen.com/data-science-books"&gt;this
+list&lt;/a&gt;of free books
+about Data Science has the basic stuff for the&amp;nbsp;job.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I will keep things updated here as the list grows. Please send me
+suggestions of good resources that you want to see on this&amp;nbsp;list!&lt;/p&gt;
+</content><category term="data science"></category><category term="Python"></category><category term="web development"></category></entry></feed>

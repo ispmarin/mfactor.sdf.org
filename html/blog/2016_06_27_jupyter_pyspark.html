@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Proper way to run PySpark on a Jupyter Notebook | Another Life Form
+</title>
+  <link rel="canonical" href="http://mfactor.sdf.org/blog/2016_06_27_jupyter_pyspark.html">
+
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/data-science.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/style.css">
+
+
+<meta name="description" content="How to proper start PySpark with a Jupyter Notebook">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="http://mfactor.sdf.org/blog">Another Life Form</a></h1>
+          <p class="text-muted">Science, Data Science and Python</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Proper way to run PySpark on a Jupyter&nbsp;Notebook
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2016-06-27T00:00:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        seg 27 junho 2016
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="http://mfactor.sdf.org/blog/category/data-science.html">data science</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="http://mfactor.sdf.org/blog/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="http://mfactor.sdf.org/blog/tag/environment.html">#environment</a>,         <a href="http://mfactor.sdf.org/blog/tag/data-science.html">#data science</a>,         <a href="http://mfactor.sdf.org/blog/tag/pyspark.html">#pyspark</a>,         <a href="http://mfactor.sdf.org/blog/tag/jupyter.html">#jupyter</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Using <a href="jupyter.org">Jupyter Notebooks</a> with PySpark is the savior combination of all data scientists around the world. The interesting bit about it is that the way that I&#8217;ve saw in the internet to start a PySpark kernel with Jupyter&nbsp;is </p>
+<div class="highlight"><pre><span></span>IPYTHON_OPTS=&quot;notebook --ip 0.0.0.0&quot; ./pyspark 
+</pre></div>
+
+
+<p>if you want to set the notebook open to the world (careful with that!). But if you launch with this command, you will get this&nbsp;message:</p>
+<div class="highlight"><pre><span></span>[TerminalIPythonApp] WARNING | Subcommand `ipython notebook` is deprecated and will be removed in future versions.
+[TerminalIPythonApp] WARNING | You likely want to use `jupyter notebook` in the future
+</pre></div>
+
+
+<p>This &#8220;future&#8221; will be probably <a href="https://github.com/apache/spark/blob/master/bin/pyspark#L30">version 2.0</a>, but the proper way to do it already works with&nbsp;1.6.1: </p>
+<div class="highlight"><pre><span></span>PYSPARK_DRIVER_PYTHON_OPTS=&#39;notebook --ip 0.0.0.0&#39; ./pyspark
+</pre></div>
+
+
+<p>and&nbsp;done. </p>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

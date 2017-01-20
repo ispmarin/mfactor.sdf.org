@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Development with Python on Linux is turning into Windows | Another Life Form
+</title>
+  <link rel="canonical" href="http://mfactor.sdf.org/blog/2015_03_15_dev_python_linux_windows.html">
+
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/debian.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/style.css">
+
+
+<meta name="description" content="Yes, the title is a flamebait, but please bear with me. As I said in the last post, I installed Debian on my Chromebook using crouton. It worked quite easily, KDE installed. But then I started building my dev environment, using Python. But first, a quick digression. I have to …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="http://mfactor.sdf.org/blog">Another Life Form</a></h1>
+          <p class="text-muted">Science, Data Science and Python</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+            <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/pages/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Development with Python on Linux is turning into&nbsp;Windows
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2015-03-15T06:05:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        dom 15 março 2015
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="http://mfactor.sdf.org/blog/category/debian.html">debian</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="http://mfactor.sdf.org/blog/author/ispmarin.html">ispmarin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="http://mfactor.sdf.org/blog/tag/debian.html">#debian</a>,         <a href="http://mfactor.sdf.org/blog/tag/pip.html">#pip</a>,         <a href="http://mfactor.sdf.org/blog/tag/pycharm.html">#PyCharm</a>,         <a href="http://mfactor.sdf.org/blog/tag/python.html">#Python</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Yes, the title is a flamebait, but please bear with&nbsp;me.</p>
+<p><img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /></p>
+<p>As I said in the last post, I installed Debian on my Chromebook using
+<a class="reference external" href="https://github.com/dnschneid/crouton">crouton</a>. It worked quite
+easily, <span class="caps">KDE</span> installed. But then I started building my dev environment,
+using Python. But first, a quick&nbsp;digression.</p>
+<p>I have to use Windows at work now. I know, I know, but there&#8217;s no way
+around it. Setting up a dev environment on Windows is very very tricky
+and not very funny, especially if you don&#8217;t have admin rights on your
+own machine. I managed to get the basics working, but it was not easy.
+The loop search internet-&gt;download-&gt;install-&gt;internet was not fun at all
+after all these years with&nbsp;apt-get.</p>
+<p>So, when I started setting up my environment on the Debian on the
+chromebook it struck me. <em>I&#8217;m doing exactly as I done in Windows.</em> How
+so? First, I installed Python 2.7.9 via apt-get. Nothing funny so far.
+Then I decided to use a virtualenv. Ops. To install it I can use the
+Debian package or download a newer version directly. Ok, ok&#8230; but then
+it comes virtualenvwrapper. Ok, I still can install it using the Debian
+repos, but it&#8217;s an old version. After I set up my virtualenv, I start
+using pip. Pip is ok, but now I have to download all packages from
+different places. I know that this is one of the features of pip, but
+nonetheless is divorced from the operating system, there is no search to
+speak about inside pip, there is no update all, etc etc. Ok, but there
+is still hope, right? Next thing, PyCharm. Bam, gotta go back to the
+internet, download it, install&#8230; Windows&nbsp;again!</p>
+<p>You can argue that I chose to use these packages, that there are several
+in the Debian repos that can satisfy my needs. That this is just a rant
+that &#8220;package A or B is not in the repos!&#8221;, and I tend to agree with
+you. But I didn&#8217;t have to do nothing like this when I was developing in
+C, C++ or Fortran, including libraries, so I started thinking that maybe
+the Python tools integration with Debian or any other Linux distro is
+not as good as it could be. What can we do to make it easier? So far I
+don&#8217;t know. Any&nbsp;suggestions?</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

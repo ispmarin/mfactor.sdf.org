@@ -7,7 +7,7 @@ SITENAME = 'Espondilite Anquilosante'
 SITEURL = 'http://mfactor.sdf.org/espodilite'
 
 PATH = 'content'
-OUTPUT_PATH = '/home/ispmarin/profissional/projetos/mfactor.sdf.org/html/espodilite'
+OUTPUT_PATH = '/home/ispmarin/profissional/projetos/mfactor.sdf.org/html/espondilite'
 TIMEZONE = 'America/Sao_Paulo'
 
 DEFAULT_LANG = 'pt'
@@ -16,10 +16,10 @@ DEFAULT_LANG = 'pt'
 TYPOGRIFY = True
 
 # Blogroll
-LINKS = (,)
+LINKS = ()
 
 # Social widget
-SOCIAL = (,)
+SOCIAL = ()
 
 DEFAULT_PAGINATION = 10
 
