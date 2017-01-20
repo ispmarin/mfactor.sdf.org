@@ -1,0 +1,32 @@
+body {
+    background-color: #6D7993;
+}
+
+div {
+    background-color: #9099A2;
+    color: #FFFFF0;
+    font-family: "Roboto";
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 3em;
+    text-align: center;
+    margin: auto;
+}
+
+a {
+    color: #FFFFF0;
+}
+
+th {
+    padding: 20px;
+}
+
+.box {
+    width:400px;
+    height:400px;
+    position:absolute;
+    margin-left:-200px;
+    margin-top:-200px;
+    top:50%;
+    left:50%;
+}

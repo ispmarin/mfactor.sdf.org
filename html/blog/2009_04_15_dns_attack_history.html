@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Histórico de ataques a DNS - 7 | Another Life Form
+</title>
+  <link rel="canonical" href="http://mfactor.sdf.org/blog/2009_04_15_dns_attack_history.html">
+
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="http://mfactor.sdf.org/blog/feeds/network.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/pygments/monokai.min.css">
+  <link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/style.css">
+
+
+<meta name="description" content="O Gustavo acabou de relatar um post em um fórum (http://macmagazine.com.br/forum/index.php?showtopic=10070) dizendo que aconteceu antes. Mesmo comportamento do que ocorreu agora, troca direta do DNS. E com o Virtua, mas agora com outro DNS, os 201.6.0.112 ou 201.6 …">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="http://mfactor.sdf.org/blog">Another Life Form</a></h1>
+          <p class="text-muted">Science, Data Science and Python</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://br.linkedin.com/in/ispmarin/en" target="_blank">linkedin</a></li>
+            <li class="list-inline-item"><a href="https://github.com/ispmarin" target="_blank">github</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Histórico de ataques a <span class="caps">DNS</span> -&nbsp;7
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2009-04-15T17:19:00-03:00">
+        <i class="fa fa-clock-o"></i>
+        qua 15 abril 2009
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="http://mfactor.sdf.org/blog/category/network.html">network</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="http://mfactor.sdf.org/blog/author/ivan-marin.html">Ivan Marin</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="http://mfactor.sdf.org/blog/tag/fail.html">#fail</a>,         <a href="http://mfactor.sdf.org/blog/tag/net.html">#net</a>,         <a href="http://mfactor.sdf.org/blog/tag/security.html">#security</a>,         <a href="http://mfactor.sdf.org/blog/tag/dns.html">#dns</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>O Gustavo acabou de relatar um post em um fórum
+(<a class="reference external" href="http://macmagazine.com.br/forum/index.php?showtopic=10070">http://macmagazine.com.br/forum/index.php?showtopic=10070</a>) dizendo que
+aconteceu antes. Mesmo comportamento do que ocorreu agora, troca direta
+do <span class="caps">DNS</span>. E com o Virtua, mas agora com outro <span class="caps">DNS</span>, os 201.6.0.112 ou
+201.6.0.113. O post é de novembro do ano passado. O Rafael, que tem
+acesso aos <span class="caps">DNS</span> do Virtua por estar em <span class="caps">SP</span>, acabou de testar tanto
+www.bradesco.com.br quanto www.bradescoprime.com.br no 112 e 113 e disse
+que está ok. Mas o&nbsp;43&#8230;</p>
+<p>17:12 o Rafael constatou que o .43 está retornando <span class="caps">SERVER</span> <span class="caps">FAIL</span> para&nbsp;www.bradesco.com.br:</p>
+<p>&lt;&lt;&gt;&gt; DiG 9.5.0-P2 &lt;&lt;&gt;&gt; &#64;201.6.0.43
+<a class="reference external" href="http://www.bradesco.com.br/">http://www.bradesco.com.br</a></p>
+<p>; (1 server&nbsp;found)</p>
+<p>;; global options:&nbsp;printcmd</p>
+<p>;; Got&nbsp;answer:</p>
+<p>;; -&gt;&gt;<span class="caps">HEADER</span>&lt;&lt;- opcode: <span class="caps">QUERY</span>, status: <span class="caps">SERVFAIL</span>, id:&nbsp;30233</p>
+<p>;; flags: qr rd ra; <span class="caps">QUERY</span>: 1, <span class="caps">ANSWER</span>: 0, <span class="caps">AUTHORITY</span>: 0, <span class="caps">ADDITIONAL</span>:&nbsp;0</p>
+<p>;; <span class="caps">QUESTION</span> <span class="caps">SECTION</span>:</p>
+<p>;www.bradesco.com.br. <span class="caps">IN</span>&nbsp;A</p>
+<p>;; Query time: 45&nbsp;msec</p>
+<p>;; <span class="caps">SERVER</span>:&nbsp;201.6.0.43#53(201.6.0.43)</p>
+<p>;; <span class="caps">WHEN</span>: Wed Apr 15 17:11:07&nbsp;2009</p>
+<p>;; <span class="caps">MSG</span> <span class="caps">SIZE</span> rcvd:&nbsp;37</p>
+<p>bradescoprime.com.br no 112 e 113 e disse que está ok. Mas o 43&#8230; o
+www.bradesco.com.br não está sendo retornado agora, 17:16, ou seja,
+estão removendo a entrada e colocando o novo. Mas estão consertando a
+falha de segurança que está permitindo&nbsp;isso?</p>
+
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="http://mfactor.sdf.org/blog/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
