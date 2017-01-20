@@ -6,6 +6,9 @@ AUTHOR = u"Ivan Marin"
 SITENAME = u'Another Life Form'
 SITEURL = u'http://mfactor.sdf.org/blog'
 
+PATH = 'content'
+OUTPUT_PATH = 'output'
+
 PATH = '/home/ispmarin/profissional/projetos/mfactor.sdf.org/blog/content'
 OUTPUT_PATH = '/home/ispmarin/profissional/projetos/mfactor.sdf.org/html/blog'
 
