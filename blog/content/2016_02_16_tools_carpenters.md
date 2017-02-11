@@ -1,6 +1,6 @@
 Title: Too many tools, not enough carpenters (short version)
 Date: 2016-02-16
-Category: Data Science 
+Category: data science 
 Tags: data science, tools
 Authors: Ivan Marin
 slug: 2016_02_16_tools_carpenters

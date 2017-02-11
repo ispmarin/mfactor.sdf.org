@@ -1,8 +1,9 @@
 Finally, Python 3!
 ##################
 :date: 2015-06-27 09:39
-:author: Ivan Marin 
+:author: Ivan Marin
 :category: development
+:tags: python, python3
 :slug: 2015_06_27_finally_python_3
 :status: published
 

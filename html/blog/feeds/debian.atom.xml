@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - debian</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/debian.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2015-03-15T06:05:00-03:00</updated><entry><title>Development with Python on Linux is turning into Windows</title><link href="http://mfactor.sdf.org/blog/2015_03_15_dev_python_linux_windows.html" rel="alternate"></link><published>2015-03-15T06:05:00-03:00</published><updated>2015-03-15T06:05:00-03:00</updated><author><name>ispmarin</name></author><id>tag:mfactor.sdf.org,2015-03-15:/blog/2015_03_15_dev_python_linux_windows.html</id><summary type="html">&lt;p&gt;Yes, the title is a flamebait, but please bear with&amp;nbsp;me.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - debian</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/debian.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2017-02-03T00:00:00-02:00</updated><entry><title>Self signed certificate with Git</title><link href="http://mfactor.sdf.org/blog/2017_02_03_self_sign_git.html" rel="alternate"></link><published>2017-02-03T00:00:00-02:00</published><updated>2017-02-03T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2017-02-03:/blog/2017_02_03_self_sign_git.html</id><summary type="html">&lt;p class="first last"&gt;How to work with a self signed certificate and&amp;nbsp;Git&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;After setting up Gogs with a self signed certificate, I needed to commit using &lt;span class="caps"&gt;HTTPS&lt;/span&gt; now. To do that, Git must be instructed to ignore the certificate signature&amp;nbsp;with&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;`
+git config http.sslVerify false
+`&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;that will disable the &lt;span class="caps"&gt;SSL&lt;/span&gt; verification for this session. An one-liner&amp;nbsp;is&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;`
+git &lt;span class="pre"&gt;-c&lt;/span&gt; http.sslVerify=false clone &lt;span class="pre"&gt;https://domain.com/path/to/git&lt;/span&gt;
+`&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;This &lt;a class="reference external" href="http://stackoverflow.com/questions/11621768/how-can-i-make-git-accept-a-self-signed-certificate"&gt;post&lt;/a&gt; has more information about&amp;nbsp;it.&lt;/p&gt;
+</content><category term="os"></category></entry><entry><title>Using Kwallet to store credentials for git</title><link href="http://mfactor.sdf.org/blog/2017_02_02_kwallet_git.html" rel="alternate"></link><published>2017-02-02T00:00:00-02:00</published><updated>2017-02-02T00:00:00-02:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2017-02-02:/blog/2017_02_02_kwallet_git.html</id><summary type="html">&lt;p class="first last"&gt;How to avoid typing your password for git &lt;span class="caps"&gt;HTTPS&lt;/span&gt;&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I switched my repos to Gogs and now I&amp;#8217;m using &lt;span class="caps"&gt;HTTPS&lt;/span&gt; to push.
+The thing is that I can&amp;#8217;t use my ssh keys for that, so I have to type the password.
+There is a way to use the KWallet to store these credentials and tell Git to use KWallet for&amp;nbsp;them:&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;`
+sudo &lt;span class="pre"&gt;apt-get&lt;/span&gt; install ksshaskpass
+`&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;and then configure git&amp;nbsp;as&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;`
+git config &lt;span class="pre"&gt;--global&lt;/span&gt; core.askpass /usr/bin/ksshaskpass
+`&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;and done. Quite&amp;nbsp;helpful.&lt;/p&gt;
+</content><category term="os"></category></entry><entry><title>Development with Python on Linux is turning into Windows</title><link href="http://mfactor.sdf.org/blog/2015_03_15_dev_python_linux_windows.html" rel="alternate"></link><published>2015-03-15T06:05:00-03:00</published><updated>2015-03-15T06:05:00-03:00</updated><author><name>ispmarin</name></author><id>tag:mfactor.sdf.org,2015-03-15:/blog/2015_03_15_dev_python_linux_windows.html</id><summary type="html">&lt;p&gt;Yes, the title is a flamebait, but please bear with&amp;nbsp;me.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;As I said in the last post, I installed Debian on my Chromebook using
 &lt;a class="reference external" href="https://github.com/dnschneid/crouton"&gt;crouton&lt;/a&gt;. It worked quite

@@ -2,7 +2,7 @@
 ##################################
 :date: 2009-01-03 01:38
 :author: Ivan Marin
-:category: sleep
+:category: personal
 :tags: personal
 :slug: 2009_01_03_sleeping_late
 :status: published
