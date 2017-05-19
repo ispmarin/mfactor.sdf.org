@@ -97,4 +97,4 @@ and done!
 Configuring JupyterHub
 ----------------------
 
-And now it begins. So far, no configuration was able to make me login correctly. It seems that is a PAM error. 
+And now it begins. So far, no configuration was able to make me login correctly. It seems that is a PAM error.
