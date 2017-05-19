@@ -12,7 +12,7 @@ PUBLISHCONF=$(CONFFILE)
 SSH_HOST=ma.sdf.org
 SSH_PORT=22
 SSH_USER=mfactor
-SSH_TARGET_DIR=/meta/m/mfactor/html/espondilite
+SSH_TARGET_DIR=/meta/m/mfactor/html/blog
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)

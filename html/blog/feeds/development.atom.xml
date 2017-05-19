@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - development</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/development.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2015-06-27T09:39:00-03:00</updated><entry><title>Finally, Python 3!</title><link href="http://mfactor.sdf.org/blog/2015_06_27_finally_python_3.html" rel="alternate"></link><published>2015-06-27T09:39:00-03:00</published><updated>2015-06-27T09:39:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-06-27:/blog/2015_06_27_finally_python_3.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2015 and it&amp;#8217;s the first time that I&amp;#8217;m using Python 3
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form - development</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/development.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2017-05-07T11:44:00-03:00</updated><entry><title>Using venv for Python 3 virtualenv</title><link href="http://mfactor.sdf.org/blog/2017_05_07_python3-venv-virtualenv.html" rel="alternate"></link><published>2017-05-07T11:44:00-03:00</published><updated>2017-05-07T11:44:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2017-05-07:/blog/2017_05_07_python3-venv-virtualenv.html</id><summary type="html">&lt;p class="first last"&gt;How to use &lt;cite&gt;venv&lt;/cite&gt; as a&amp;nbsp;virtualenv&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I&amp;#8217;ve been trying to use Python 3.6 as much as I can. I&amp;#8217;ve been bitten by the encoding problems of Python 2
+too many times to remember - and that&amp;#8217;s my reason why I want to use Python 3 for now, I will not enter
+the &lt;a class="reference external" href="https://wiki.python.org/moin/Python2orPython3"&gt;eternal&lt;/a&gt;
+&lt;a class="reference external" href="https://news.ycombinator.com/item?id=13019819"&gt;flamewar&lt;/a&gt; &lt;a class="reference external" href="https://news.ycombinator.com/item?id=13504215"&gt;between&lt;/a&gt;
+&lt;a class="reference external" href="https://news.ycombinator.com/item?id=13061570"&gt;Python 2&lt;/a&gt; &lt;a class="reference external" href="https://news.ycombinator.com/item?id=13053757"&gt;vs&lt;/a&gt;
+&lt;a class="reference external" href="https://www.reddit.com/r/Python/comments/qwq4l/not_trying_to_start_a_flame_war_but_which_python/"&gt;Python 3&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So I decided to try the Python 3 solution for creating virtualenvs: &lt;a class="reference external" href="https://docs.python.org/3/library/venv.html"&gt;venv&lt;/a&gt;.
+It should be the default way tho create virtualenvs, as it&amp;#8217;s not based on &amp;#8220;hacks&amp;#8221; as the package &lt;cite&gt;virtualenv&lt;/cite&gt; and
+it&amp;#8217;s now part of the default&amp;nbsp;distribution.&lt;/p&gt;
+&lt;p&gt;So far, it seems that some nice shortcuts and functionalities are still not there, like relocate a virtualenv and
+the handy &lt;cite&gt;workon&lt;/cite&gt; from the &lt;cite&gt;virtualenvwrapper&lt;/cite&gt; package. What is missing so far is a workflow management. The rest is very
+similar to working with virtualenvs and &lt;cite&gt;pip&lt;/cite&gt;.&lt;/p&gt;
+&lt;div class="section" id="working-with-venv"&gt;
+&lt;h2&gt;Working with &lt;cite&gt;venv&lt;/cite&gt;&lt;/h2&gt;
+&lt;p&gt;The standard way of working with &lt;cite&gt;venv&lt;/cite&gt; is quite similar to &lt;cite&gt;virtualenv&lt;/cite&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/usr/bin/python3.6 -m venv test_env /home/username/bin/virtualenvs/test_env
+&lt;/pre&gt;
+&lt;p&gt;So now the virtualenv is created. To activate it, use the full &lt;cite&gt;source activate&lt;/cite&gt; path:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+source /home/username/bin/virtualenvs/test_env/bin/activate
+&lt;/pre&gt;
+&lt;p&gt;and now we are inside the virtualenv &lt;cite&gt;test_env&lt;/cite&gt;. To install packages use the traditional &lt;cite&gt;pip&lt;/cite&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+pip install matplotlib sklearn pandas jupyter folium
+&lt;/pre&gt;
+&lt;p&gt;And that&amp;#8217;s it. To deactivate a simple &lt;cite&gt;deactivate&lt;/cite&gt; suffices.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="managing-the-virtualenvs"&gt;
+&lt;h2&gt;Managing the&amp;nbsp;virtualenvs&lt;/h2&gt;
+&lt;p&gt;One of the things that is both good and bad about Continuum &lt;cite&gt;conda&lt;/cite&gt; is the hability of managing the virtualenvs. We
+can list the available environments&amp;nbsp;with&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+conda info --envs
+&lt;/pre&gt;
+&lt;p&gt;That will show all virtualenvs created using conda and the full paths. With &lt;cite&gt;venv&lt;/cite&gt; we have to resort to using the filesystem
+tools directly, or being explicit, using &lt;cite&gt;ls&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Listing packages can be done using &lt;cite&gt;pip&lt;/cite&gt; directly. Removing a virtualenv is done using the good old &lt;cite&gt;rm&lt;/cite&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="virtualenvwrapper-comparison"&gt;
+&lt;h2&gt;Virtualenvwrapper&amp;nbsp;comparison&lt;/h2&gt;
+&lt;p&gt;The &lt;a class="reference external" href="http://virtualenvwrapper.readthedocs.io/"&gt;virtualenvwrapper&lt;/a&gt; package has the purpose of handling the steps explained
+above with some shell tools. &lt;cite&gt;venv&lt;/cite&gt;, of course doesn&amp;#8217;t provide any of this. There is even an option that I was not aware on
+&lt;cite&gt;virtualenvwrapper&lt;/cite&gt;, that is, managing &lt;a class="reference external" href="http://virtualenvwrapper.readthedocs.io/en/latest/projects.html#project-management"&gt;projects&lt;/a&gt;.
+This looks very interesting to me, as I&amp;#8217;m &lt;a class="reference external" href="http://mfactor.sdf.org/blog/2015_12_08_reproducible_ds.html"&gt;quite found&lt;/a&gt; of reproducible environments and &lt;a class="reference external" href="http://mfactor.sdf.org/blog/2015_11_26_conda.html"&gt;automated tools&lt;/a&gt; for it.
+I&amp;#8217;ll test it against the &lt;a class="reference external" href="https://github.com/ispmarin/cookiecutter-pypackage"&gt;Data Science Cookie Cutter&lt;/a&gt; and report&amp;nbsp;back.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="python3"></category><category term="virtualenv"></category><category term="venv"></category></entry><entry><title>Finally, Python 3!</title><link href="http://mfactor.sdf.org/blog/2015_06_27_finally_python_3.html" rel="alternate"></link><published>2015-06-27T09:39:00-03:00</published><updated>2015-06-27T09:39:00-03:00</updated><author><name>Ivan Marin</name></author><id>tag:mfactor.sdf.org,2015-06-27:/blog/2015_06_27_finally_python_3.html</id><summary type="html">&lt;p&gt;It&amp;#8217;s 2015 and it&amp;#8217;s the first time that I&amp;#8217;m using Python 3
 professionally. And I have to admit, if I knew that all my scripts were
 going to work so easily with 3, I would have changed way before. There
 were a few hurdles with the Python …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It&amp;#8217;s 2015 and it&amp;#8217;s the first time that I&amp;#8217;m using Python 3
