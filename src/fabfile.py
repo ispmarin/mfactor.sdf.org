@@ -3,7 +3,7 @@ import fabric.contrib.project as project
 import os
 import shutil
 import sys
-import SocketServer
+# import SocketServer
 
 from pelican.server import ComplexHTTPRequestHandler
 
@@ -36,22 +36,22 @@ def regenerate():
     """Automatically regenerate site upon file modification"""
     local('pelican -r -s pelicanconf.py')
 
-def serve():
-    """Serve site at http://localhost:8000/"""
-    os.chdir(env.deploy_path)
-
-    class AddressReuseTCPServer(SocketServer.TCPServer):
-        allow_reuse_address = True
-
-    server = AddressReuseTCPServer(('', PORT), ComplexHTTPRequestHandler)
-
-    sys.stderr.write('Serving on port {0} ...\n'.format(PORT))
-    server.serve_forever()
+# def serve():
+#     """Serve site at http://localhost:8000/"""
+#     os.chdir(env.deploy_path)
+#
+#     class AddressReuseTCPServer(SocketServer.TCPServer):
+#         allow_reuse_address = True
+#
+#     server = AddressReuseTCPServer(('', PORT), ComplexHTTPRequestHandler)
+#
+#     sys.stderr.write('Serving on port {0} ...\n'.format(PORT))
+#     server.serve_forever()
 
 def reserve():
     """`build`, then `serve`"""
     build()
-    serve()
+    # serve()
 
 def preview():
     """Build production version of site"""
