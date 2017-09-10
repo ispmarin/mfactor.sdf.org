@@ -92,6 +92,7 @@ our own certificates:
 ::
 
   sudo -u jupyterhub openssl req -x509 -newkey rsa:4096 -keyout jupyterhub_ssl.pem -out jupyterhub_cert.pem -days 365 -nodes
+
 and done!
 
 Configuring JupyterHub
