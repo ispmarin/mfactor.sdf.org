@@ -1,7 +1,7 @@
 Python reads on data understanding and web development
 ######################################################
 :date: 2015-07-08 04:45
-:author: I M 
+:author: Ivan Marin
 :category: data science
 :tags: data science, Python, web development
 :slug: 2015_07_08_python-reads

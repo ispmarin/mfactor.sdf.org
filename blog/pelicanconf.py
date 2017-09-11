@@ -10,7 +10,7 @@ SITEURL = u'http://mfactor.sdf.org/blog'
 PATH = os.path.join(os.getcwd(),'content')
 OUTPUT_PATH = os.path.join(os.getcwd(),'output')
 
-DISPLAY_PAGES_ON_MENU = True
+# DISPLAY_PAGES_ON_MENU = True
 TIMEZONE = 'America/Sao_Paulo'
 DEFAULT_LANG = 'en'
 AUTHOR_FEED_RSS = None
@@ -28,7 +28,7 @@ DEFAULT_PAGINATION = 10
 
 MENUITEMS = (
     ('Home', '/'),
-    ('About', '/about.html')
+    ('About', '/pages/about.html')
 )
 # SITEIMAGE = '/images/profile.jpg width=200 height=200'
 DESCRIPTION = 'Notes on Science, Data Science, Programming and Operating Systems'

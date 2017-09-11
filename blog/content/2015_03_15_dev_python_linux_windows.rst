@@ -1,7 +1,7 @@
 Development with Python on Linux is turning into Windows
 ########################################################
 :date: 2015-03-15 06:05
-:author: ispmarin
+:author: Ivan Marin
 :category: debian
 :tags: debian, pip, PyCharm, Python
 :slug: 2015_03_15_dev_python_linux_windows
