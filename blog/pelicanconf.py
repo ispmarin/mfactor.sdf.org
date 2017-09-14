@@ -22,7 +22,7 @@ LINKS = (
             ('linkedin', 'https://br.linkedin.com/in/ispmarin/en'),
             ('github', 'https://github.com/ispmarin'),
          )
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 15
 
 #PYGMENTS_STYLE = 'monokai'
 
@@ -35,13 +35,12 @@ DESCRIPTION = 'Notes on Science, Data Science, Programming and Operating Systems
 # STATIC_PATHS = ['images', 'extra/robots.txt', 'extra/favicon.ico']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
-    'extra/favicon.ico': {'path': 'favicon.ico'},
-    'static/images/background.png': {'path': 'background.png'}
+    'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 THEME = os.path.join(os.getcwd(), 'themes','nest')
 SITESUBTITLE = 'Science, Data Science and Python'
-NEST_HEADER_IMAGES = 'static/images/background.png'
-NEST_HEADER_LOGO = 'static/images/logo.png'
+NEST_HEADER_IMAGES = 'background.jpg'
+NEST_HEADER_LOGO = 'logo.png'
 # Footer
 NEST_SITEMAP_COLUMN_TITLE = u'Sitemap'
 NEST_SITEMAP_MENU = [('Archive', '/archives.html'),('Tags','/tags.html'), ('Authors','/authors.html')]
@@ -109,6 +108,5 @@ NEST_TAGS_HEADER_SUBTITLE = u'Tags List'
 NEST_TAGS_CONTENT_TITLE = u'Tags List'
 NEST_TAGS_CONTENT_LIST = u'tagged'
 # Static files
-STATIC_PATHS = ['static/images', 'extras/robots.txt', 'extras/favicon.ico', 'extras/logo.svg'
-                'static/images/background.png', 'static/images/logo.png']
+STATIC_PATHS = ['images', 'extras/robots.txt', 'extras/favicon.ico', 'extras/logo.svg']
 
