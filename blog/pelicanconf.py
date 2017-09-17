@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import os
 
 AUTHOR = u"Ivan Marin"
-SITENAME = u'Murphy Factor'
+SITENAME = u'Ivan Blog'
 SITEURL = u'http://mfactor.sdf.org/blog'
 
 PATH = os.path.join(os.getcwd(),'content')
@@ -24,11 +24,12 @@ LINKS = (
          )
 DEFAULT_PAGINATION = 15
 
-#PYGMENTS_STYLE = 'monokai'
+PYGMENTS_STYLE = 'monokai'
 
 MENUITEMS = (
     ('Home', '/'),
-    ('About', '/pages/about.html')
+    ('About', '/pages/about.html'),
+    ('Git Repo', 'https://mfactor.sdf.org:20265')
 )
 # SITEIMAGE = '/images/profile.jpg width=200 height=200'
 DESCRIPTION = 'Notes on Science, Data Science, Programming and Operating Systems'
@@ -40,7 +41,7 @@ EXTRA_PATH_METADATA = {
 THEME = os.path.join(os.getcwd(), 'themes','nest')
 SITESUBTITLE = 'Science, Data Science and Python'
 NEST_HEADER_IMAGES = 'background.jpg'
-NEST_HEADER_LOGO = 'logo.png'
+NEST_HEADER_LOGO = '/images/logo_2.png'
 # Footer
 NEST_SITEMAP_COLUMN_TITLE = u'Sitemap'
 NEST_SITEMAP_MENU = [('Archive', '/archives.html'),('Tags','/tags.html'), ('Authors','/authors.html')]
@@ -52,8 +53,8 @@ NEST_COPYRIGHT = u'&copy; Ivan Marin 2017'
 # Footer optional
 NEST_FOOTER_HTML = ''
 # index.html
-NEST_INDEX_HEAD_TITLE = u'Ivan blog'
-NEST_INDEX_HEADER_TITLE = u'Murphy Factor'
+NEST_INDEX_HEAD_TITLE = u'Bem vindo'
+NEST_INDEX_HEADER_TITLE = u'Ivan Marin'
 NEST_INDEX_HEADER_SUBTITLE = u'Science, Data Science and more fun stuff'
 NEST_INDEX_CONTENT_TITLE = u'Last Posts'
 # archives.html
@@ -108,5 +109,5 @@ NEST_TAGS_HEADER_SUBTITLE = u'Tags List'
 NEST_TAGS_CONTENT_TITLE = u'Tags List'
 NEST_TAGS_CONTENT_LIST = u'tagged'
 # Static files
-STATIC_PATHS = ['images', 'extras/robots.txt', 'extras/favicon.ico', 'extras/logo.svg']
+STATIC_PATHS = ['images', 'extras/robots.txt', 'extras/favicon.ico',]
 
