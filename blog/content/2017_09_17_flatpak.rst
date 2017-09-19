@@ -1,0 +1,83 @@
+Testing Flatpak
+###############
+
+:date: 2017-09-18
+:modified: 2017-09-18
+:tags: linux, flatpak
+:category: linux
+:slug: testing_flatpak
+:authors: Ivan Marin
+:summary: How to use Flatpak on userland
+
+I'm thinking more and more about how to isolate my environment and the applications. I'm still not on the level of using
+`Docker <https://blog.jessfraz.com/post/docker-containers-on-the-desktop/>`_ on everything, but more and more I'm willing to
+see how things can be isolated.
+
+The downside, of course, is that the same idea of a Linux distribution is being pervented on the way. Linux distributions
+were supposed to define a set of libraries that all programs would use, to avoid duplication and several different binaries
+all around. That is exactly what's happening with `Flatpak <https://flatpak.org>`_ and other similar approaches.
+
+But alas, sometimes you have to embrace the future to see how the past was better. One problem with distribution packages is
+that they have to be installed as root and that's something that, as I said, I'm trying to avoid. So that's the first thing
+that I'm going to do with Flatpak. Let's try to install some applications.
+
+Installing Telegram
+-------------------
+
+I'm going to test it with Telegram. The `manual <http://flatpak.org/apps.html>`_ tells how to install it as root. I had to
+ask on `github <https://github.com/flatpak/flatpak/issues/1018>`_ because I couldn't find it on the manual. The command is the same
+as the manual, but with the `--user` flag:
+
+::
+
+    flatpak install --from https://jgrulich.fedorapeople.org/telegram/telegram.flatpakref --user
+
+This will install the runtime in `$HOME/.var` and the application in `$HOME/.local/share/flatpak`. It asks to first install
+the KDE runtime, and only this runtime occupies 1.9 GB! Telegram itself is quite small in comparison.
+
+Running Telegram
+----------------
+
+Now, to run the application, we have to use
+
+::
+
+    flatpak run org.telegram.TelegramDesktopDevel
+
+I still don't know how to integrate that into the normal shortcut and XDG desktop files, at least from the command line
+installation.
+
+Installing using Flatpakref files
+---------------------------------
+
+The other option is to use a `flatpakref` file directly from the website. The file is something on this lines:
+
+::
+
+    [Flatpak Ref]
+    Title=Skype Alpha
+    Name=com.skype.Client
+    Branch=alpha
+    Url=http://alexlarsson.s3-website-us-east-1.amazonaws.com/skype-repo
+    RuntimeRepo=https://sdk.gnome.org/gnome.flatpakrepo
+    IsRuntime=False
+    GPGKey=mQENBFgSNocBCACZy7qhFD40rSiQMcTq1oQdnmkb9YoLenv07DCPeKveNCiyJ2...
+
+    Comment=Skype
+    Description=Linux version of the skype client
+    Icon=http://icons.iconarchive.com/icons/danleech/simple/256/skype-icon.png
+
+So it will pull the application from a S3 bucket and check against the GPG key. The installation is similar:
+
+::
+
+    flatpak install skype.flatpakref --user
+
+Now the .desktop file is created at least.
+
+Developing and deploying
+------------------------
+
+The developer manual has some information about how to deploy an application with it. That's going to be the next step.
+Specifically, I'll investigate if I can create a flatpak without having to use the Gnome or KDE runtime, for my
+Python compilation.
