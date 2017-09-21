@@ -1,0 +1,4 @@
+- name: Regenerate Pelican site
+
+  tasks:
+    - name: Remove local output
