@@ -1,4 +1,22 @@
-- name: Regenerate Pelican site
+#- synchronize:
+#    src: "{{website_src}}/index/index.html"
+#    dest: "{{website_dest}}"
 
-  tasks:
-    - name: Remove local output
+#- synchronize:
+#    src: "{{website_src}}/index/static"
+#    dest: "{{website_dest}}/static"
+#    delete: yes
+#    recursive: yes
+
+#- name: run pelican
+#  local_action: command "{{venv}}/bin/pelican -s {{website_src}}/blog/pelicanconf.py {{website_src}}/blog/content -t {{website_src}}/blog/themes"
+#
+
+- synchronize:
+    src: "{{website_src}}/blog/output/"
+    dest: "{{website_dest}}/"
+    delete: yes
+    recursive: yes
+
+- name: fix permissions on remote node
+  shell: mkhomepg -p

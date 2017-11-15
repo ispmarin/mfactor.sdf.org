@@ -1,0 +1,10 @@
+---
+- name: copy website to remote server
+  hosts: all
+  remote_user: mfactor
+  roles:
+    - webservers
+  vars:
+    website_src: "/home/ispmarin/profissional/projetos/mfactor.sdf.org"
+    website_dest: "/meta/m/mfactor/html"
+    venv: "/home/ispmarin/.virtualenvs/website/"

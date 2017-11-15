@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 import os
 
 AUTHOR = u"Ivan Marin"
-SITENAME = u'Ivan Blog'
-SITEURL = u'http://mfactor.sdf.org/blog'
+SITENAME = u'Blog!'
+SITEURL = u'http://mfactor.sdf.org/'
 
 PATH = os.path.join(os.getcwd(),'content')
 OUTPUT_PATH = os.path.join(os.getcwd(),'output')
@@ -39,7 +39,7 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 THEME = os.path.join(os.getcwd(), 'themes','nest')
-SITESUBTITLE = 'Science, Data Science and Python'
+SITESUBTITLE = 'Notes on Science, Data Science, Programming and Machine Learning'
 NEST_HEADER_IMAGES = 'background.jpg'
 NEST_HEADER_LOGO = '/images/logo_2.png'
 # Footer
@@ -53,9 +53,9 @@ NEST_COPYRIGHT = u'&copy; Ivan Marin 2017'
 # Footer optional
 NEST_FOOTER_HTML = ''
 # index.html
-NEST_INDEX_HEAD_TITLE = u'Bem vindo'
-NEST_INDEX_HEADER_TITLE = u'Ivan Marin'
-NEST_INDEX_HEADER_SUBTITLE = u'Science, Data Science and more fun stuff'
+NEST_INDEX_HEAD_TITLE = u'Science, Data Science and other stuff'
+NEST_INDEX_HEADER_TITLE = u'Hopefully something useful'
+NEST_INDEX_HEADER_SUBTITLE = u'Notes on Science, Data Science and Machine Learning'
 NEST_INDEX_CONTENT_TITLE = u'Last Posts'
 # archives.html
 NEST_ARCHIVES_HEAD_TITLE = u'Archive'
