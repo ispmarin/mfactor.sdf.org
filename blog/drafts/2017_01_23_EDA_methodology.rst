@@ -1,13 +1,13 @@
-Good-bye pass, hello Enpass
-###########################
+Exploratory data analysis methodology
+#####################################
 
 :date: 2010-10-03 10:20
 :modified: 2010-10-04 18:40
-:tags: thats, awesome
-:category: yeah
-:slug: my-super-post
-:authors: Alexis Metaireau, Conan Doyle
-:summary: Short version for index and feeds
+:tags: eda, data science
+:category: data science
+:slug: eda-methodology
+:authors: Ivan Marin
+:summary: EDA is an important part of any data project. We present a methodology for it.
 :status: draft
 
 Objetivo: explorar o conjunto de dados para
@@ -40,7 +40,8 @@ Análise:
 A análise deve conter as transformações de dados necessárias e cumprir os objetivos descritos acima.
 
 Modelo:
-Não se impôe um modelo a priori nos dados. Os dados devem fornecer a base para a inferência de um modelo. Após a identificação de um modelo, o mesmo dever ser usado para obter mais entendimento do processo sendo estudado e avaliar a consistência de algumas predições simples, com resíduos, por exemplo.
+Não se impôe um modelo a priori nos dados. Os dados devem fornecer a base para a inferência de um modelo. Após a identificação de um modelo, o
+    mesmo dever ser usado para obter mais entendimento do processo sendo estudado e avaliar a consistência de algumas predições simples, com resíduos, por exemplo.
 
 Métodos:
 - Estatísticas descritivas do conjunto das 7
