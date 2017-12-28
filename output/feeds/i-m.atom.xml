@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Another Life Form</title><link href="http://mfactor.sdf.org/blog/" rel="alternate"></link><link href="http://mfactor.sdf.org/blog/feeds/i-m.atom.xml" rel="self"></link><id>http://mfactor.sdf.org/blog/</id><updated>2015-07-20T09:33:00-03:00</updated><entry><title>A history of packages and libraries or: how Spark and Hadoop are doing the same mistake as BLAS and LAPACK</title><link href="http://mfactor.sdf.org/blog/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html" rel="alternate"></link><published>2015-07-20T09:33:00-03:00</published><updated>2015-07-20T09:33:00-03:00</updated><author><name>I M</name></author><id>tag:mfactor.sdf.org,2015-07-20:blog/a-history-of-packages-and-libraries-or-how-spark-and-hadoop-are-doing-the-same-mistake-as-blas-and-lapack.html</id><summary type="html">&lt;p&gt;A long time ago, on a land of big iron and MPI, there were some
+libraries that were used everywhere. The libraries were fundamental to
+most of the important computation that was done, they were open source
+and all the cool kids on the block knew them. They also rarely were
+distributed by the Linux distributions, and several versions needed to
+coexist to support all the high performance software that needed to be
+run. They needed to be compiled, and different versions of compilers and
+libraries and binaries kept spiralling out of control. Keeping them
+working was already a huge task, and working well was even harder. And
+yes, I'm talking about BLAS and LAPACK.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.netlib.org/blas/"&gt;BLAS&lt;/a&gt; (Basic Linear Algebra Suprograms)
+and &lt;a class="reference external" href="http://www.netlib.org/lapack/"&gt;LAPACK&lt;/a&gt; (Linear Algebra PACKAge),
+from &lt;a class="reference external" href="http://www.netlib.org/"&gt;Netlib&lt;/a&gt;, were fundamental on the HPC
+era as the backbone of inumerous projects. The stack on those days had
+one flavour or another of
+&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface"&gt;MPI&lt;/a&gt; to run
+the parallel jobs in huge clusters, together with
+&lt;a class="reference external" href="http://www.netlib.org/scalapack/"&gt;ScaLAPACK&lt;/a&gt;. And the job of keeping
+these libraries working with several different compilers (mainly
+&lt;a class="reference external" href="https://gcc.gnu.org/"&gt;GCC&lt;/a&gt;,
+&lt;a class="reference external" href="https://software.intel.com/en-us/intel-compilers"&gt;Intel&lt;/a&gt; and
+&lt;a class="reference external" href="http://www.pgroup.com/"&gt;Portland Group&lt;/a&gt; compilers ) and linking
+binaries objects were the nightmare of any sysadmin. Written mainly in
+Fortran, with wrappers for C and C++, a sysadmin had to keep the entire
+stack compiled with the right version of compilers and linked with the
+right libraries. Projects like &lt;a class="reference external" href="http://www.netlib.org/atlas/"&gt;ATLAS&lt;/a&gt;
+tried to help a bit on the side of performance optimization, while
+vendors had their own binary distribution, tuned to their processors
+(&lt;a class="reference external" href="https://software.intel.com/en-us/intel-mkl"&gt;MKL&lt;/a&gt; for Intel and
+&lt;a class="reference external" href="http://developer.amd.com/tools-and-sdks/cpu-development/amd-core-math-library-acml/"&gt;ACML&lt;/a&gt;
+for AMD).&lt;/p&gt;
+&lt;p&gt;A sysadmin on the HPC world had to know all these libraries, how to
+deploy them to the users that wanted to compile their own programs, and
+how to make all of them play nice with each other on the same cluster.
+It was hard to keep track of what was breaking, with lots of non
+standard paths and binary objects, name mangling, and users trying to do
+things that you never imagined possible. The HPC sysadmin also needed to
+know the underlying architecture very well, including the network and
+storage structures, the physical layout of the cables, so he or she
+could have a chance to know what was breaking or lagging.&amp;nbsp; Slowly, these
+tools started to be better organized, with practices like module loading
+and the linux distributions creating packages to the basic libraries,
+even if the performance was not the best possible. And then the Cloud
+happened.&lt;/p&gt;
+&lt;p&gt;(I'm not going to dwelve on the HPC vs Cloud debate, not even try to
+touch the Big Data vs BI vs computing debates, and try to focus on the
+tools that make all these acronyms possible, otherwise this would be a
+very long post.)&lt;/p&gt;
+&lt;p&gt;I have some time now on my hands and decided to check how the deployment
+and configuration of a Spark cluster is being done on
+&lt;a class="reference external" href="https://spark.apache.org/docs/latest/"&gt;Debian&lt;/a&gt;. And boy, &lt;a class="reference external" href="http://spark.apache.org/docs/latest/building-spark.html"&gt;what a
+surprise&lt;/a&gt;.
+I've been seeing several posts from sysadmins complaining about the
+dockerization of applications and the mirage of the devops, but was
+taken aback with the state of how Spark is suposed to be deployed on a
+Debian (&lt;a class="reference external" href="http://bigtop.apache.org/book/apache-bigtop-user-guide/apache-bigtop-user-guide.html"&gt;or any other
+linux&lt;/a&gt;)
+installation. There are several binaries spread out, with
+interdependencies, depending on the compiler version or library version,
+without standard paths, and users making a even larger mess... where did
+I hear about it before?&lt;/p&gt;
+&lt;p&gt;I expected that with the amout of resources that are being poured on the
+cloud projects, some form of organization or standardization would have
+happened. But no luck: all is still downloading binaries and compiling
+tons of disconnected but interdependent libraries, only with more levels
+of abstraction. Yes, the abstraction levels help the user, as he doesn't
+need anymore to know about if the processor has SSE3 or SSE4.2. Yes, now
+devops can be both programmers and sysadmins. Yes, you don't have to buy
+new machines, install them, plug the cables - you can just go to the AWS
+console and click moar instances. But someone, on the end, has to move
+all this to production, keep it working, plan on how this will grow, and
+fix it when it breaks - and it will break, trust me.&lt;/p&gt;
+&lt;p&gt;Oh, but there's &lt;a class="reference external" href="https://www.openstack.org/"&gt;OpenStack&lt;/a&gt;to the
+rescue! Well, not really. I'm also not going to go deep into OpenStack,
+but suffice to say that OpenStack is more an orchestration service than
+what I'm looking into here.&lt;/p&gt;
+&lt;p&gt;And oh, there's Docker/Vagrant/CoreOS/etc containers! Well, that's also
+an issue that I think is not the focus of this discussion. During the
+HPC era, usually the application deployment consisted of: configuring
+the computing nodes to communicate, share the data using a dedicated
+network connected to a RAID server and running a binary on a NFS share.
+Things got way more complicated because they are more complicated:
+connection to several databases, web services, what not. But in the end
+the problem is the same: how to deploy an environment that you can
+maintain and fix? These technologies help immensely on empowering the
+developer to create more complex solutions and abstract more, especially
+parallel computations, but they actually make the maitain and fix part
+way more complicated, from the sysadmin perspective. That's why I'm not
+trying to address again these tools: they solve another problem, and
+anyway, you have to configure these containers with the same binaries
+and libraries, that need to be compiled, going back to the initial
+problem!&lt;/p&gt;
+&lt;p&gt;So, is there a way to solve this mess? Unfortunately, I don't know. I've
+been sidelining all these issues on the day to day at work, adding
+binaries and virtualenvs when needed, but this will explode soon or
+later. I just think that this problem is not being looked with much
+care, especially on the startup world, or just being pushed to the new
+&lt;a class="reference external" href="https://anotherlifeform.files.wordpress.com/2015/07/7d267-11359006_420191058182770_2015412754_n.jpg"&gt;shiny new
+thing&lt;/a&gt;that
+will solve everything with more abstraction. What to do? Maybe to think
+about these points when deploying your cluster, playing better with the
+basic distributions and contributing more, and the distros trying not to
+suffer from NIH syndrome would help.&lt;/p&gt;
+&lt;p&gt;I'm all ears for suggestions!&lt;/p&gt;
+</summary><category term="beowulf"></category><category term="big data"></category><category term="debian"></category><category term="haddop"></category><category term="openstack"></category><category term="spark"></category></entry><entry><title>Python reads on data understanding and web development</title><link href="http://mfactor.sdf.org/blog/python-reads-on-data-understanding-and-web-development.html" rel="alternate"></link><published>2015-07-08T04:45:00-03:00</published><updated>2015-07-08T04:45:00-03:00</updated><author><name>I M</name></author><id>tag:mfactor.sdf.org,2015-07-08:blog/python-reads-on-data-understanding-and-web-development.html</id><summary type="html">&lt;p&gt;I´ve been overwhelmed by the number of good publications, workbooks and
+other material on Python and Data Science on the web. I tried to keep
+track and read everything, but my time on the job has been limited for
+that. I decided to keep a list of the sources that I´m reading or want
+to read here. They are, in no order:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.fullstackpython.com/"&gt;http://www.fullstackpython.com/&lt;/a&gt; Awesome resource for Python web
+development.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/"&gt;https://plot.ly/ipython-notebooks/survival-analysis-r-vs-python/&lt;/a&gt;
+Survival analysis in R and Python. Excellent resource to combine
+ipython notebooks with R. (The entire plotly notebooks collection is
+awesome. I would love if plotly was open source or at least free.)&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/donnemartin/data-science-ipython-notebooks"&gt;https://github.com/donnemartin/data-science-ipython-notebooks&lt;/a&gt; This is
+an awesome collection of notebooks with all the parts of a good data
+stack on Python. Still no time to review them all, but so far, very
+good and detailed. &lt;a class="reference external" href="http://nbviewer.ipython.org/github/donnemartin/data-science-ipython-notebooks/blob/master/scipy/effect_size.ipynb"&gt;This is
+one&lt;/a&gt;
+of the best on the statistical side.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://people.duke.edu/~ccc14/sta-663/"&gt;http://people.duke.edu/~ccc14/sta-663/&lt;/a&gt; This one is very through, even
+if sometimes a bit rough on the edges. Very good reference material.
+There are other materials from the folks at Duke that are very good,
+like &lt;a class="reference external" href="http://people.duke.edu/~ccc14/pcfb/"&gt;this&lt;/a&gt; one, a bit more
+biological.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/josephmisiti/awesome-machine-learning"&gt;https://github.com/josephmisiti/awesome-machine-learning&lt;/a&gt; More on the
+line of Machine Learning, this collection is also quite good, if a
+bit extensive. The objective is more to list all resources and
+libraries on several languages about Machine Learning than just
+Python, but nonetheless the Python section is good.&lt;/li&gt;
+&lt;li&gt;Keeping the more generalist vibe,&lt;a class="reference external" href="http://www.wzchen.com/data-science-books"&gt;this
+list&lt;/a&gt;of free books
+about Data Science has the basic stuff for the job.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I will keep things updated here as the list grows. Please send me
+suggestions of good resources that you want to see on this list!&lt;/p&gt;
+</summary><category term="data science"></category><category term="Python"></category><category term="web development"></category></entry><entry><title>Analytics in a locked world</title><link href="http://mfactor.sdf.org/blog/analytics-in-a-locked-world.html" rel="alternate"></link><published>2015-04-21T19:25:00-03:00</published><updated>2015-04-21T19:25:00-03:00</updated><author><name>I M</name></author><id>tag:mfactor.sdf.org,2015-04-21:blog/analytics-in-a-locked-world.html</id><summary type="html">&lt;p&gt;As a data scientist, I have to deal with data from several different
+sources. This begs for a wide range of tools and great flexibility of
+using these tools, otherwise manipulating the data can be almost
+impossible. And then your employer says that you can only use Windows,
+without admin rights, and you can only install software from a very
+restrict pre-approved list. What do you do? Go to a corner and cry?&lt;/p&gt;
+&lt;p&gt;Almost. But then, you find a breach, a sliver of hope. You can install
+python on your machine. And in this moment, you smile, asking if you're
+up to the challenge. (Dramatic, no?)&lt;/p&gt;
+&lt;p&gt;With one of the best Python installations for Windows is
+&lt;a class="reference external" href="https://winpython.github.io/"&gt;WinPython&lt;/a&gt;, that comes prepackaged
+with &lt;a class="reference external" href="https://github.com/winpython/winpython/issues/56"&gt;Numpy, Scipy and
+Pandas&lt;/a&gt; and other
+neat stuff, you can start really working. The second best part is that
+you can install on your user folder, so you don't need admin rights.
+Ufta! And the savior for sane workflows in this setting is
+&lt;a class="reference external" href="https://jupyter.org/"&gt;Jupyter&lt;/a&gt;, the new IPython shell. It is awesome
+for the data and modelling workflow.&lt;/p&gt;
+&lt;p&gt;My workflow now consists of:&lt;/p&gt;
+&lt;p&gt;1. Getting all raw data in one place, be excel spreadsheets (don't ask),
+CSV files, word files (I said don't ask!), and some data banks. Most of
+my data are time series.&lt;/p&gt;
+&lt;p&gt;2. Importing the data or connecting the services on a jupyter python
+notebook. I have to connect to an oracle BD, so
+&lt;a class="reference external" href="http://cx-oracle.sourceforge.net/"&gt;cx_Oracle&lt;/a&gt; is the connector.&lt;/p&gt;
+&lt;p&gt;3. Parsing the data with
+&lt;a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.excel.ExcelFile.parse.html"&gt;ExcelFile&lt;/a&gt;
+from &lt;a class="reference external" href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt;. It can be tricky. As each
+sheet is different, I use a JSON file with the starting line, starting
+and ending columns, number of lines to be read and headers. That way I
+can process it automatically, and if the file changes is quite easy to
+adjust.&lt;/p&gt;
+&lt;p&gt;4. Ok, clear the data! This is usually the most problematic part. One of
+the things that I had to do was to convert zero values to NaNs. The
+reason is that zero is a valid value on my data, but not a real one, so
+it would skew all statistics. Pandas can handle NaNs in the&lt;a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.16.0/gotchas.html"&gt;Right
+Way&lt;/a&gt;,
+so you would be better off. But beware, there are a few problems with
+&lt;a class="reference external" href="http://stackoverflow.com/questions/29747850/error-using-bootstrap-plot-in-pandas-if-values-have-nan"&gt;some
+functions&lt;/a&gt;,
+so you have to be careful anyway.&lt;/p&gt;
+&lt;p&gt;5. With the data in a proper format, (&lt;a class="reference external" href="www.jstatsoft.org/v59/i10/paper"&gt;tidy
+format&lt;/a&gt;, NaNs for invalid values,
+all values with proper references), I start doing some exploratory
+analysis on the data. For now, basic stuff like line graphs, boxplots,
+averages by year and month, autocorrelation and some rolling means, and
+scatter plots.&lt;/p&gt;
+&lt;p&gt;6. With that things start to get more interesting. I decided to use
+&lt;a class="reference external" href="http://scikit-learn.org/stable/"&gt;Scikit-Learn&lt;/a&gt; to do the regressions
+instead of statsmodels because of the next step, prediction. You have to
+transform the data again so scikit can understand it, but it's&lt;a class="reference external" href="http://stackoverflow.com/questions/29748717/use-scikit-learn-to-do-linear-regression-on-a-time-series-pandas-data-frame"&gt;not
+that
+hard&lt;/a&gt;,
+and worth the while. Now I do some stardard Linear Squares to get the
+trend and a RANSAC to get more specific results.&lt;/p&gt;
+&lt;p&gt;And all this inside a ipython notebook! Pretty awesome, right? Next
+steps, do a full
+&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Box%E2%80%93Jenkins"&gt;Box-Jenkins&lt;/a&gt; on
+the results.&lt;/p&gt;
+</summary><category term="pandas"></category><category term="Python"></category></entry></feed>

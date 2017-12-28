@@ -1,0 +1,14 @@
+Small trick in Pandas: formatting the precision of numeric values
+#################################################################
+:date: 2015-07-12 18:59
+:author: ispmarin
+:category: ciência
+:slug: 589
+:status: draft
+
+Quick note from the previous post.
+
+I needed to change the precision to show the results of the difference
+of two descriptions of data frames, so I could show them with two
+decimal places. Kinda convoluted, but with the help of the apply
+function, it's quite easy:

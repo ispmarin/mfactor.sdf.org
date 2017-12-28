@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Analytics in a locked world - Another Life Form</title>	
+	<meta name="author" content="Ivan Marin">
+	
+
+	<meta name="description" content="As a data scientist, I have to deal with data from several different sources. This begs for a wide range of tools and great flexibility of using these tools, otherwise manipulating the data can be almost impossible. And then your employer says that you can only use Windows, without admin ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/main.css" type="text/css" />
+		
+
+    <link href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	        <a href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" rel="alternate"><img src="http://mfactor.sdf.org/blog/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
+	    </div>
+	      <nav class="pages">
+			  <a href="http://mfactor.sdf.org/blog/pages/about.html">About</a>
+	      </nav>
+		<a href="http://mfactor.sdf.org/blog" class="title">Another Life Form</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Analytics in a locked world</h1>
+		
+<div class="metadata">
+  <time datetime="2015-04-21T19:25:00-03:00" pubdate>ter 21 abril 2015</time>
+    <address class="vcard author">
+      by <a class="url fn" href="http://mfactor.sdf.org/blog/author/i-m.html">I M</a>
+    </address>
+  in <a href="http://mfactor.sdf.org/blog/category/data-science.html">data science</a>
+<p class="tags">tagged <a href="http://mfactor.sdf.org/blog/tag/pandas.html">pandas</a>, <a href="http://mfactor.sdf.org/blog/tag/python.html">Python</a></p></div>		
+		<p>As a data scientist, I have to deal with data from several different
+sources. This begs for a wide range of tools and great flexibility of
+using these tools, otherwise manipulating the data can be almost
+impossible. And then your employer says that you can only use Windows,
+without admin rights, and you can only install software from a very
+restrict pre-approved list. What do you do? Go to a corner and cry?</p>
+<p>Almost. But then, you find a breach, a sliver of hope. You can install
+python on your machine. And in this moment, you smile, asking if you're
+up to the challenge. (Dramatic, no?)</p>
+<p>With one of the best Python installations for Windows is
+<a class="reference external" href="https://winpython.github.io/">WinPython</a>, that comes prepackaged
+with <a class="reference external" href="https://github.com/winpython/winpython/issues/56">Numpy, Scipy and
+Pandas</a> and other
+neat stuff, you can start really working. The second best part is that
+you can install on your user folder, so you don't need admin rights.
+Ufta! And the savior for sane workflows in this setting is
+<a class="reference external" href="https://jupyter.org/">Jupyter</a>, the new IPython shell. It is awesome
+for the data and modelling workflow.</p>
+<p>My workflow now consists of:</p>
+<p>1. Getting all raw data in one place, be excel spreadsheets (don't ask),
+CSV files, word files (I said don't ask!), and some data banks. Most of
+my data are time series.</p>
+<p>2. Importing the data or connecting the services on a jupyter python
+notebook. I have to connect to an oracle BD, so
+<a class="reference external" href="http://cx-oracle.sourceforge.net/">cx_Oracle</a> is the connector.</p>
+<p>3. Parsing the data with
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.excel.ExcelFile.parse.html">ExcelFile</a>
+from <a class="reference external" href="http://pandas.pydata.org/">pandas</a>. It can be tricky. As each
+sheet is different, I use a JSON file with the starting line, starting
+and ending columns, number of lines to be read and headers. That way I
+can process it automatically, and if the file changes is quite easy to
+adjust.</p>
+<p>4. Ok, clear the data! This is usually the most problematic part. One of
+the things that I had to do was to convert zero values to NaNs. The
+reason is that zero is a valid value on my data, but not a real one, so
+it would skew all statistics. Pandas can handle NaNs in the<a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.16.0/gotchas.html">Right
+Way</a>,
+so you would be better off. But beware, there are a few problems with
+<a class="reference external" href="http://stackoverflow.com/questions/29747850/error-using-bootstrap-plot-in-pandas-if-values-have-nan">some
+functions</a>,
+so you have to be careful anyway.</p>
+<p>5. With the data in a proper format, (<a class="reference external" href="www.jstatsoft.org/v59/i10/paper">tidy
+format</a>, NaNs for invalid values,
+all values with proper references), I start doing some exploratory
+analysis on the data. For now, basic stuff like line graphs, boxplots,
+averages by year and month, autocorrelation and some rolling means, and
+scatter plots.</p>
+<p>6. With that things start to get more interesting. I decided to use
+<a class="reference external" href="http://scikit-learn.org/stable/">Scikit-Learn</a> to do the regressions
+instead of statsmodels because of the next step, prediction. You have to
+transform the data again so scikit can understand it, but it's<a class="reference external" href="http://stackoverflow.com/questions/29748717/use-scikit-learn-to-do-linear-regression-on-a-time-series-pandas-data-frame">not
+that
+hard</a>,
+and worth the while. Now I do some stardard Linear Squares to get the
+trend and a RANSAC to get more specific results.</p>
+<p>And all this inside a ipython notebook! Pretty awesome, right? Next
+steps, do a full
+<a class="reference external" href="http://en.wikipedia.org/wiki/Box%E2%80%93Jenkins">Box-Jenkins</a> on
+the results.</p>
+	
+
+	</article>
+
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="http://mfactor.sdf.org/blog/category/data-science.html">data science</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/debian.html">debian</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/development.html">development</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/learning.html">Learning</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/linux.html">Linux</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/os.html">os</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/tools.html">tools</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/yeah.html">yeah</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
+				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+	          <aside>
+	            <h2>Blogroll</h2>
+	            <ul>
+	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
+	            </ul>
+	          </aside>
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

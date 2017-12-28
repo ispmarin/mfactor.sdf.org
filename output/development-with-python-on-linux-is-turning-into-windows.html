@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Development with Python on Linux is turning into Windows - Another Life Form</title>	
+	<meta name="author" content="Ivan Marin">
+	
+
+	<meta name="description" content="Yes, the title is a flamebait, but please bear with me. As I said in the last post, I installed Debian on my Chromebook using crouton. It worked quite easily, KDE installed. But then I started building my dev environment, using Python. But first, a quick digression. I have to ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="http://mfactor.sdf.org/blog/theme/css/main.css" type="text/css" />
+		
+
+    <link href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Another Life Form Atom Feed" />
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	        <a href="http://mfactor.sdf.org/blog/feeds/all.atom.xml" rel="alternate"><img src="http://mfactor.sdf.org/blog/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
+	    </div>
+	      <nav class="pages">
+			  <a href="http://mfactor.sdf.org/blog/pages/about.html">About</a>
+	      </nav>
+		<a href="http://mfactor.sdf.org/blog" class="title">Another Life Form</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Development with Python on Linux is turning into Windows</h1>
+		
+<div class="metadata">
+  <time datetime="2015-03-15T06:05:00-03:00" pubdate>dom 15 março 2015</time>
+    <address class="vcard author">
+      by <a class="url fn" href="http://mfactor.sdf.org/blog/author/ispmarin.html">ispmarin</a>
+    </address>
+  in <a href="http://mfactor.sdf.org/blog/category/debian.html">debian</a>
+<p class="tags">tagged <a href="http://mfactor.sdf.org/blog/tag/debian.html">debian</a>, <a href="http://mfactor.sdf.org/blog/tag/pip.html">pip</a>, <a href="http://mfactor.sdf.org/blog/tag/pycharm.html">PyCharm</a>, <a href="http://mfactor.sdf.org/blog/tag/python.html">Python</a></p></div>		
+		<p>Yes, the title is a flamebait, but please bear with me.</p>
+<p><img alt="image0" src="https://dxprience.files.wordpress.com/2014/08/bear-with-me.jpg" /></p>
+<p>As I said in the last post, I installed Debian on my Chromebook using
+<a class="reference external" href="https://github.com/dnschneid/crouton">crouton</a>. It worked quite
+easily, KDE installed. But then I started building my dev environment,
+using Python. But first, a quick digression.</p>
+<p>I have to use Windows at work now. I know, I know, but there's no way
+around it. Setting up a dev environment on Windows is very very tricky
+and not very funny, especially if you don't have admin rights on your
+own machine. I managed to get the basics working, but it was not easy.
+The loop search internet-&gt;download-&gt;install-&gt;internet was not fun at all
+after all these years with apt-get.</p>
+<p>So, when I started setting up my environment on the Debian on the
+chromebook it struck me. <em>I'm doing exactly as I done in Windows.</em> How
+so? First, I installed Python 2.7.9 via apt-get. Nothing funny so far.
+Then I decided to use a virtualenv. Ops. To install it I can use the
+Debian package or download a newer version directly. Ok, ok... but then
+it comes virtualenvwrapper. Ok, I still can install it using the Debian
+repos, but it's an old version. After I set up my virtualenv, I start
+using pip. Pip is ok, but now I have to download all packages from
+different places. I know that this is one of the features of pip, but
+nonetheless is divorced from the operating system, there is no search to
+speak about inside pip, there is no update all, etc etc. Ok, but there
+is still hope, right? Next thing, PyCharm. Bam, gotta go back to the
+internet, download it, install... Windows again!</p>
+<p>You can argue that I chose to use these packages, that there are several
+in the Debian repos that can satisfy my needs. That this is just a rant
+that &quot;package A or B is not in the repos!&quot;, and I tend to agree with
+you. But I didn't have to do nothing like this when I was developing in
+C, C++ or Fortran, including libraries, so I started thinking that maybe
+the Python tools integration with Debian or any other Linux distro is
+not as good as it could be. What can we do to make it easier? So far I
+don't know. Any suggestions?</p>
+	
+
+	</article>
+
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/data-science.html">data science</a></li>
+	              <li class="active"><a href="http://mfactor.sdf.org/blog/category/debian.html">debian</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/development.html">development</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/learning.html">Learning</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/linux.html">Linux</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/os.html">os</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/tools.html">tools</a></li>
+	              <li ><a href="http://mfactor.sdf.org/blog/category/yeah.html">yeah</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://br.linkedin.com/in/ispmarin/en">linkedin</a><i></i></li>
+				  <li><a href="https://github.com/ispmarin">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+	          <aside>
+	            <h2>Blogroll</h2>
+	            <ul>
+	                <li><a href="http://www.icaromedeiros.com.br/">Ícaro Medeiros</a></li>
+	            </ul>
+	          </aside>
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 Ivan Marin - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

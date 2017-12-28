@@ -1,0 +1,34 @@
+The sad state of Python on Windows
+##################################
+:date: 2015-03-24 19:06
+:author: ispmarin
+:category: ciência
+:slug: 573
+:status: draft
+
+The last post was about how the multiple libraries and installation
+paths for a sane developer environment for Python on Linux was turning
+into a Windows-style ordeal. Today, with another flamebait title, I'll
+tell the sad state of trying to do some Python work on a Windows
+machine, with and without Admininstrator rights. First of all, I'm not
+blaming Python developers or Windows developers. What I'm trying to say
+is that the combination of both turns out to be very problematic to use
+Python on Windows.
+
+First off, installing Python without admin rights is outright
+impossible. I tried every combination of directories and permissions,
+and without admin rights, no dice. The `portable
+Python <http://portablepython.com/>`__\ also didn't work properly (more
+on that later), to my despair, and are outdated. Even on the Python
+installation pages nothing is said about admin rights. Is it normal to
+assume that everyone has admin rights on its own machine? The only
+formats available on the official Python page are
+`MSIs <https://www.python.org/downloads/release/python-279/>`__\ that
+need to be installed with with admin rights.
+
+(To be fair, I think that trying to install Python on a Debian machine
+without sudo would be a royal pain, but it would be possible. Also,
+Python is a requirement for several if not all Linux distros, so that is
+a non issue.)
+
+Ok,

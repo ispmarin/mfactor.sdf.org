@@ -1,0 +1,11 @@
+Why I love and hate C++
+#######################
+:date: 2013-03-07 11:30
+:author: ispmarin
+:category: ciência
+:slug: 537
+:status: draft
+
+I hate C++. But I love it too.
+
+Case in point: doing another version of

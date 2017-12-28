@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+*.py[cod]
 
 # C extensions
 *.so
@@ -22,6 +23,8 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+=======
+__pycache__
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -55,8 +58,12 @@ docs/_build/
 
 # PyBuilder
 target/
+<<<<<<< HEAD
 .idea
 
 pelican-themes
 output
 html/
+.idea/*
+
+pelican-themes

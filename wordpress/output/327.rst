@@ -1,0 +1,85 @@
+Ubuntu Server, juju, virtualbox and OpenStack
+#############################################
+:date: 2012-08-15 08:55
+:author: ispmarin
+:category: Uncategorized
+:slug: 327
+:status: draft
+
+Hello all,
+
+After being a SysAdmin for some time, you can get used to some ways of
+doing the admin part of your job. The Good Thing about this is
+that \ *it works;* the Bad Thing is that technology, and especially
+computer hardware and software continue to advance. So if you stay put,
+you will be able to admin machines \ *from your time*. So I decided -
+with a little push from a friend - to try the new stuff that is coming
+out the Free Software Community. The idea is to deploy a server for
+scientific computing using management tools for both the system and the
+scientific software, and sharing this data in an intelligent and
+efficient way. So the proposed setup is to use `Ubuntu
+12.04 <http://www.ubuntu.com/>`__ (Precise Pangolin, for those who like
+these crazy Canonical names),\ `juju <http://juju.ubuntu.com>`__ and
+`Openstack <http://www.openstack.org/>`__, all inside a virtual machine
+emulated by V\ `irtualBox <https://www.virtualbox.org/>`__.
+
+Well, let's get started. Download an image from Canonical for the
+`Ubuntu Server <http://www.ubuntu.com/download/server>`__, and create a
+virtual machine on virtualbox for it. Installs it using the default
+configurations from the installer (I only asked to install ssh server
+and postgresql.) Go for the standard
+
+    apt-get update
+
+    apt-get upgrade
+
+and let it upgrade. Reboot because of the kernel update. Then, install
+both juju and the virtualbox guest additions:
+
+    apt-get install juju virtualbox-guest-dkms
+
+Now the system is ready to be configured. I saved a snapshot in
+Virtualbox right after it, so if we bork something it's easy to reroll
+the changes. Now we proceed for the installation of Openstack.
+
+The biggest advantage on Openstack is that it is already well integrated
+with Ubuntu 12.04.
+Their \ `manual <http://docs.openstack.org/diablo/openstack-compute/starter/content/Introduction_to_OpenStack_and_its_components-d1e59.html>`__
+is also step-by-step, and we're going to follow it.]
+
+    apt-get install -y bridge-utils
+
+They ask for a static network configuration, but we gonna use the
+dynamic one for now. We will be back to that part. The NTP also will be
+installed:
+
+    apt-get install -y ntp
+
+The NTP seems to be configured as the default, so we're gonna ignore the
+Openstack manual and use the default Ubuntu installation. The database
+that we chose is PostgreSQL, so we're gonna follow `this
+part: <http://docs.openstack.org/diablo/openstack-compute/starter/content/PostgreSQL-dle678.html>`__
+
+    /etc/postgresql/9.1/main/postgresql.conf
+
+And change
+
+    listen\_address = '\*'
+
+Done! Restart the postgre server. We're going to skip the Glance Image
+part, and go straight to Nova. Let's install the relevant packages:
+
+    apt-get install -y rabbitmq-server nova-common nova-doc python-nova
+    nova-api nova-network nova-volume nova-objectstore nova-scheduler
+    nova-compute
+
+Great. Other two packages, as per the manual:
+
+    apt-get install -y euca2ools unzip
+
+We go again with the postgresql option. Time to create an entry on the
+database for the nova management:
+
+     
+
+ 
