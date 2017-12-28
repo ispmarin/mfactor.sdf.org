@@ -14,8 +14,8 @@ occuring problem". After working with `PySpark <https://spark.apache.org/docs/la
 while now, I noticed a few patterns that keep coming up and some solutions that I've been using to solve them. So please
 take these patterns with a grain of salt, and if you have a better solution, please don't hesitate to contact me!
 
-Data Ingestion
---------------
+Data Ingestion organization
+---------------------------
 
 PySpark is awesome for several reasons and one of them is the multitude of ways that it can read data. Lately, the most
 common one for me is to read some data stored as tables in Hive or Impala. (Actually, the "tables" are stored in HDFS
@@ -85,3 +85,5 @@ to select the data of interest. As another simple pattern, I use the method chai
 
      df_filter = df.filter(df.dt > '2017-01-01').filter(df.dt <= '2017-03-31').filter(df.mytype == 'A').filter(df.othertype != 'B').\
                    .filter(df.anotherone.isin(['C', 'D']))
+
+This is an extreme case and there are probably better solutions if you're trying to do everything at the same time.
